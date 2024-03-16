@@ -3,7 +3,7 @@
 }
 
 .logo:hover {
-  transform: rotate(-20deg);
+  transform: rotate(-6deg)
 }
 
 .NavBarObj {
@@ -11,7 +11,6 @@
     font-size: 25px;
     padding-left:5%;
     color: white;
-    /* width: 50%; */
 }
 
 .inputBoxNavBar::placeholder {
