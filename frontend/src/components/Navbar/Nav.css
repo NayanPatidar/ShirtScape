@@ -1,34 +1,39 @@
+.NavBarMain {
+  width: 100%;
+}
+
 .logo {
   transition: transform 0.3s ease;
 }
 
 .logo:hover {
-  transform: rotate(-6deg)
+  transform: rotate(-6deg);
 }
 
 .NavBarObj {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 25px;
-    padding-left:5%;
-    color: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 25px;
+  padding-left: 5%;
+  color: white;
 }
 
 .inputBoxNavBar::placeholder {
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-self: center;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
 }
 
 .inputBoxNavBar {
-    width: 300px;
-    height: 35px;
-    font-size: 15px;
-    padding-left: 5px;
+  width: 300px;
+  height: 35px;
+  font-size: 15px;
+  padding-left: 5px;
 }
 
 .SearchBox {
-    height: 20px;
-    width: 100px;
+  height: 20px;
+  width: 100px;
 }

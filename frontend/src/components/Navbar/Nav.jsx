@@ -7,8 +7,8 @@ import { CiUser } from "react-icons/ci";
 
 function Navbar() {
   return (
-    <div className=" w-screen flex flex-col ">
-      <div className=" h-20 bg-white pl-5 flex flex-row items-center justify-between w-screen">
+    <div className="NavBarMain flex flex-col">
+      <div className=" h-20 bg-white pl-5 flex flex-row items-center justify-between">
         <div className="flex flex-row justify-start items-center w-3/5">
           <img src={logo} alt="LOGO" className="logo w-24" />
           <div className="NavBarObj flex flex-row justify-around w-8/12 text-black">
@@ -19,7 +19,6 @@ function Navbar() {
                 <label>
                   <input
                     type="text"
-                    autocomplete="off"
                     className="inputBoxNavBar  rounded-md border border-black"
                     placeholder=" What are you looking for ?"
                   />
