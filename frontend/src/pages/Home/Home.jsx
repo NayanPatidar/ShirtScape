@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Nav";
 import banner1 from "../../assets/banner1.jpg";
-import banner3 from "../../assets/banner2.png";
-import banner2 from "../../assets/banner3.jpg";
+import banner2 from "../../assets/banner2.png";
+import banner3 from "../../assets/banner3.jpg";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Home.css";
@@ -29,12 +29,31 @@ const divStyle = {
 };
 
 function Home() {
-  useEffect(() => {});
+  const [dataImages, setData] = useState();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/mainpage/images");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+
+  // console.log(dataImages);
 
   return (
     <div>
       <Navbar />
-      <div className="slide-container">
+      <div className="slide-container pt-20">
         <Fade>
           {slideImages.map((image, index) => (
             <div key={index}>
@@ -45,20 +64,30 @@ function Home() {
           ))}
         </Fade>
       </div>
+      <div className=" h-1 bg-black"></div>
+
       <div className=" flex flex-col justify-center items-center align-middle mt-16">
         <span className="TopSellingTitle">TOP SELLING</span>
         <div className="TopSellingProds flex flex-row justify-around items-center gap-4 mt-3 mb-3">
           <div className=" w-1/5">
-            <Cards />
+            {dataImages && dataImages.images && dataImages.images[0] && (
+              <Cards imageLink={dataImages.images[0].photo1} />
+            )}
           </div>
           <div className=" w-1/5">
-            <Cards />
+            {dataImages && dataImages.images && dataImages.images[0] && (
+              <Cards imageLink={dataImages.images[1].photo1} />
+            )}
           </div>
           <div className=" w-1/5">
-            <Cards />
+            {dataImages && dataImages.images && dataImages.images[0] && (
+              <Cards imageLink={dataImages.images[0].photo1} />
+            )}
           </div>
           <div className=" w-1/5">
-            <Cards />
+            {dataImages && dataImages.images && dataImages.images[0] && (
+              <Cards imageLink={dataImages.images[1].photo1} />
+            )}
           </div>
         </div>
       </div>
