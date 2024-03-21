@@ -16,3 +16,9 @@
     font-weight: 700;
     color: #282C3F;
 }
+
+.CategoryTypes {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+}

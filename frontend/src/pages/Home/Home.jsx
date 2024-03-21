@@ -6,7 +6,7 @@ import banner3 from "../../assets/banner3.jpg";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Home.css";
-import Cards from "../../components/ProductsCard/ProductsCard";
+import Cards from "../../components/ProductsCard/HomeProductsCard";
 
 const slideImages = [
   {
@@ -68,7 +68,11 @@ function Home() {
 
       <div className=" flex flex-col justify-center items-center align-middle mt-14">
         <span className="Categories">CATEGORIES</span>
-        <div className="CategoryTypes mt-3 mb-3"></div>
+        <div className="CategoryTypes mt-3 mb-3">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
 
         <span className="TopSellingTitle">TOP SELLING</span>
         <div className="TopSellingProds flex flex-row justify-around items-center mt-3 mb-3">
