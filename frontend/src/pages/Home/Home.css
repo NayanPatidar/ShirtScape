@@ -1,10 +1,18 @@
 .TopSellingTitle {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 25px;
-    font-weight: 100;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #282C3F;
 }
 
 .MainHome {
     padding: 0px;
     margin: 0px;
+}
+
+.Categories {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #282C3F;
 }

@@ -8,11 +8,11 @@ import { CiUser } from "react-icons/ci";
 function Navbar() {
   return (
     <div className="NavBarMain flex flex-col fixed">
-      <div className=" h-20 bg-white pl-5 flex flex-row items-center justify-between">
+      <div className=" h-16 bg-white pl-5 flex flex-row items-center justify-between">
         <div className="flex flex-row justify-start items-center w-3/5">
-          <img src={logo} alt="LOGO" className="logo w-24" />
+          <img src={logo} alt="LOGO" className="logo w-20" />
           <div className="NavBarObj flex flex-row justify-around w-8/12 text-black">
-            <div className=" hover:underline text-black font-light cursor-pointer">MEN</div>
+            <div className=" hover:underline text-black cursor-pointer">MEN</div>
             <div className=" hover:underline text-black cursor-pointer">NEW ARRIVALS</div>
             <div className=" text-black text-md">
               <form className="SearchBox">

@@ -1,15 +1,14 @@
 import React from "react";
 import "./ProductsCard.css";
 
-const Cards = ({ imageLink }) => {
-  console.log(imageLink);
+const Cards = ({ photo, name, description, price, mrp, discount }) => {
   return (
     <div className=" flex flex-col ">
-      <img className=" rounded-3xl" src={imageLink} />
+      <img className=" rounded-3xl" src={photo} />
       <div className=" flex flex-col">
-        <span className="ProductName">Naruto: Jiyara</span>
-        <span className="ProductDesc">Oversized T-Shirt</span>
-        <span className="ProductPrice">$ 599</span>
+        <span className="ProductName">{name}</span>
+        <span className="ProductDesc">{description}</span>
+        <span className="ProductPrice">{price}</span>
       </div>
     </div>
   );

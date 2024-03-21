@@ -29,7 +29,7 @@ const divStyle = {
 };
 
 function Home() {
-  const [dataImages, setData] = useState();
+  const [TShirts, setTShirts] = useState();
 
   useEffect(() => {
     fetchData();
@@ -37,23 +37,23 @@ function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/mainpage/images");
+      const response = await fetch("http://localhost:8080/mainpage/TShirts");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setData(data);
+      if (JSON.stringify(data) !== JSON.stringify(TShirts)) {
+        setTShirts(data.tshirtsDetails);
+      }
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
   };
 
-  // console.log(dataImages);
-
   return (
     <div>
       <Navbar />
-      <div className="slide-container pt-20">
+      <div className="slide-container pt-16">
         <Fade>
           {slideImages.map((image, index) => (
             <div key={index}>
@@ -66,29 +66,28 @@ function Home() {
       </div>
       <div className=" h-1 bg-black"></div>
 
-      <div className=" flex flex-col justify-center items-center align-middle mt-16">
+      <div className=" flex flex-col justify-center items-center align-middle mt-14">
+        <span className="Categories">CATEGORIES</span>
+        <div className="CategoryTypes mt-3 mb-3"></div>
+
         <span className="TopSellingTitle">TOP SELLING</span>
-        <div className="TopSellingProds flex flex-row justify-around items-center gap-4 mt-3 mb-3">
-          <div className=" w-1/5">
-            {dataImages && dataImages.images && dataImages.images[0] && (
-              <Cards imageLink={dataImages.images[0].photo1} />
-            )}
-          </div>
-          <div className=" w-1/5">
-            {dataImages && dataImages.images && dataImages.images[0] && (
-              <Cards imageLink={dataImages.images[1].photo1} />
-            )}
-          </div>
-          <div className=" w-1/5">
-            {dataImages && dataImages.images && dataImages.images[0] && (
-              <Cards imageLink={dataImages.images[0].photo1} />
-            )}
-          </div>
-          <div className=" w-1/5">
-            {dataImages && dataImages.images && dataImages.images[0] && (
-              <Cards imageLink={dataImages.images[1].photo1} />
-            )}
-          </div>
+        <div className="TopSellingProds flex flex-row justify-around items-center mt-3 mb-3">
+          {
+            TShirts &&
+              TShirts.map((tShirt, index) => (
+                <div key={index} className="" style={{ width: "23.5%" }}>
+                  <Cards
+                    photo={tShirt.tshirts.photo1}
+                    name={tShirt.tshirts.product_name}
+                    description={tShirt.tshirts.genericdesc}
+                    price={tShirt.tshirts.price}
+                    mrp={tShirt.tshirts.mrp}
+                    discount={tShirt.tshirts.discount}
+                  />
+                </div>
+              ))
+            // console.log(TShirts.tShirt.product_name)
+          }
         </div>
       </div>
     </div>
