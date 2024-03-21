@@ -1,36 +1,46 @@
 .TopSellingTitle {
-    font-family: "Source Sans 3", sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #282C3F;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #282c3f;
 }
 
 .MainHome {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .Categories {
-    font-family: "Source Sans 3", sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #282C3F;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #282c3f;
 }
 
 .CategoryTypes {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10;
 }
 
 .EachCategoryProp {
-    margin-top: 2%;
-    width: 30%;
-    height: 600px;
+  margin-top: 2%;
+  width: 32.5%;
+  height: 450px;
+  overflow: hidden;
 }
 
 .EachImageCategory {
-    height: 500px;
-    width: 200%;
-    object-fit:cover;
+  object-fit: cover;
+}
+
+.EachCategoryProp > img {
+  width: 100%;
+  height: 100%;
+  transition: transform 450ms ease-in-out;
+}
+
+.EachCategoryProp:hover > img {
+  transform: scale(1.15);
 }
