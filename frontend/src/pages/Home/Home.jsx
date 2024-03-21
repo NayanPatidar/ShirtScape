@@ -30,6 +30,7 @@ const divStyle = {
 
 function Home() {
   const [TShirts, setTShirts] = useState();
+  const [Categories, setCategory] = useState();
 
   useEffect(() => {
     fetchData();
@@ -38,10 +39,13 @@ function Home() {
   const fetchData = async () => {
     try {
       const response = await fetch("http://localhost:8080/mainpage/TShirts");
-      if (!response.ok) {
+      const categories = await fetch("http://localhost:8080/mainpage/images");
+      if (!response.ok || !categories.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      const categoryData = await categories.json();
+      setCategory(categoryData.images);
       if (JSON.stringify(data) !== JSON.stringify(TShirts)) {
         setTShirts(data.tshirtsDetails);
       }
@@ -68,13 +72,16 @@ function Home() {
 
       <div className=" flex flex-col justify-center items-center align-middle mt-14">
         <span className="Categories">CATEGORIES</span>
-        <div className="CategoryTypes mt-3 mb-3">
-          <div></div>
-          <div></div>
-          <div></div>
+        <div className="CategoryTypes">
+          {Categories &&
+            Categories.map((category, index) => (
+              <div key={index} className=" EachCategoryProp" >
+                <img src={category.photo1} className=" EachImageCategory"/>
+              </div>
+            ))}
         </div>
 
-        <span className="TopSellingTitle">TOP SELLING</span>
+        <span className="TopSellingTitle mt-20">TOP SELLING</span>
         <div className="TopSellingProds flex flex-row justify-around items-center mt-3 mb-3">
           {
             TShirts &&

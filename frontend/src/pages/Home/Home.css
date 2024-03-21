@@ -20,5 +20,17 @@
 .CategoryTypes {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+}
+
+.EachCategoryProp {
+    margin-top: 2%;
     width: 30%;
+    height: 600px;
+}
+
+.EachImageCategory {
+    height: 500px;
+    width: 200%;
+    object-fit:cover;
 }
