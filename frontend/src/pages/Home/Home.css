@@ -20,14 +20,14 @@
 .CategoryTypes {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  gap: 10;
+  justify-content: space-between;
+  width: 97%;
 }
 
 .EachCategoryProp {
   margin-top: 2%;
   width: 32.5%;
-  height: 450px;
+  height: 400px;
   overflow: hidden;
 }
 

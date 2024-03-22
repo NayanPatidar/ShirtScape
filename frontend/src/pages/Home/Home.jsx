@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Nav";
 import banner1 from "../../assets/banner1.jpg";
 import banner2 from "../../assets/banner2.png";
-import banner3 from "../../assets/banner3.jpg";
+import banner3 from "../../assets/banner3.png";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Home.css";
