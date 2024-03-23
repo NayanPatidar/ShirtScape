@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProductsPage.css";
-import banner4 from "../../assets/banner4.png";
 import { useEffect } from "react";
+import ProductsPageCard from "../../components/ProductsCard/ProductsPageCards";
 
 const divStyle = {
   display: "flex",
@@ -53,11 +53,18 @@ const ProductsPage = () => {
       <div className=" flex flex-row">
         <div className="FilterTableMain"></div>
         <div className="ProductsListMain p-5">
-          <div className=" ProductsArea grid grid-cols-4 gap-y-10">
+          <div className=" ProductsArea grid grid-cols-4 gap-y-24 justify-items-center">
             {products &&
-              products.map((product) => (
-                <div key={product.id} className="ProductBoxMain">
-                  <img src={product.cloths.photo1} />
+              products.map((product, index) => (
+                <div key={index} className=" ProductBoxMain">
+                  <ProductsPageCard
+                    Image={product.cloths.photo1}
+                    Name={product.cloths.product_name}
+                    Description={product.cloths.genericdesc}
+                    Price={product.cloths.price}
+                    MRP={product.cloths.mrp}
+                    Discount={product.cloths.discount}
+                  />
                 </div>
               ))}
           </div>
