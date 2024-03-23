@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProductsCard.css";
+import "./HomeProductsCard.css";
 
 const Cards = ({ photo, name, description, price, mrp, discount }) => {
   return (

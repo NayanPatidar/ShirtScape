@@ -21,8 +21,8 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   color: #3e3e3e;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide any overflowing content */
+  white-space: nowrap;
+  overflow: hidden; 
   text-overflow: ellipsis;
 }
 
