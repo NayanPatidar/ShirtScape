@@ -37,12 +37,12 @@ function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/mainpage/TShirts");
+      const TshirtData = await fetch("http://localhost:8080/mainpage/TShirts");
       const categories = await fetch("http://localhost:8080/mainpage/images");
-      if (!response.ok || !categories.ok) {
+      if (!TshirtData.ok || !categories.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json();
+      const data = await TshirtData.json();
       const categoryData = await categories.json();
       setCategory(categoryData.images);
       if (JSON.stringify(data) !== JSON.stringify(TShirts)) {
