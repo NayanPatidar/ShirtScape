@@ -7,7 +7,7 @@
 .NavBarObj {
   font-family: "Source Sans 3", sans-serif;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   padding-left: 5%;
   color: white;
 }
@@ -30,4 +30,8 @@
 .SearchBox {
   height: 20px;
   width: 100px;
+}
+
+.navBarBoundary {
+  height: 1px;
 }
