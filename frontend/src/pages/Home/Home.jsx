@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useState } from "react";
-import Navbar from "../../components/Navbar/Nav";
 import banner1 from "../../assets/banner1.jpg";
 import banner2 from "../../assets/banner2.png";
 import banner3 from "../../assets/banner3.png";
@@ -56,7 +55,6 @@ function Home() {
 
   return (
     <div>
-      <Navbar />
       <div className="slide-container pt-16">
         <Fade>
           {slideImages.map((image, index) => (
