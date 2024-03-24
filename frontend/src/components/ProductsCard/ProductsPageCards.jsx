@@ -11,7 +11,7 @@ const ProductsPageCard = ({
 }) => {
   return (
     <div className=" ProductsPageCardsMain flex flex-col ">
-      <img className=" ProductsPageImage cursor-pointer" src={Image} />
+      <img className=" ProductsPageImage cursor-pointer z-0" src={Image} />
       <div className=" flex flex-col">
         <span className="ProductsPageName">{Name}</span>
         <span className="ProductsPageDesc">{Description}</span>

@@ -1,25 +1,61 @@
 .ProductsPageMain {
-    width: 100%;
+  width: 100%;
 }
 
 .FilterTableMain {
-    width: 20%;
-    height: 300px;
+  width: 20%;
+  height: 300px;
 }
 
 .ProductsListMain {
-    width: 80%;
-    border-left: 1px solid rgb(218, 218, 218);
+  width: 80%;
+  border-left: 1px solid rgb(218, 218, 218);
 }
 
 .ProductDescriptionArea {
-    height: 100px;
-    width: 100%;
-    border-bottom: 1px solid rgb(218, 218, 218);
+  height: 100px;
+  width: 100%;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  display: flex;
+  justify-content: end;
+  align-items: end;
 }
 
 .ProductBoxMain {
-    height: 280px;
-    width: 85%;
-    background-color: aqua;
+  height: 280px;
+  width: 85%;
+}
+
+.DescriptionAreaContent {
+  width: 100%;
+  justify-self: baseline;
+}
+
+.Sorting {
+  border: 1px solid rgb(215, 215, 215);
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.SortBox {
+  width: 20%;
+}
+
+.SortBoxText {
+  font-weight: 500;
+  color: rgb(36, 36, 36);
+}
+
+.DropDownSortBox {
+  margin-top: 5px;
+  border-left: 1px solid rgb(215, 215, 215);
+  border-top: 1px solid rgb(215, 215, 215);
+  border-bottom: 1px solid rgb(215, 215, 215);
+  border-right: 1px solid rgb(215, 215, 215);
+
+  font-size: 12px;
+  font-weight: 400;
+  background-color: white;
+  z-index: 100;
 }

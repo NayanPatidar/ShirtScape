@@ -22,7 +22,7 @@
   font-size: 12px;
   color: #3e3e3e;
   white-space: nowrap;
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 

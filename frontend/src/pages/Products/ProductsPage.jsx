@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ProductsPage.css";
 import { useEffect } from "react";
 import ProductsPageCard from "../../components/ProductsCard/ProductsPageCards";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const divStyle = {
   display: "flex",
@@ -13,6 +14,17 @@ const divStyle = {
 
 const ProductsPage = () => {
   const [products, setProducts] = useState();
+  const [SortFeatures, setSortFeatures] = useState(false);
+
+  const sortToggle = () => {
+    setSortFeatures(!SortFeatures);
+  };
+
+  const sortToggleOff = () => {
+    if (SortFeatures) {
+      setSortFeatures(false);
+    }
+  };
 
   useEffect(() => {
     fetchProductsData();
@@ -45,18 +57,51 @@ const ProductsPage = () => {
   };
 
   return (
-    <div className="ProductsPageMain flex flex-col pt-16">
+    <div
+      className="ProductsPageMain flex flex-col pt-16"
+      onClick={sortToggleOff}
+    >
       {/* <div style={{ ...divStyle }}>
         <img src={banner4} />
       </div> */}
-      <div className=" ProductDescriptionArea"></div>
+
+      <div className=" ProductDescriptionArea p-2">
+        <div className=" DescriptionAreaContent h-10 flex flex-row justify-end pr-8">
+          <div className=" SortBox z-10">
+            <div
+              className=" Sorting h-10 flex pl-2 items-center justify-between"
+              onClick={sortToggle}
+            >
+              <div>
+                Sort by :<span className=" SortBoxText pl-1">Recommended</span>
+              </div>
+              <div>
+                <RiArrowDropDownLine className=" font-thin" size={25} />
+              </div>
+            </div>
+            {SortFeatures ? (
+              <ul className=" DropDownSortBox bg-white z-10 ">
+                <li className=" pt-1 pb-1 pl-2 hover:bg-slate-300">
+                  Price: Low to High
+                </li>
+                <li className=" pt-1 pb-1 pl-2 hover:bg-slate-300">
+                  Price: High to Low
+                </li>
+              </ul>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className=" flex flex-row">
         <div className="FilterTableMain"></div>
         <div className="ProductsListMain p-5">
           <div className=" ProductsArea grid grid-cols-4 gap-y-24 justify-items-center">
             {products &&
               products.map((product, index) => (
-                <div key={index} className=" ProductBoxMain">
+                <div key={index} className=" ProductBoxMain z-0">
                   <ProductsPageCard
                     Image={product.cloths.photo1}
                     Name={product.cloths.product_name}
