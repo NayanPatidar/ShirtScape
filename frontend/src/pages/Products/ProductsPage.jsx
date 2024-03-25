@@ -4,14 +4,6 @@ import { useEffect } from "react";
 import ProductsPageCard from "../../components/ProductsCard/ProductsPageCards";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "400px",
-  backgroundSize: "cover",
-};
-
 const ProductsPage = () => {
   const [products, setProducts] = useState();
   const [SortFeatures, setSortFeatures] = useState(false);
@@ -61,10 +53,6 @@ const ProductsPage = () => {
       className="ProductsPageMain flex flex-col pt-16"
       onClick={sortToggleOff}
     >
-      {/* <div style={{ ...divStyle }}>
-        <img src={banner4} />
-      </div> */}
-
       <div className=" ProductDescriptionArea p-2">
         <div className=" DescriptionAreaContent h-10 flex flex-row justify-end pr-8">
           <div className=" SortBox z-10">
@@ -135,9 +123,7 @@ const ProductsPage = () => {
             </div>
           </div>
           <div className="border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-600 text-sm">
-              SIZE
-            </span>
+            <span className=" font-semibold text-gray-600 text-sm">SIZE</span>
             <div className="grid grid-cols-3 pt-1">
               <div class="checkbox-example">
                 <input
