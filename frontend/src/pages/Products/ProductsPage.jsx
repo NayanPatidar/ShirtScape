@@ -98,8 +98,148 @@ const ProductsPage = () => {
       <div className=" flex flex-row">
         <div className="FilterTableMain flex flex-col p-3 ">
           <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-600 text-sm pb-3">
+            <span className=" font-semibold text-gray-600 text-sm pb-1">
               PRODUCTS
+            </span>
+            <div class="checkbox-example">
+              <input
+                type="checkbox"
+                value="1"
+                id="checkboxOneInput"
+                className=" size-3"
+              />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2  text-sm text-gray-600"
+              >
+                T-Shirts
+              </label>
+            </div>
+            <div class="checkbox-example">
+              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2 text-sm text-gray-600"
+              >
+                Oversized T-Shirts
+              </label>
+            </div>
+            <div class="checkbox-example">
+              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2 text-sm text-gray-600"
+              >
+                Shirts
+              </label>
+            </div>
+          </div>
+          <div className="border-b border-gray-300 pb-3">
+            <span className=" font-semibold text-gray-600 text-sm">
+              SIZE
+            </span>
+            <div className="grid grid-cols-3 pt-1">
+              <div class="checkbox-example">
+                <input
+                  type="checkbox"
+                  value="1"
+                  id="checkboxOneInput"
+                  className=" size-3"
+                />
+                <label
+                  for="checkboxOneInput"
+                  className=" pl-2  text-sm text-gray-600"
+                >
+                  XS
+                </label>
+              </div>
+              <div class="checkbox-example">
+                <input type="checkbox" value="1" id="checkboxOneInput" />
+                <label
+                  for="checkboxOneInput"
+                  className=" pl-2 text-sm text-gray-600"
+                >
+                  S
+                </label>
+              </div>
+              <div class="checkbox-example">
+                <input type="checkbox" value="1" id="checkboxOneInput" />
+                <label
+                  for="checkboxOneInput"
+                  className=" pl-2 text-sm text-gray-600"
+                >
+                  M
+                </label>
+              </div>
+              <div class="checkbox-example">
+                <input type="checkbox" value="1" id="checkboxOneInput" />
+                <label
+                  for="checkboxOneInput"
+                  className=" pl-2 text-sm text-gray-600"
+                >
+                  L
+                </label>
+              </div>
+              <div class="checkbox-example">
+                <input type="checkbox" value="1" id="checkboxOneInput" />
+                <label
+                  for="checkboxOneInput"
+                  className=" pl-2 text-sm text-gray-600"
+                >
+                  XL
+                </label>
+              </div>
+              <div class="checkbox-example">
+                <input type="checkbox" value="1" id="checkboxOneInput" />
+                <label
+                  for="checkboxOneInput"
+                  className=" pl-2 text-sm text-gray-600"
+                >
+                  XXL
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className=" flex flex-col  border-b border-gray-300 pb-3">
+            <span className=" font-semibold text-gray-600 text-sm pb-1">
+              PRICE
+            </span>
+            <div class="checkbox-example">
+              <input
+                type="checkbox"
+                value="1"
+                id="checkboxOneInput"
+                className=" size-3"
+              />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2  text-sm text-gray-600"
+              >
+                T-Shirts
+              </label>
+            </div>
+            <div class="checkbox-example">
+              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2 text-sm text-gray-600"
+              >
+                Oversized T-Shirts
+              </label>
+            </div>
+            <div class="checkbox-example">
+              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2 text-sm text-gray-600"
+              >
+                Shirts
+              </label>
+            </div>
+          </div>
+          <div className=" flex flex-col  border-b border-gray-300 pb-3">
+            <span className=" font-semibold text-gray-600 text-sm pb-1">
+              DISCOUNT
             </span>
             <div class="checkbox-example">
               <input
