@@ -96,7 +96,45 @@ const ProductsPage = () => {
       </div>
 
       <div className=" flex flex-row">
-        <div className="FilterTableMain"></div>
+        <div className="FilterTableMain flex flex-col p-3 ">
+          <div className=" flex flex-col  border-b border-gray-300 pb-3">
+            <span className=" font-semibold text-gray-600 text-sm pb-3">
+              PRODUCTS
+            </span>
+            <div class="checkbox-example">
+              <input
+                type="checkbox"
+                value="1"
+                id="checkboxOneInput"
+                className=" size-3"
+              />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2  text-sm text-gray-600"
+              >
+                T-Shirts
+              </label>
+            </div>
+            <div class="checkbox-example">
+              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2 text-sm text-gray-600"
+              >
+                Oversized T-Shirts
+              </label>
+            </div>
+            <div class="checkbox-example">
+              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <label
+                for="checkboxOneInput"
+                className=" pl-2 text-sm text-gray-600"
+              >
+                Shirts
+              </label>
+            </div>
+          </div>
+        </div>
         <div className="ProductsListMain p-5">
           <div className=" ProductsArea grid grid-cols-4 gap-y-24 justify-items-center">
             {products &&
