@@ -3,6 +3,7 @@ import "./ProductsPage.css";
 import { useEffect } from "react";
 import ProductsPageCard from "../../components/ProductsCard/ProductsPageCards";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import ProductGrid from "../../components/ProductsGrid/ProductsGrid";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState();
@@ -261,23 +262,7 @@ const ProductsPage = () => {
             </div>
           </div>
         </div>
-        <div className="ProductsListMain p-5">
-          <div className=" ProductsArea grid grid-cols-4 gap-y-24 justify-items-center">
-            {products &&
-              products.map((product, index) => (
-                <div key={index} className=" ProductBoxMain z-0">
-                  <ProductsPageCard
-                    Image={product.cloths.photo1}
-                    Name={product.cloths.product_name}
-                    Description={product.cloths.genericdesc}
-                    Price={product.cloths.price}
-                    MRP={product.cloths.mrp}
-                    Discount={product.cloths.discount}
-                  />
-                </div>
-              ))}
-          </div>
-        </div>
+        <ProductGrid productsData={products} />
       </div>
     </div>
   );
