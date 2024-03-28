@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const ProductsPage = () => {
   const [products, setProducts] = useState();
   const [SortFeatures, setSortFeatures] = useState(false);
+  const [SortOption, setSortOption] = useState("Recommended");
   const [CategoryFilter, setCategoryFilter] = useState({
     TShirt: false,
     Oversized: false,
@@ -22,6 +23,10 @@ const ProductsPage = () => {
     if (SortFeatures) {
       setSortFeatures(false);
     }
+  };
+
+  const setSortType = (SortType) => {
+    setSortOption(SortType);
   };
 
   const handleCheckboxChange = (event) => {
@@ -82,23 +87,35 @@ const ProductsPage = () => {
         <div className=" DescriptionAreaContent h-10 flex flex-row justify-end pr-8">
           <div className=" SortBox z-10">
             <div
-              className=" Sorting h-10 flex pl-2 items-center justify-between"
+              className=" Sorting h-10 flex pl-2 items-center justify-between cursor-pointer"
               onClick={sortToggle}
             >
               <div>
-                Sort by :<span className=" SortBoxText pl-1">Recommended</span>
+                Sort by :<span className=" SortBoxText pl-1">{SortOption}</span>
               </div>
               <div>
                 <RiArrowDropDownLine className=" font-thin" size={25} />
               </div>
             </div>
             {SortFeatures ? (
-              <ul className=" DropDownSortBox bg-white z-10 ">
-                <li className=" pt-1 pb-1 pl-2 hover:bg-slate-300">
+              <ul className=" DropDownSortBox bg-white z-10 cursor-pointer">
+                <li
+                  className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
+                  onClick={() => setSortType("Price: Low to High")}
+                >
                   Price: Low to High
                 </li>
-                <li className=" pt-1 pb-1 pl-2 hover:bg-slate-300">
+                <li
+                  className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
+                  onClick={() => setSortType("Price: High to Low")}
+                >
                   Price: High to Low
+                </li>
+                <li
+                  className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
+                  onClick={() => setSortType("Recommended")}
+                >
+                  Recommended
                 </li>
               </ul>
             ) : (
@@ -118,7 +135,7 @@ const ProductsPage = () => {
               <input
                 type="checkbox"
                 name="TShirt"
-                checked={CategoryFilter.Tshirt}
+                checked={CategoryFilter.TShirt}
                 onChange={handleCheckboxChange}
               />
               <label className=" pl-2  text-sm text-gray-600">T-Shirts</label>
