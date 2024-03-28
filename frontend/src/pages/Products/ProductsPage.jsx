@@ -9,7 +9,7 @@ const ProductsPage = () => {
   const [products, setProducts] = useState();
   const [SortFeatures, setSortFeatures] = useState(false);
   const [CategoryFilter, setCategoryFilter] = useState({
-    Tshirt: false,
+    TShirt: false,
     Oversized: false,
     Shirt: false,
   });
@@ -50,18 +50,27 @@ const ProductsPage = () => {
 
   const seed = 2413;
   const fetchProductsData = async () => {
-    const response = await fetch("http://localhost:8080/products/men");
+    const queryParams = new URLSearchParams();
+    for (const key in CategoryFilter) {
+      if (CategoryFilter[key]) {
+        queryParams.append("category", key);
+      }
+    }
+    const queryString = queryParams.toString();
+    const url = queryString
+      ? `http://localhost:8080/products/men?${queryString}`
+      : "http://localhost:8080/products/men";
+
+    const response = await fetch(url);
     const ProductsData = await response.json();
     const shuffledData = shuffleArray(ProductsData.clothsData.slice(), seed);
     setProducts(shuffledData);
   };
 
-  useEffect(() => {
-    fetchProductsData();
-  }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(CategoryFilter);
+    fetchProductsData();
   }, [CategoryFilter]);
 
   return (
@@ -108,7 +117,7 @@ const ProductsPage = () => {
             <div className="checkbox-example">
               <input
                 type="checkbox"
-                name="Tshirt"
+                name="TShirt"
                 checked={CategoryFilter.Tshirt}
                 onChange={handleCheckboxChange}
               />
