@@ -18,6 +18,12 @@ const ProductsPage = () => {
     Oversized: false,
     Shirt: false,
   });
+  const [DiscountFilter, setDiscountFilter] = useState({
+    10: false,
+    30: false,
+    50: false,
+    70: false,
+  });
 
   const sortToggle = () => {
     setSortFeatures(!SortFeatures);
@@ -38,6 +44,14 @@ const ProductsPage = () => {
     setCategoryFilter((prevState) => ({
       ...prevState,
       [name]: checked,
+    }));
+  };
+
+  const handleDiscountChange = (event) => {
+    const { value, checked } = event.target;
+    setDiscountFilter((prevState) => ({
+      ...prevState,
+      [value]: checked,
     }));
   };
 
@@ -235,31 +249,41 @@ const ProductsPage = () => {
             <div className="checkbox-example">
               <input
                 type="radio"
-                value="1"
+                value="10"
                 id="radioOneInput"
                 name="discount"
+                checked={DiscountFilter[10]}
+                onChange={handleDiscountChange}
               />
-              <label className=" pl-2  text-sm text-gray-600">T-Shirts</label>
-            </div>
-            <div className="checkbox-example">
-              <input
-                type="radio"
-                value="1"
-                id="radioTwoInput"
-                name="discount"
-              />
-              <label className=" pl-2 text-sm text-gray-600">
-                Oversized T-Shirts
+              <label className=" pl-2  text-sm text-gray-600">
+                10% and above
               </label>
             </div>
             <div className="checkbox-example">
               <input
                 type="radio"
-                value="1"
+                value="30"
+                id="radioTwoInput"
+                name="discount"
+                checked={DiscountFilter[30]}
+                onChange={handleDiscountChange}
+              />
+              <label className=" pl-2 text-sm text-gray-600">
+                30% and above
+              </label>
+            </div>
+            <div className="checkbox-example">
+              <input
+                type="radio"
+                value="50"
                 id="radioThreeInput"
                 name="discount"
+                checked={DiscountFilter[50]}
+                onChange={handleDiscountChange}
               />
-              <label className=" pl-2 text-sm text-gray-600">Shirts</label>
+              <label className=" pl-2 text-sm text-gray-600">
+                50% and above
+              </label>
             </div>
           </div>
         </div>
