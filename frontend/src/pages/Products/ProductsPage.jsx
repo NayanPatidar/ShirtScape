@@ -48,6 +48,12 @@ const ProductsPage = () => {
   };
 
   const handleDiscountChange = (event) => {
+    for (const key in DiscountFilter) {
+      if (DiscountFilter[key]) {
+        DiscountFilter[key] = false;
+      }
+    }
+
     const { value, checked } = event.target;
     setDiscountFilter((prevState) => ({
       ...prevState,
@@ -72,8 +78,10 @@ const ProductsPage = () => {
   }
 
   const seed = 2413;
+  
   const fetchProductsData = async () => {
     const queryParams = new URLSearchParams();
+
     for (const key in CategoryFilter) {
       if (CategoryFilter[key]) {
         queryParams.append("category", key);
@@ -84,6 +92,11 @@ const ProductsPage = () => {
       queryParams.append("sort", SortObj[SortOption]);
     }
 
+    for (const key in DiscountFilter) {
+      if (DiscountFilter[key]) {
+        queryParams.append("discount", key);
+      }
+    }
     const queryString = queryParams.toString();
     const url = queryString
       ? `http://localhost:8080/products/men?${queryString}`
@@ -91,6 +104,7 @@ const ProductsPage = () => {
 
     const response = await fetch(url);
     const ProductsData = await response.json();
+    console.log(url);
 
     if (queryString == "" || !queryString.includes("sort")) {
       const shuffledData = shuffleArray(ProductsData.clothsData.slice(), seed);
@@ -104,7 +118,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     fetchProductsData();
-  }, [CategoryFilter, SortOption]);
+  }, [CategoryFilter, SortOption, DiscountFilter]);
 
   return (
     <div
@@ -156,7 +170,7 @@ const ProductsPage = () => {
       <div className=" flex flex-row">
         <div className="FilterTableMain flex flex-col p-3 ">
           <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-600 text-sm pb-1">
+            <span className=" font-semibold text-gray-700 text-sm pb-1">
               PRODUCTS
             </span>
             <div className="checkbox-example">
@@ -166,7 +180,7 @@ const ProductsPage = () => {
                 checked={CategoryFilter.TShirt}
                 onChange={handleCheckboxChange}
               />
-              <label className=" pl-2  text-sm text-gray-600">T-Shirts</label>
+              <label className=" pl-2  text-sm text-gray-700">T-Shirts</label>
             </div>
             <div className="checkbox-example">
               <input
@@ -175,7 +189,7 @@ const ProductsPage = () => {
                 checked={CategoryFilter.Oversized}
                 onChange={handleCheckboxChange}
               />
-              <label className=" pl-2 text-sm text-gray-600">
+              <label className=" pl-2 text-sm text-gray-700">
                 Oversized T-Shirts
               </label>
             </div>
@@ -186,40 +200,40 @@ const ProductsPage = () => {
                 checked={CategoryFilter.Shirt}
                 onChange={handleCheckboxChange}
               />
-              <label className=" pl-2 text-sm text-gray-600">Shirts</label>
+              <label className=" pl-2 text-sm text-gray-700">Shirts</label>
             </div>
           </div>
           <div className="border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-600 text-sm">SIZE</span>
+            <span className=" font-semibold text-gray-700 text-sm">SIZE</span>
             <div className="grid grid-cols-3 pt-1">
               <div className="checkbox-example">
                 <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className="pl-2 text-sm text-gray-600">XS</label>
+                <label className="pl-2 text-sm text-gray-700">XS</label>
               </div>
               <div className="checkbox-example">
                 <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-600">S</label>
+                <label className=" pl-2 text-sm text-gray-700">S</label>
               </div>
               <div className="checkbox-example">
                 <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-600">M</label>
+                <label className=" pl-2 text-sm text-gray-700">M</label>
               </div>
               <div className="checkbox-example">
                 <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-600">L</label>
+                <label className=" pl-2 text-sm text-gray-700">L</label>
               </div>
               <div className="checkbox-example">
                 <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-600">XL</label>
+                <label className=" pl-2 text-sm text-gray-700">XL</label>
               </div>
               <div className="checkbox-example">
                 <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-600">XXL</label>
+                <label className=" pl-2 text-sm text-gray-700">XXL</label>
               </div>
             </div>
           </div>
           <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-600 text-sm pb-1">
+            <span className=" font-semibold text-gray-700 text-sm pb-1">
               PRICE
             </span>
             <div className="checkbox-example">
@@ -229,21 +243,21 @@ const ProductsPage = () => {
                 id="checkboxOneInput"
                 className=" size-3"
               />
-              <label className=" pl-2  text-sm text-gray-600">T-Shirts</label>
+              <label className=" pl-2  text-sm text-gray-700">T-Shirts</label>
             </div>
             <div className="checkbox-example">
               <input type="checkbox" value="1" id="checkboxOneInput" />
-              <label className=" pl-2 text-sm text-gray-600">
+              <label className=" pl-2 text-sm text-gray-700">
                 Oversized T-Shirts
               </label>
             </div>
             <div className="checkbox-example">
               <input type="checkbox" value="1" id="checkboxOneInput" />
-              <label className=" pl-2 text-sm text-gray-600">Shirts</label>
+              <label className=" pl-2 text-sm text-gray-700">Shirts</label>
             </div>
           </div>
           <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-600 text-sm pb-1">
+            <span className=" font-semibold text-gray-700 text-sm pb-1">
               DISCOUNT
             </span>
             <div className="checkbox-example">
@@ -251,11 +265,11 @@ const ProductsPage = () => {
                 type="radio"
                 value="10"
                 id="radioOneInput"
-                name="discount"
+                name="discount1"
                 checked={DiscountFilter[10]}
                 onChange={handleDiscountChange}
               />
-              <label className=" pl-2  text-sm text-gray-600">
+              <label className=" pl-2  text-sm text-gray-700">
                 10% and above
               </label>
             </div>
@@ -264,11 +278,11 @@ const ProductsPage = () => {
                 type="radio"
                 value="30"
                 id="radioTwoInput"
-                name="discount"
+                name="discount2"
                 checked={DiscountFilter[30]}
                 onChange={handleDiscountChange}
               />
-              <label className=" pl-2 text-sm text-gray-600">
+              <label className=" pl-2 text-sm text-gray-700">
                 30% and above
               </label>
             </div>
@@ -277,11 +291,11 @@ const ProductsPage = () => {
                 type="radio"
                 value="50"
                 id="radioThreeInput"
-                name="discount"
+                name="discount3"
                 checked={DiscountFilter[50]}
                 onChange={handleDiscountChange}
               />
-              <label className=" pl-2 text-sm text-gray-600">
+              <label className=" pl-2 text-sm text-gray-700">
                 50% and above
               </label>
             </div>
