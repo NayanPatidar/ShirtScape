@@ -9,6 +9,10 @@ const ProductsPage = () => {
   const [products, setProducts] = useState();
   const [SortFeatures, setSortFeatures] = useState(false);
   const [SortOption, setSortOption] = useState("Recommended");
+  const SortObj = {
+    "Price: Low to High": "ASC",
+    "Price: High to Low": "DESC",
+  };
   const [CategoryFilter, setCategoryFilter] = useState({
     TShirt: false,
     Oversized: false,
@@ -61,6 +65,11 @@ const ProductsPage = () => {
         queryParams.append("category", key);
       }
     }
+
+    if (SortOption != "Recommended") {
+      queryParams.append("sort", SortObj[SortOption]);
+    }
+
     const queryString = queryParams.toString();
     const url = queryString
       ? `http://localhost:8080/products/men?${queryString}`
@@ -68,15 +77,20 @@ const ProductsPage = () => {
 
     const response = await fetch(url);
     const ProductsData = await response.json();
-    const shuffledData = shuffleArray(ProductsData.clothsData.slice(), seed);
-    setProducts(shuffledData);
+
+    if (queryString == "" || !queryString.includes("sort")) {
+      const shuffledData = shuffleArray(ProductsData.clothsData.slice(), seed);
+      setProducts(shuffledData);
+    } else {
+      setProducts(ProductsData.clothsData);
+    }
   };
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchProductsData();
-  }, [CategoryFilter]);
+  }, [CategoryFilter, SortOption]);
 
   return (
     <div
@@ -220,21 +234,31 @@ const ProductsPage = () => {
             </span>
             <div className="checkbox-example">
               <input
-                type="checkbox"
+                type="radio"
                 value="1"
-                id="checkboxOneInput"
-                className=" size-3"
+                id="radioOneInput"
+                name="discount"
               />
               <label className=" pl-2  text-sm text-gray-600">T-Shirts</label>
             </div>
             <div className="checkbox-example">
-              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <input
+                type="radio"
+                value="1"
+                id="radioTwoInput"
+                name="discount"
+              />
               <label className=" pl-2 text-sm text-gray-600">
                 Oversized T-Shirts
               </label>
             </div>
             <div className="checkbox-example">
-              <input type="checkbox" value="1" id="checkboxOneInput" />
+              <input
+                type="radio"
+                value="1"
+                id="radioThreeInput"
+                name="discount"
+              />
               <label className=" pl-2 text-sm text-gray-600">Shirts</label>
             </div>
           </div>
