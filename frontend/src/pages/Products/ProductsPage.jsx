@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import ProductGrid from "../../components/ProductsGrid/ProductsGrid";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar/Nav";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState();
@@ -78,7 +79,7 @@ const ProductsPage = () => {
   }
 
   const seed = 2413;
-  
+
   const fetchProductsData = async () => {
     const queryParams = new URLSearchParams();
 
@@ -121,187 +122,168 @@ const ProductsPage = () => {
   }, [CategoryFilter, SortOption, DiscountFilter]);
 
   return (
-    <div
-      className="ProductsPageMain flex flex-col pt-16"
-      onClick={sortToggleOff}
-    >
-      <div className=" ProductDescriptionArea p-2">
-        <div className=" DescriptionAreaContent h-10 flex flex-row justify-end pr-8">
-          <div className=" SortBox z-10">
-            <div
-              className=" Sorting h-10 flex pl-2 items-center justify-between cursor-pointer"
-              onClick={sortToggle}
-            >
-              <div>
-                Sort by :<span className=" SortBoxText pl-1">{SortOption}</span>
-              </div>
-              <div>
-                <RiArrowDropDownLine className=" font-thin" size={25} />
-              </div>
-            </div>
-            {SortFeatures ? (
-              <ul className=" DropDownSortBox bg-white z-10 cursor-pointer">
-                <li
-                  className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
-                  onClick={() => setSortType("Price: Low to High")}
-                >
-                  Price: Low to High
-                </li>
-                <li
-                  className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
-                  onClick={() => setSortType("Price: High to Low")}
-                >
-                  Price: High to Low
-                </li>
-                <li
-                  className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
-                  onClick={() => setSortType("Recommended")}
-                >
-                  Recommended
-                </li>
-              </ul>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-      </div>
+    <div>
+      <Navbar />
 
-      <div className=" flex flex-row">
-        <div className="FilterTableMain flex flex-col p-3 ">
-          <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-700 text-sm pb-1">
-              PRODUCTS
-            </span>
-            <div className="checkbox-example">
-              <input
-                type="checkbox"
-                name="TShirt"
-                checked={CategoryFilter.TShirt}
-                onChange={handleCheckboxChange}
-              />
-              <label className=" pl-2  text-sm text-gray-700">T-Shirts</label>
-            </div>
-            <div className="checkbox-example">
-              <input
-                type="checkbox"
-                name="Oversized"
-                checked={CategoryFilter.Oversized}
-                onChange={handleCheckboxChange}
-              />
-              <label className=" pl-2 text-sm text-gray-700">
-                Oversized T-Shirts
-              </label>
-            </div>
-            <div className="checkbox-example">
-              <input
-                type="checkbox"
-                name="Shirt"
-                checked={CategoryFilter.Shirt}
-                onChange={handleCheckboxChange}
-              />
-              <label className=" pl-2 text-sm text-gray-700">Shirts</label>
-            </div>
-          </div>
-          <div className="border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-700 text-sm">SIZE</span>
-            <div className="grid grid-cols-3 pt-1">
-              <div className="checkbox-example">
-                <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className="pl-2 text-sm text-gray-700">XS</label>
+      <div
+        className="ProductsPageMain flex flex-col pt-16"
+        onClick={sortToggleOff}
+      >
+        <div className=" ProductDescriptionArea p-2">
+          <div className=" DescriptionAreaContent h-10 flex flex-row justify-end pr-8">
+            <div className=" SortBox z-10">
+              <div
+                className=" Sorting h-10 flex pl-2 items-center justify-between cursor-pointer"
+                onClick={sortToggle}
+              >
+                <div>
+                  Sort by :
+                  <span className=" SortBoxText pl-1">{SortOption}</span>
+                </div>
+                <div>
+                  <RiArrowDropDownLine className=" font-thin" size={25} />
+                </div>
               </div>
-              <div className="checkbox-example">
-                <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-700">S</label>
-              </div>
-              <div className="checkbox-example">
-                <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-700">M</label>
-              </div>
-              <div className="checkbox-example">
-                <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-700">L</label>
-              </div>
-              <div className="checkbox-example">
-                <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-700">XL</label>
-              </div>
-              <div className="checkbox-example">
-                <input type="checkbox" value="1" id="checkboxOneInput" />
-                <label className=" pl-2 text-sm text-gray-700">XXL</label>
-              </div>
-            </div>
-          </div>
-          <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-700 text-sm pb-1">
-              PRICE
-            </span>
-            <div className="checkbox-example">
-              <input
-                type="checkbox"
-                value="1"
-                id="checkboxOneInput"
-                className=" size-3"
-              />
-              <label className=" pl-2  text-sm text-gray-700">T-Shirts</label>
-            </div>
-            <div className="checkbox-example">
-              <input type="checkbox" value="1" id="checkboxOneInput" />
-              <label className=" pl-2 text-sm text-gray-700">
-                Oversized T-Shirts
-              </label>
-            </div>
-            <div className="checkbox-example">
-              <input type="checkbox" value="1" id="checkboxOneInput" />
-              <label className=" pl-2 text-sm text-gray-700">Shirts</label>
-            </div>
-          </div>
-          <div className=" flex flex-col  border-b border-gray-300 pb-3">
-            <span className=" font-semibold text-gray-700 text-sm pb-1">
-              DISCOUNT
-            </span>
-            <div className="checkbox-example">
-              <input
-                type="radio"
-                value="10"
-                id="radioOneInput"
-                name="discount1"
-                checked={DiscountFilter[10]}
-                onChange={handleDiscountChange}
-              />
-              <label className=" pl-2  text-sm text-gray-700">
-                10% and above
-              </label>
-            </div>
-            <div className="checkbox-example">
-              <input
-                type="radio"
-                value="30"
-                id="radioTwoInput"
-                name="discount2"
-                checked={DiscountFilter[30]}
-                onChange={handleDiscountChange}
-              />
-              <label className=" pl-2 text-sm text-gray-700">
-                30% and above
-              </label>
-            </div>
-            <div className="checkbox-example">
-              <input
-                type="radio"
-                value="50"
-                id="radioThreeInput"
-                name="discount3"
-                checked={DiscountFilter[50]}
-                onChange={handleDiscountChange}
-              />
-              <label className=" pl-2 text-sm text-gray-700">
-                50% and above
-              </label>
+              {SortFeatures ? (
+                <ul className=" DropDownSortBox bg-white z-10 cursor-pointer">
+                  <li
+                    className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
+                    onClick={() => setSortType("Price: Low to High")}
+                  >
+                    Price: Low to High
+                  </li>
+                  <li
+                    className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
+                    onClick={() => setSortType("Price: High to Low")}
+                  >
+                    Price: High to Low
+                  </li>
+                  <li
+                    className=" pt-1 pb-1 pl-2 hover:bg-slate-300"
+                    onClick={() => setSortType("Recommended")}
+                  >
+                    Recommended
+                  </li>
+                </ul>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
-        <ProductGrid productsData={products} />
+
+        <div className=" flex flex-row">
+          <div className="FilterTableMain flex flex-col p-3 ">
+            <div className=" flex flex-col  border-b border-gray-300 pb-3">
+              <span className=" font-semibold text-gray-700 text-sm pb-1">
+                PRODUCTS
+              </span>
+              <div className="checkbox-example">
+                <input
+                  type="checkbox"
+                  name="TShirt"
+                  checked={CategoryFilter.TShirt}
+                  onChange={handleCheckboxChange}
+                />
+                <label className=" pl-2  text-sm text-gray-700">T-Shirts</label>
+              </div>
+              <div className="checkbox-example">
+                <input
+                  type="checkbox"
+                  name="Oversized"
+                  checked={CategoryFilter.Oversized}
+                  onChange={handleCheckboxChange}
+                />
+                <label className=" pl-2 text-sm text-gray-700">
+                  Oversized T-Shirts
+                </label>
+              </div>
+              <div className="checkbox-example">
+                <input
+                  type="checkbox"
+                  name="Shirt"
+                  checked={CategoryFilter.Shirt}
+                  onChange={handleCheckboxChange}
+                />
+                <label className=" pl-2 text-sm text-gray-700">Shirts</label>
+              </div>
+            </div>
+            <div className="border-b border-gray-300 pb-3">
+              <span className=" font-semibold text-gray-700 text-sm">SIZE</span>
+              <div className="grid grid-cols-3 pt-1">
+                <div className="checkbox-example">
+                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <label className="pl-2 text-sm text-gray-700">XS</label>
+                </div>
+                <div className="checkbox-example">
+                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <label className=" pl-2 text-sm text-gray-700">S</label>
+                </div>
+                <div className="checkbox-example">
+                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <label className=" pl-2 text-sm text-gray-700">M</label>
+                </div>
+                <div className="checkbox-example">
+                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <label className=" pl-2 text-sm text-gray-700">L</label>
+                </div>
+                <div className="checkbox-example">
+                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <label className=" pl-2 text-sm text-gray-700">XL</label>
+                </div>
+                <div className="checkbox-example">
+                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <label className=" pl-2 text-sm text-gray-700">XXL</label>
+                </div>
+              </div>
+            </div>
+            <div className=" flex flex-col  border-b border-gray-300 pb-3">
+              <span className=" font-semibold text-gray-700 text-sm pb-1">
+                DISCOUNT
+              </span>
+              <div className="checkbox-example">
+                <input
+                  type="radio"
+                  value="10"
+                  id="radioOneInput"
+                  name="discount1"
+                  checked={DiscountFilter[10]}
+                  onChange={handleDiscountChange}
+                />
+                <label className=" pl-2  text-sm text-gray-700">
+                  10% and above
+                </label>
+              </div>
+              <div className="checkbox-example">
+                <input
+                  type="radio"
+                  value="30"
+                  id="radioTwoInput"
+                  name="discount2"
+                  checked={DiscountFilter[30]}
+                  onChange={handleDiscountChange}
+                />
+                <label className=" pl-2 text-sm text-gray-700">
+                  30% and above
+                </label>
+              </div>
+              <div className="checkbox-example">
+                <input
+                  type="radio"
+                  value="50"
+                  id="radioThreeInput"
+                  name="discount3"
+                  checked={DiscountFilter[50]}
+                  onChange={handleDiscountChange}
+                />
+                <label className=" pl-2 text-sm text-gray-700">
+                  50% and above
+                </label>
+              </div>
+            </div>
+          </div>
+          <ProductGrid className="" productsData={products} />
+        </div>
       </div>
     </div>
   );
