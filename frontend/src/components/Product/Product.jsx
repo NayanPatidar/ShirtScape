@@ -1,14 +1,30 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { json, useParams } from "react-router-dom";
 import Navbar from "../Navbar/Nav";
 
 const Product = () => {
+  const [product, setProduct] = useState("");
   let { productId } = useParams();
 
-  useEffect(() => {});
+  useEffect(() => {
+    fetchProductData();
+  }, []);
 
   async function fetchProductData() {
-    // const productData = await fetch("") 
+    try {
+      const productData = await fetch(
+        `http://localhost:8080/product/${productId}`
+      );
+      if (!productData.ok) {
+        console.error("Product Data Not Valid");
+      }
+      const jsonProduct = await productData.json();
+      setProduct(jsonProduct);
+    } catch (error) {
+      console.error(
+        `Encountered Error while fetching the data : ${error.message}`
+      );
+    }
   }
 
   return (
@@ -16,7 +32,7 @@ const Product = () => {
       <Navbar />
       <div className=" flex flex-row justify-around pt-16">
         <div className=" bg-black w-1/2 h-96">
-          <div className=" bg-white grid grid-cols-2"></div>
+          <img src={product.productData[0].product.photo1} alt="" className=" " />
         </div>
         <div className=" bg-slate-600 w-1/2 h-96"></div>
       </div>

@@ -8,9 +8,17 @@ const ProductsPageCard = ({
   Price,
   MRP,
   Discount,
+  ProductId,
 }) => {
+  const ProductIdCheck = () => {
+    console.log(ProductId);
+  };
+
   return (
-    <div className=" ProductsPageCardsMain flex flex-col ">
+    <div
+      className=" ProductsPageCardsMain flex flex-col"
+      onClick={ProductIdCheck}
+    >
       <img className=" ProductsPageImage cursor-pointer z-0" src={Image} />
       <div className=" flex flex-col">
         <span className="ProductsPageName">{Name}</span>
