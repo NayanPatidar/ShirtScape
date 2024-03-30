@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProductsPageCards.css";
+import { useNavigate } from "react-router-dom";
 
 const ProductsPageCard = ({
   Image,
@@ -10,8 +11,9 @@ const ProductsPageCard = ({
   Discount,
   ProductId,
 }) => {
+  const navigate = useNavigate();
   const ProductIdCheck = () => {
-    console.log(ProductId);
+    navigate(`/products/${ProductId}`);
   };
 
   return (
