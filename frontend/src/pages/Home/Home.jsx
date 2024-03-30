@@ -6,6 +6,7 @@ import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./Home.css";
 import Cards from "../../components/ProductsCard/HomeProductsCard";
+import Navbar from "../../components/Navbar/Nav";
 
 const slideImages = [
   {
@@ -55,6 +56,7 @@ function Home() {
 
   return (
     <div>
+      <Navbar />
       <div className="slide-container pt-16">
         <Fade>
           {slideImages.map((image, index) => (
@@ -73,8 +75,8 @@ function Home() {
         <div className="CategoryTypes">
           {Categories &&
             Categories.map((category, index) => (
-              <div key={index} className=" EachCategoryProp" >
-                <img src={category.photo1} className=" EachImageCategory"/>
+              <div key={index} className=" EachCategoryProp">
+                <img src={category.photo1} className=" EachImageCategory" />
               </div>
             ))}
         </div>

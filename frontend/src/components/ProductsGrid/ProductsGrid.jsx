@@ -3,7 +3,7 @@ import ProductsPageCard from "../ProductsCard/ProductsPageCards";
 
 const ProductGrid = ({ productsData }) => {
   return (
-    <div className="ProductsListMain p-5">
+    <div className="ProductsListMain p-5 pb-24">
       <div className=" ProductsArea grid grid-cols-4 gap-y-24 justify-items-center">
         {productsData &&
           productsData.map((product, index) => (
