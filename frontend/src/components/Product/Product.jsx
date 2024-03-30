@@ -30,11 +30,42 @@ const Product = () => {
   return (
     <div>
       <Navbar />
-      <div className=" flex flex-row justify-around pt-16">
-        <div className=" bg-black w-1/2 h-96">
-          <img src={product.productData[0].product.photo1} alt="" className=" " />
+      <div className=" flex flex-row justify-around pt-36 ">
+        <div className="  w-7/12 grid grid-cols-2 justify-items-center items-center p-4 pl-10 gap-5 ">
+          <div>
+            {product && (
+              <img
+                src={product.productData[0].product.photo1}
+                alt="Image One"
+              />
+            )}
+          </div>
+          <div>
+            {product && (
+              <img
+                src={product.productData[0].product.photo2}
+                alt="Image One"
+              />
+            )}
+          </div>
+          <div>
+            {product && (
+              <img
+                src={product.productData[0].product.photo3}
+                alt="Image One"
+              />
+            )}
+          </div>
+          <div>
+            {product && (
+              <img
+                src={product.productData[0].product.photo4}
+                alt="Image One"
+              />
+            )}
+          </div>
         </div>
-        <div className=" bg-slate-600 w-1/2 h-96"></div>
+        <div className=" w-5/12 "></div>
       </div>
     </div>
   );
