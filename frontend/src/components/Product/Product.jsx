@@ -5,6 +5,8 @@ import "./Product.css";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+
   let { productId } = useParams();
 
   useEffect(() => {
@@ -27,6 +29,10 @@ const Product = () => {
       );
     }
   }
+
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+  };
 
   return (
     <div>
@@ -57,15 +63,51 @@ const Product = () => {
                   {product.product.maindescription}
                 </span>
               </div>
-              <div className=" flex flex-row gap-3 justify-start pt-4 text-xl">
-                <span className=" Product_Price">₹{product.product.price}</span>
-                <span className=" Product_MRP_Desc">
-                  MRP{" "}
-                  <span className=" Product_MRP">₹{product.product.mrp}</span>
+              <div className=" flex flex-col">
+                <div className=" flex flex-row gap-3 justify-start pt-4 text-xl">
+                  <span className=" Product_Price">
+                    ₹{product.product.price}
+                  </span>
+                  <span className=" Product_MRP_Desc">
+                    MRP{" "}
+                    <span className=" Product_MRP">₹{product.product.mrp}</span>
+                  </span>
+                  <span className=" Product_Discount">
+                    ({product.product.discount}%) OFF
+                  </span>
+                </div>
+                <span className=" text-md text-green-500 font-medium mt-1 ml-1">
+                  inclusive of all taxes
                 </span>
-                <span className=" Product_Discount">
-                  ({product.product.discount}%) OFF
-                </span>
+              </div>
+              <div className=" Product_Size mt-10 ">
+                <span className=" tracking-wide ">SHIRT SIZE</span>
+                <div className=" flex gap-10 mt-5 cursor-pointer">
+                  <span
+                    className={`dot ${selectedSize === "S" ? "active" : ""}`}
+                    onClick={() => handleSizeClick("S")}
+                  >
+                    S
+                  </span>
+                  <span
+                    className={`dot ${selectedSize === "M" ? "active" : ""}`}
+                    onClick={() => handleSizeClick("M")}
+                  >
+                    M
+                  </span>
+                  <span
+                    className={`dot ${selectedSize === "L" ? "active" : ""}`}
+                    onClick={() => handleSizeClick("L")}
+                  >
+                    L
+                  </span>
+                  <span
+                    className={`dot ${selectedSize === "XL" ? "active" : ""}`}
+                    onClick={() => handleSizeClick("XL")}
+                  >
+                    XL
+                  </span>
+                </div>
               </div>
             </div>
           )}

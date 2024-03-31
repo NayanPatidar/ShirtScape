@@ -33,3 +33,29 @@
   font-size: 20px;
   color: rgb(255, 106, 0);
 }
+
+.Product_Size {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+
+.dot {
+  height: 50px;
+  width: 50px;
+  border: solid 1px rgb(133, 133, 133);
+  border-radius: 30%;
+  font-size: small;
+  font-weight: 200;
+  text-align: center;
+  align-content: center;
+}
+
+.dot:hover {
+  border-color: rgb(255, 9, 50);
+}
+
+.dot.active {
+  border-color: rgb(255, 9, 50);
+  color: rgb(255, 9, 50);
+}
