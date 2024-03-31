@@ -43,7 +43,7 @@
 .dot {
   height: 50px;
   width: 50px;
-  border: solid 1px rgb(133, 133, 133);
+  border: solid 2px rgb(133, 133, 133);
   border-radius: 30%;
   font-size: small;
   font-weight: 200;
@@ -58,4 +58,25 @@
 .dot.active {
   border-color: rgb(255, 9, 50);
   color: rgb(255, 9, 50);
+}
+
+.Add_To_Card_Button {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(255, 9, 50);
+}
+
+.Add_To_Wishlist_Button {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: solid 1px rgb(133, 133, 133);
 }

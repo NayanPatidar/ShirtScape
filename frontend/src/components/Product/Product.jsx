@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { json, useParams } from "react-router-dom";
+import { CiShoppingCart } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar/Nav";
 import "./Product.css";
 
@@ -55,7 +57,7 @@ const Product = () => {
         <div className=" w-5/12 mt-5 ml-5">
           {product && (
             <div className=" flex flex-col">
-              <div className="flex flex-col leading-6 border-b border-gray-200 w-3/4 pb-3">
+              <div className="flex flex-col leading-6 border-b border-gray-200 w-5/6 pb-3">
                 <span className="Product_Name">
                   {product.product.product_name}
                 </span>
@@ -107,6 +109,16 @@ const Product = () => {
                   >
                     XL
                   </span>
+                </div>
+              </div>
+              <div className=" flex flex-row gap-5 w-10/12  justify-start items-start mt-6 cursor-pointer">
+                <div className="Add_To_Card_Button w-6/12">
+                  <CiShoppingCart className=" size-6 w-1/6" />
+                  <span>ADD TO CART</span>
+                </div>
+                <div className="Add_To_Wishlist_Button w-2/5 flex flex-row">
+                  <CiHeart className=" size-5 w-1/6" />
+                  <span className=" w-5/12">WISHLIST</span>
                 </div>
               </div>
             </div>
