@@ -1,0 +1,35 @@
+.Product_Name {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #454647;
+}
+
+.Product_Main_Description {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  color: #6b6767;
+}
+
+.Product_Price {
+  font-weight: 700;
+  font-size: 24px;
+  color: rgb(47, 47, 47);
+}
+
+.Product_MRP {
+  font-size: 18px;
+  color: rgb(107, 102, 102);
+  text-decoration: line-through;
+}
+
+.Product_MRP_Desc {
+  font-size: 18px;
+  color: rgb(107, 102, 102);
+}
+
+.Product_Discount {
+  font-weight: 500;
+  font-size: 20px;
+  color: rgb(255, 106, 0);
+}

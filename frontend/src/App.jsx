@@ -1,8 +1,7 @@
 import React from "react";
 import Home from "./pages/Home/Home";
 import "./App.css";
-import Navbar from "./components/Navbar/Nav";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ProductsPage from "./pages/Products/ProductsPage";
 import Wishlist from "./components/Wishlist/Wishlist";
 import Cart from "./components/Cart/Cart";

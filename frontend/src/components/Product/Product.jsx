@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { json, useParams } from "react-router-dom";
 import Navbar from "../Navbar/Nav";
+import "./Product.css";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
@@ -45,7 +46,30 @@ const Product = () => {
             {product && <img src={product.product.photo4} alt="Image One" />}
           </div>
         </div>
-        <div className=" w-5/12 "></div>
+        <div className=" w-5/12 mt-5 ml-5">
+          {product && (
+            <div className=" flex flex-col">
+              <div className="flex flex-col leading-6 border-b border-gray-200 w-3/4 pb-3">
+                <span className="Product_Name">
+                  {product.product.product_name}
+                </span>
+                <span className="Product_Main_Description">
+                  {product.product.maindescription}
+                </span>
+              </div>
+              <div className=" flex flex-row gap-3 justify-start pt-4 text-xl">
+                <span className=" Product_Price">₹{product.product.price}</span>
+                <span className=" Product_MRP_Desc">
+                  MRP{" "}
+                  <span className=" Product_MRP">₹{product.product.mrp}</span>
+                </span>
+                <span className=" Product_Discount">
+                  ({product.product.discount}%) OFF
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
