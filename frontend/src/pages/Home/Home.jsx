@@ -94,6 +94,7 @@ function Home() {
                     price={tShirt.tshirts.price}
                     mrp={tShirt.tshirts.mrp}
                     discount={tShirt.tshirts.discount}
+                    ProductId={tShirt.tshirts.product_id}
                   />
                 </div>
               ))

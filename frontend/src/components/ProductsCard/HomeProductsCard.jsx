@@ -1,9 +1,22 @@
 import React from "react";
 import "./HomeProductsCard.css";
+import { useNavigate } from "react-router-dom";
 
-const Cards = ({ photo, name, description, price, mrp, discount }) => {
+const Cards = ({
+  photo,
+  name,
+  description,
+  price,
+  mrp,
+  discount,
+  ProductId,
+}) => {
+  const navigate = useNavigate();
+  const ProductIdCheck = () => {
+    navigate(`/products/${ProductId}`);
+  };
   return (
-    <div className=" flex flex-col ">
+    <div className=" flex flex-col" onClick={ProductIdCheck}>
       <img className="rounded-3xl cursor-pointer" src={photo} />
       <div className=" flex flex-col">
         <span className="ProductName">{name}</span>
