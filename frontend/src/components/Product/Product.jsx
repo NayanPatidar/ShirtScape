@@ -38,7 +38,11 @@ const Product = () => {
   };
 
   const productData = () => {
-    AddProduct({ product_id: `${product.product.product_id}` });
+    let ProductAdditionToCart = AddProduct({
+      product_id: `${product.product.product_id}`,
+    });
+
+    console.log(ProductAdditionToCart);
   };
 
   return (

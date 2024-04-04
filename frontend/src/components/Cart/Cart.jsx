@@ -2,9 +2,35 @@ import React, { useEffect } from "react";
 import "./Cart.css";
 
 const Cart = () => {
+  const FetchCartData = async () => {
+    try {
+      let LocalCartData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
+      const productIds = LocalCartData.map((item) => parseInt(item.id));
+      console.log(productIds);
+      let FetchedLocalCartData = await fetch(
+        "http://localhost:8080/cart/tempUser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productIds }),
+        }
+      );
+
+      if (FetchedLocalCartData.ok) {
+        const data = await FetchedLocalCartData.json();
+        console.log(data);
+      }
+      console.log(FetchedLocalCartData);
+    } catch (error) {
+      console.log("Error fetching the data: ", error.message);
+    }
+  };
+
   useEffect(() => {
-    
-  });
+    FetchCartData();
+  }, []);
 
   return (
     <div>
