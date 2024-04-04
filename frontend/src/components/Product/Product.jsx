@@ -4,6 +4,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar/Nav";
 import "./Product.css";
+import AddProduct from "../../services/AddProduct";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
@@ -34,6 +35,10 @@ const Product = () => {
 
   const handleSizeClick = (size) => {
     setSelectedSize(size);
+  };
+
+  const productData = () => {
+    AddProduct({ product_id: `${product.product.product_id}` });
   };
 
   return (
@@ -112,7 +117,10 @@ const Product = () => {
                 </div>
               </div>
               <div className=" flex flex-row gap-5 w-10/12  justify-start items-start mt-6 cursor-pointer">
-                <div className="Add_To_Card_Button w-6/12">
+                <div
+                  className="Add_To_Card_Button w-6/12"
+                  onClick={productData}
+                >
                   <CiShoppingCart className=" size-6 w-1/6" />
                   <span>ADD TO CART</span>
                 </div>

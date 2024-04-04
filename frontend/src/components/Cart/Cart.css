@@ -5,7 +5,6 @@
 }
 
 .ProductsPricesBlock {
-  height: 40ch;
-  border: solid 1px rgb(199, 199, 199);
-  border-radius: 5px;
+  height: 50ch;
+  border-left: solid 1px rgb(199, 199, 199);
 }
