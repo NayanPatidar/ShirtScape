@@ -2,40 +2,19 @@ import React, { useEffect, useState } from "react";
 import "./Cart.css";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
+import CartProductSize from "../../components/CartProdSize&Quantity/CartProductSize";
 
 const Cart = () => {
   const [CartItems, SetCartItems] = useState(null);
-  const [Size, setSize] = useState(false);
-  const [SizeOption, setSizeOption] = useState("S");
-  const [Qty, setQty] = useState(false);
-  const [QtyOption, setQtyOption] = useState(1);
-
-  const sizeToggle = () => {
-    setSize(!Size);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleSizeSelectionClick = () => {
+    setIsModalOpen(true);
+    console.log(isModalOpen);
   };
 
-  const sizeToggleOff = () => {
-    if (Size) {
-      setSize(false);
-    }
-  };
-
-  const qtyToggle = () => {
-    setQty(!Qty);
-  };
-
-  const qtyToggleOff = () => {
-    if (Qty) {
-      setQty(false);
-    }
-  };
-
-  const setQtyType = (SortType) => {
-    setQtyOption(SortType);
-  };
-
-  const setSizeType = (SortType) => {
-    setSizeOption(SortType);
+  // Function to handle closing the modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const FetchCartData = async () => {
@@ -68,15 +47,10 @@ const Cart = () => {
 
   return (
     <div>
-      <div className=" w-screen flex flex-col" onClick={sizeToggleOff}>
+      <div className=" w-screen flex flex-col">
+        {isModalOpen && <CartProductSize />}
         <div className=" bg-gray-800 h-16"></div>
-        <div
-          className=" flex flex-row justify-center gap-6 p-5"
-          onClick={() => {
-            sizeToggleOff();
-            qtyToggleOff();
-          }}
-        >
+        <div className=" flex flex-row justify-center gap-6 p-5">
           <div className=" w-6/12 flex flex-col gap-4">
             {CartItems &&
               CartItems.map((products, index) => (
@@ -97,11 +71,13 @@ const Cart = () => {
                     </span>
                     <span className="SizeQty mt-6 flex flex-row justify-start gap-4">
                       <div className=" flex flex-col w-5/12">
-                        <div
-                          className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer"
-                          onClick={sizeToggle}
-                        >
-                          <div className=" SizeTab">Size: {SizeOption}</div>
+                        <div className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer">
+                          <div
+                            className=" SizeTab"
+                            onClick={handleSizeSelectionClick}
+                          >
+                            Size:
+                          </div>
                           <div className=" flex items-center">
                             <MdArrowDropDown className=" size-4" />
                           </div>
@@ -109,11 +85,8 @@ const Cart = () => {
                       </div>
 
                       <div className=" flex flex-col w-5/12">
-                        <div
-                          className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer"
-                          onClick={qtyToggle}
-                        >
-                          <div className=" SizeTab">Qty: {QtyOption}</div>
+                        <div className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer">
+                          <div className=" SizeTab">Qty: </div>
                           <div className=" flex items-center">
                             <MdArrowDropDown className=" size-4" />
                           </div>
