@@ -9,7 +9,7 @@ function AddProduct({ product_id }) {
 
     if (!cart.some((item) => item.id === product_id)) {
       cart.push(Cart_Product);
-      localStorage.setItem("ShirtScape_Cart", JSON.stringify(cart));
+      localStorage.setItem("ShirtScape_Cart",JSON.stringify(cart));
       return "Product Added to Cart";
     }
 

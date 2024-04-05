@@ -83,23 +83,20 @@ function Home() {
 
         <span className="TopSellingTitle mt-20">TOP SELLING</span>
         <div className="TopSellingProds flex flex-row justify-around items-center mt-3 mb-3">
-          {
-            TShirts &&
-              TShirts.map((tShirt, index) => (
-                <div key={index} className="" style={{ width: "23.5%" }}>
-                  <Cards
-                    photo={tShirt.tshirts.photo1}
-                    name={tShirt.tshirts.product_name}
-                    description={tShirt.tshirts.genericdesc}
-                    price={tShirt.tshirts.price}
-                    mrp={tShirt.tshirts.mrp}
-                    discount={tShirt.tshirts.discount}
-                    ProductId={tShirt.tshirts.product_id}
-                  />
-                </div>
-              ))
-            // console.log(TShirts.tShirt.product_name)
-          }
+          {TShirts &&
+            TShirts.map((tShirt, index) => (
+              <div key={index} className="" style={{ width: "23.5%" }}>
+                <Cards
+                  photo={tShirt.tshirts.photo1}
+                  name={tShirt.tshirts.product_name}
+                  description={tShirt.tshirts.genericdesc}
+                  price={tShirt.tshirts.price}
+                  mrp={tShirt.tshirts.mrp}
+                  discount={tShirt.tshirts.discount}
+                  ProductId={tShirt.tshirts.product_id}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

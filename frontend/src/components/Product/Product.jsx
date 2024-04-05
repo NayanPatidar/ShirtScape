@@ -41,8 +41,6 @@ const Product = () => {
     let ProductAdditionToCart = AddProduct({
       product_id: `${product.product.product_id}`,
     });
-
-    console.log(ProductAdditionToCart);
   };
 
   return (
@@ -54,13 +52,13 @@ const Product = () => {
             {product && <img src={product.product.photo1} alt="Image One" />}
           </div>
           <div>
-            {product && <img src={product.product.photo2} alt="Image One" />}
+            {product && <img src={product.product.photo2} alt="Image Two" />}
           </div>
           <div>
-            {product && <img src={product.product.photo3} alt="Image One" />}
+            {product && <img src={product.product.photo3} alt="Image Three" />}
           </div>
           <div>
-            {product && <img src={product.product.photo4} alt="Image One" />}
+            {product && <img src={product.product.photo4} alt="Image Four" />}
           </div>
         </div>
         <div className=" w-5/12 mt-5 ml-5">

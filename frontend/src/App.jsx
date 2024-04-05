@@ -4,8 +4,8 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "./pages/Products/ProductsPage";
 import Wishlist from "./components/Wishlist/Wishlist";
-import Cart from "./components/Cart/Cart";
 import Product from "./components/Product/Product";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   return (

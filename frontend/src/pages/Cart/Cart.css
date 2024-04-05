@@ -1,0 +1,36 @@
+.ProductsBlockMain {
+  border: solid 1px rgb(231, 231, 231);
+  border-radius: 5px;
+}
+
+.ProductsPricesBlock {
+  height: 50ch;
+  border-left: solid 1px rgb(238, 238, 238);
+}
+
+.ImageOfCartItem {
+  width: 150px;
+  height: 200px;
+  padding: 15px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.CartItemTitle {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 10px;
+  color: #282c3f;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.CartItemDescription {
+  font-size: 14px;
+  padding-top: 2px;
+  font-weight: 300;
+  color: #282c3f;
+}
+
+.CartItemDetails {
+  padding-top: 20px;
+}
+
