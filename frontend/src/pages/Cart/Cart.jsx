@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Cart.css";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { MdArrowDropDown } from "react-icons/md";
 
 const Cart = () => {
   const [CartItems, SetCartItems] = useState(null);
-  const [Size, setSize] = useState(false);
+  const [Size, setSize] = useState(true);
   const [SizeOption, setSizeOption] = useState("S");
 
   const sizeToggle = () => {
@@ -67,8 +67,37 @@ const Cart = () => {
                 <span className="CartItemDescription">
                   Seeleves Tshirt Cotton Printed
                 </span>
-                <span className="SizeQty">
-                  
+                <span className="SizeQty mt-6 flex flex-row justify-start gap-4">
+                  <div className=" flex flex-col w-5/12">
+                    <div
+                      className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer"
+                      onClick={sizeToggle}
+                    >
+                      <div className=" SizeTab">Size: {SizeOption}</div>
+                      <div className=" flex items-center">
+                        <MdArrowDropDown className=" size-4" />
+                      </div>
+                    </div>
+                    {Size ? (
+                      <ul className=" SizeDropDown mt-2 flex flex-col items-center bg-white z-10 cursor-pointer">
+                        <li className="flex w-full justify-center text-xs hover:bg-slate-300">
+                          S
+                        </li>
+                        <li className="flex w-full justify-center text-xs hover:bg-slate-300">
+                          M
+                        </li>
+                        <li className="flex w-full justify-center text-xs hover:bg-slate-300">
+                          L
+                        </li>
+                      </ul>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
+                  <div className=" QtyBox w-5/12">
+                    <div className=" QtyTab"></div>
+                  </div>
                 </span>
                 <span className="PriceCartItem"></span>
               </div>

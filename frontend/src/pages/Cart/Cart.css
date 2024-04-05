@@ -31,6 +31,35 @@
 }
 
 .CartItemDetails {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
+.SizeQty {
+  height: 20px;
+}
+
+.SizeBox {
+  height: 20px;
+  background-color: rgb(241, 241, 241);
+}
+
+.QtyTab {
+  background-color: rgb(243, 243, 243);
+}
+
+.SizeTab {
+  font-weight: 600;
+  font-size: 14px;
+  color: #282c3f;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.DropDownSize {
+  border: solid 1px rgb(239, 239, 239);
+}
+
+.SizeDropDown {
+  border: solid 1px rgb(215, 215, 215);
+  /* display: flex; */
+  /* justify-content: center; */
+}
