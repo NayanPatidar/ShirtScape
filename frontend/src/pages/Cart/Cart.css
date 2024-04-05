@@ -24,7 +24,7 @@
 }
 
 .CartItemDescription {
-  font-size: 14px;
+  font-size: 13px;
   padding-top: 2px;
   font-weight: 300;
   color: #282c3f;
@@ -60,6 +60,31 @@
 
 .SizeDropDown {
   border: solid 1px rgb(215, 215, 215);
-  /* display: flex; */
-  /* justify-content: center; */
+}
+
+.MainPrice {
+  font-size: 12px;
+  font-weight: 700;
+  color: #282c3f;
+}
+
+.MRPCart {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgb(198, 198, 198);
+}
+
+.DiscountCart {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(255, 64, 64);
+}
+
+.CartPorductInfo {
+  font-size: 12px;
+  color: #282c3f;
+}
+
+.CartProductInfoStyle {
+  font-weight: 700;
 }
