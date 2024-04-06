@@ -33,7 +33,7 @@
 }
 
 .SizeSelectionPhoto {
-  height: 80px
+  height: 80px;
 }
 
 .SizeSelectionTitle {
@@ -49,4 +49,24 @@
   padding-top: 2px;
   font-weight: 350;
   color: #1e1e1e;
+}
+
+.SelectSizeHeading {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #1e1e1e;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.SelectionSubmit {
+  width: 100%;
+  height: 35px;
+  background-color: rgb(255, 41, 112);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #1e1e1e;
+  font-family: "Source Sans 3", sans-serif;
+  color: white;
 }
