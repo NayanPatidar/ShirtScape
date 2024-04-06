@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
 import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import Logo from "../../assets/logo/Logo.png";
 import "./Cart.css";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -16,6 +18,8 @@ const Cart = () => {
   const [done, setDone] = useState(false);
 
   const [size, setFinalSize] = useState("");
+
+  const navigate = useNavigate();
 
   const handleCloseModal = () => {
     if (isModalOpen) {
@@ -74,7 +78,20 @@ const Cart = () => {
           backgroundColor: isModalOpen ? "rgba(0,0,0,0.2)" : "",
         }}
       >
-        <div className=" bg-slate-300 h-16 "></div>
+        <div className=" bg-gray-200 h-16 flex flex-row align-middle items-center">
+          <div className=" w-1/2 pl-5">
+            <img
+              src={Logo}
+              alt="LOGO"
+              className="logo w-16"
+              onClick={() => navigate("/")}
+            />
+          </div>
+          <div className=" flex flex-row justify-between items-center w-1/2 pr-5">
+            <span className="BAGTitle">BAG</span>
+            <span className="BAGSecurity">100% SECURE</span>
+          </div>
+        </div>
         <div
           className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
           onClick={handleCloseModal}

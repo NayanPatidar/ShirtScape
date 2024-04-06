@@ -1,5 +1,4 @@
 .MainCartPage {
-
 }
 
 .ProductsBlockMain {
@@ -92,4 +91,18 @@
 
 .CartProductInfoStyle {
   font-weight: 700;
+}
+
+.BAGTitle {
+  color: rgb(93, 201, 50);
+  font-weight: 500;
+  font-size: 18px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.BAGSecurity {
+  color: #555555;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Source Sans 3", sans-serif;
 }
