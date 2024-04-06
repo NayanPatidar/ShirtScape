@@ -31,3 +31,22 @@
   border-color: rgb(255, 9, 50);
   color: rgb(255, 9, 50);
 }
+
+.SizeSelectionPhoto {
+  height: 80px
+}
+
+.SizeSelectionTitle {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #1e1e1e;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.SizeSelectionAbout {
+  font-size: 16px;
+  padding-top: 2px;
+  font-weight: 350;
+  color: #1e1e1e;
+}

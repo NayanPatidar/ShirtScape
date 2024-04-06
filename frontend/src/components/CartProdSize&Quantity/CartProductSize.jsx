@@ -13,14 +13,35 @@ const CartProductSize = ({ products, index }) => {
 
   return (
     <div>
-      <div className="SizeSelectionBox flex flex-col justify-center align-middle items-center">
-        <div className=" ClothData flex flex-col">
-          <div className="ImgageCloth">
-            {products && <img src={products.cloths.photo1} />}
+      <div className="SizeSelectionBox flex flex-col justify-between ">
+        <div className=" ClothData flex flex-row ">
+          <div className="ImageCloth">
+            {products && (
+              <img
+                className="SizeSelectionPhoto"
+                src={products.cloths.photo1}
+              />
+            )}
           </div>
-          <div className=""></div>
+          <div className="Description flex flex-col pt-1 justify-around pl-2">
+            <span className=" SizeSelectionTitle">
+              {products.cloths.product_name}
+            </span>
+            <span className=" SizeSelectionAbout">
+              {products.cloths.genericdesc}
+            </span>
+            <span className=" SizeSelectionPrices flex flex-row gap-2">
+              <span className=" MainPrice">₹{products.cloths.price}</span>
+              <span className=" MRPCart line-through">
+                ₹{products.cloths.mrp}
+              </span>
+              <span className=" DiscountCart">
+                {products.cloths.discount}% OFF
+              </span>
+            </span>
+          </div>
         </div>
-        <div className=" flex gap-10 mt-5 cursor-pointer">
+        <div className=" flex gap-10 mt-5 cursor-pointer self-center">
           <span
             className={`sizeDot ${selectedSize === "S" ? "active" : ""}`}
             onClick={() => handleSizeClick("S")}
