@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Cart.css";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
 import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import "./Cart.css";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -11,7 +11,11 @@ const Cart = () => {
   // This are the requirements
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [product, setProduct] = useState(null);
-  const [size, setFinalSize] = useState(null);
+  const [reference, setReference] = useState(null);
+  const [itemIndex, setItemIndex] = useState(null);
+  const [done, setDone] = useState(false);
+
+  const [size, setFinalSize] = useState("");
 
   const handleCloseModal = () => {
     if (isModalOpen) {
@@ -46,10 +50,6 @@ const Cart = () => {
     FetchCartData();
   }, []);
 
-  useEffect(() => {
-    console.log(isModalOpen);
-  }, [isModalOpen]);
-
   return (
     <SizeSelectionContext.Provider
       value={{
@@ -59,6 +59,12 @@ const Cart = () => {
         setProduct,
         size,
         setFinalSize,
+        reference,
+        setReference,
+        itemIndex,
+        setItemIndex,
+        done,
+        setDone,
       }}
     >
       <div
@@ -76,15 +82,13 @@ const Cart = () => {
           <div className=" w-6/12 flex flex-col gap-4">
             {CartItems &&
               CartItems.map((products, index) => (
-                <CartProduct products={products} index={index} />
+                <CartProduct products={products} key={index} index={index} />
               ))}
           </div>
           <div className="ProductsPricesBlock w-4/12 text-black"></div>
         </div>
       </div>
-      {isModalOpen && (
-        <div className=" fixed">{<CartProductSize products={product} />}</div>
-      )}
+      {isModalOpen && <div className=" fixed">{<CartProductSize />}</div>}
     </SizeSelectionContext.Provider>
   );
 };

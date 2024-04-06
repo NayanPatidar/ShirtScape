@@ -1,20 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MdArrowDropDown } from "react-icons/md";
-import { IoIosReturnLeft } from "react-icons/io";
-import {
-  CartDropdownContext,
-  SizeSelectionContext,
-} from "../../contexts/CartSizeSelection";
+import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
 import { IoMdClose } from "react-icons/io";
 import "./SelectionCartProduct.css";
 
-const CartProductSize = ({ products, index }) => {
-  const [selectedSize, setTempSize] = useState(null);
-  const { isModalOpen, setIsModalOpen, product, setProduct } =
-    useContext(SizeSelectionContext);
+const CartProductSize = () => {
+  const [selectedSize, setTempSize] = useState("");
+  const {
+    isModalOpen,
+    setIsModalOpen,
+    product,
+    setFinalSize,
+    setReference,
+    itemIndex,
+    done,
+    setDone,
+  } = useContext(SizeSelectionContext);
 
-  const handleSizeClick = (size) => {
+  const handleTempSizeClick = (size) => {
     setTempSize(size);
+  };
+
+  const handleDone = () => {
+    setFinalSize(selectedSize);
+    setReference(itemIndex);
+    setDone(!done);
+    console.log("Reference has been set");
+    handleCloseModal();
   };
 
   const handleCloseModal = () => {
@@ -28,27 +39,24 @@ const CartProductSize = ({ products, index }) => {
       <div className="SizeSelectionBox flex flex-col justify-between ">
         <div className=" ClothData flex flex-row justify-start">
           <div className="ImageCloth w-1/6">
-            {products && (
-              <img
-                className="SizeSelectionPhoto"
-                src={products.cloths.photo1}
-              />
+            {product && (
+              <img className="SizeSelectionPhoto" src={product.cloths.photo1} />
             )}
           </div>
           <div className="Description flex flex-col pt-1 justify-around pl-2 w-5/12">
             <span className=" SizeSelectionTitle flex flex-row  justify-between">
-              {products.cloths.product_name}
+              {product.cloths.product_name}
             </span>
             <span className=" SizeSelectionAbout">
-              {products.cloths.genericdesc}
+              {product.cloths.genericdesc}
             </span>
             <span className=" SizeSelectionPrices flex flex-row gap-2">
-              <span className=" MainPrice">₹{products.cloths.price}</span>
+              <span className=" MainPrice">₹{product.cloths.price}</span>
               <span className=" MRPCart line-through">
-                ₹{products.cloths.mrp}
+                ₹{product.cloths.mrp}
               </span>
               <span className=" DiscountCart">
-                {products.cloths.discount}% OFF
+                {product.cloths.discount}% OFF
               </span>
             </span>
           </div>
@@ -66,32 +74,34 @@ const CartProductSize = ({ products, index }) => {
           <div className=" flex gap-10 mt-5 cursor-pointer self-center">
             <span
               className={`sizeDot ${selectedSize === "S" ? "active" : ""}`}
-              onClick={() => handleSizeClick("S")}
+              onClick={() => handleTempSizeClick("S")}
             >
               S
             </span>
             <span
               className={`sizeDot ${selectedSize === "M" ? "active" : ""}`}
-              onClick={() => handleSizeClick("M")}
+              onClick={() => handleTempSizeClick("M")}
             >
               M
             </span>
             <span
               className={`sizeDot ${selectedSize === "L" ? "active" : ""}`}
-              onClick={() => handleSizeClick("L")}
+              onClick={() => handleTempSizeClick("L")}
             >
               L
             </span>
             <span
               className={`sizeDot ${selectedSize === "XL" ? "active" : ""}`}
-              onClick={() => handleSizeClick("XL")}
+              onClick={() => handleTempSizeClick("XL")}
             >
               XL
             </span>
           </div>
         </div>
         <div className=" submitSize flex justify-center align-middle items-center">
-          <button className=" SelectionSubmit ">DONE</button>
+          <button className=" SelectionSubmit " onClick={() => handleDone()}>
+            DONE
+          </button>
         </div>
       </div>
     </div>

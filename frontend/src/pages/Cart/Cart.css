@@ -52,6 +52,7 @@
 }
 
 .SizeTab {
+  width: 60px;
   font-weight: 600;
   font-size: 14px;
   color: #282c3f;
