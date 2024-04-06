@@ -7,14 +7,18 @@ import CartProductSize from "../../components/CartProdSize&Quantity/CartProductS
 const Cart = () => {
   const [CartItems, SetCartItems] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleSizeSelectionClick = () => {
+  const [product, setProduct] = useState(null);
+
+  const handleSizeSelectionClick = (product) => {
     setIsModalOpen(true);
+    setProduct(product);
     console.log(isModalOpen);
   };
 
-  // Function to handle closing the modal
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    if (isModalOpen) {
+      setIsModalOpen(false);
+    }
   };
 
   const FetchCartData = async () => {
@@ -34,7 +38,6 @@ const Cart = () => {
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         SetCartItems(data.CartData);
-        // console.log(data.CartData[0].cloths.price);
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
@@ -47,15 +50,23 @@ const Cart = () => {
 
   return (
     <div>
-      <div className=" w-screen flex flex-col">
-        {isModalOpen && <CartProductSize />}
-        <div className=" bg-gray-800 h-16"></div>
-        <div className=" flex flex-row justify-center gap-6 p-5">
+      <div
+        className="MainCartPage flex flex-col "
+        style={{
+          filter: isModalOpen ? "brightness(0.8)" : "none",
+          backgroundColor: isModalOpen ? "rgba(0,0,0,0.2)" : "",
+        }}
+      >
+        <div className=" bg-slate-300 h-16 "></div>
+        <div
+          className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
+          onClick={handleCloseModal}
+        >
           <div className=" w-6/12 flex flex-col gap-4">
             {CartItems &&
               CartItems.map((products, index) => (
                 <div
-                  className="ProductsBlockMain text-black flex flex-row"
+                  className="ProductsBlockMain text-black flex flex-row "
                   key={index}
                 >
                   <img
@@ -71,13 +82,11 @@ const Cart = () => {
                     </span>
                     <span className="SizeQty mt-6 flex flex-row justify-start gap-4">
                       <div className=" flex flex-col w-5/12">
-                        <div className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer">
-                          <div
-                            className=" SizeTab"
-                            onClick={handleSizeSelectionClick}
-                          >
-                            Size:
-                          </div>
+                        <div
+                          className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer"
+                          onClick={() => handleSizeSelectionClick(products)}
+                        >
+                          <div className=" SizeTab">Size:</div>
                           <div className=" flex items-center">
                             <MdArrowDropDown className=" size-4" />
                           </div>
@@ -118,6 +127,9 @@ const Cart = () => {
           <div className="ProductsPricesBlock w-4/12 text-black"></div>
         </div>
       </div>
+      {isModalOpen && (
+        <div className=" fixed">{<CartProductSize products={product} />}</div>
+      )}
     </div>
   );
 };
