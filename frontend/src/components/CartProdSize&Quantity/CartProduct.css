@@ -1,10 +1,33 @@
-.modal-overlay {
-  position: absolute;
+.SizeSelectionBox {
+  position: fixed;
+  width: 417px;
+  height: 252px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255, 1);
+  opacity: 1;
+}
+
+.sizeDot {
+  height: 35px;
+  width: 35px;
+  border: solid 1px rgb(133, 133, 133);
+  border-radius: 50%;
+  font-size: small;
+  font-weight: 400;
+  text-align: center;
+  align-content: center;
+}
+
+.sizeDot:hover {
+  border-color: rgb(255, 9, 50);
+}
+
+.sizeDot.active {
+  border-color: rgb(255, 9, 50);
+  color: rgb(255, 9, 50);
 }
