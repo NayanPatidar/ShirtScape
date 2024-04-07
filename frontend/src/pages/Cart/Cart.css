@@ -1,5 +1,5 @@
-.MainCartPage {
-  height: 100vh;
+.MainBackgroundCart {
+  height: auto;
 }
 
 .ProductsBlockMain {
@@ -170,4 +170,45 @@
 
 .LoginCoupDesc {
   color: rgb(255, 30, 97);
+}
+
+/* Price Details  */
+
+.priceDetailsTitle {
+  color: #575757;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.PriceField {
+  color: #282c3f;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.PriceCalcBox {
+  border-bottom: solid 1px rgb(228, 228, 228);
+  padding-bottom: 20px;
+}
+
+.TotalAmountText {
+  color: #282c3f;
+  font-weight: 650;
+  font-size: 18px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.CheckoutClick {
+  width: 100%;
+  height: 35px;
+  background-color: rgb(255, 41, 112);
+  font-weight: 560;
+  font-size: 15px;
+  line-height: 10px;
+  color: #1e1e1e;
+  font-family: "Source Sans 3", sans-serif;
+  color: white;
+  letter-spacing: 0.1em;
 }

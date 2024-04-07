@@ -21,9 +21,11 @@ const Cart = () => {
   const [itemIndex, setItemIndex] = useState(null);
   const [SizeMenuDone, setSizeMenuDone] = useState(false);
   const [QuantityMenuDone, setQuantityMenuDone] = useState(false);
+  const [itemsNum, setItemsNum] = useState(0);
 
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [price, SetPrice] = useState("");
 
   const navigate = useNavigate();
 
@@ -56,6 +58,7 @@ const Cart = () => {
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         SetCartItems(data.CartData);
+        setItemsNum(data.CartData.length);
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
@@ -94,8 +97,11 @@ const Cart = () => {
       <div
         className="MainCartPage flex flex-col"
         style={{
-          filter: isSizeMenuOpen ? "brightness(0.8)" : "none",
-          backgroundColor: isSizeMenuOpen ? "rgba(0,0,0,0.2)" : "",
+          filter:
+            isSizeMenuOpen || isQuantityMenuOpen ? "brightness(0.8)" : "none",
+          backgroundColor:
+            isSizeMenuOpen || isQuantityMenuOpen ? "rgba(0,0,0,0.2)" : "",
+          height: itemsNum > 2 ? "100%" : "100vh",
         }}
       >
         <div className="TopBarCartPage h-16 p-10 flex flex-row justify-between align-middle items-center cursor-default">
@@ -116,7 +122,6 @@ const Cart = () => {
           </div>
           <span className="BAGSecurity">100% SECURE</span>
         </div>
-        <div className=" flex flex-row justify-between items-center pr-5"></div>
         <div
           className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
           onClick={() => {
@@ -139,14 +144,49 @@ const Cart = () => {
                     <IoIosPricetags />
                     <span className="ApplyCouponsText">Apply Coupons</span>
                   </div>
-                  <div className="ApplyCouponText p-1 cursor-pointer">APPLY</div>
+                  <div className="ApplyCouponText p-1 cursor-pointer">
+                    APPLY
+                  </div>
                 </div>
                 <span className="CouponDescription flex gap-1">
                   <span className=" LoginCoupDesc  cursor-pointer">Login</span>
-                  <span className=" "> to get upto ₹200 OFF on first order</span>
+                  <span>to get upto ₹200 OFF on first order</span>
                 </span>
               </div>
-              <div className=""></div>
+              <div className="CartItemsPriceDetails">
+                <div className=" flex flex-col pt-4">
+                  <span className="priceDetailsTitle">PRICE DETAILS</span>
+                  <div className="PriceCalcBox flex flex-col gap-2 pt-5">
+                    <div className=" flex flex-row justify-between ">
+                      <span className=" PriceField">Total MRP</span>
+                      <span></span>
+                    </div>
+                    <div className=" flex flex-row justify-between ">
+                      <span className=" PriceField">Discount on MRP</span>
+                      <span></span>
+                    </div>
+                    <div className=" flex flex-row justify-between ">
+                      <span className=" PriceField">Coupon Discount</span>
+                      <span></span>
+                    </div>
+                    <div className=" flex flex-row justify-between ">
+                      <span className=" PriceField">Platform Fee</span>
+                      <span></span>
+                    </div>
+                    <div className=" flex flex-row justify-between ">
+                      <span className=" PriceField">Shipping Fee</span>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="TotalAmount flex flex-row justify-between pt-3">
+                <span className=" TotalAmountText">Total Amount</span>
+                <span></span>
+              </div>
+              <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
+                <button className=" CheckoutClick ">PLACE ORDER</button>
+              </div>
             </div>
           </div>
         </div>

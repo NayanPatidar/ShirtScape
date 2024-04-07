@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import "./SelectionCartProduct.css";
 
 const CartProductSize = () => {
-  const [selectedSize, setTempSize] = useState("");
+  const [selectedSize, setTempSize] = useState("S");
   const {
     isSizeMenuOpen,
     setIsSizeMenu,
