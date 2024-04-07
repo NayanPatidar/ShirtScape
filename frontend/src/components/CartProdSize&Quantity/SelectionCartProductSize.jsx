@@ -9,7 +9,7 @@ const CartProductSize = () => {
     isSizeMenuOpen,
     setIsSizeMenu,
     product,
-    setFinalSize,
+    setSize,
     setReference,
     itemIndex,
     done,
@@ -21,14 +21,14 @@ const CartProductSize = () => {
   };
 
   const handleDone = () => {
-    setFinalSize(selectedSize);
+    setSize(selectedSize);
     setReference(itemIndex);
     setDone(!done);
     console.log("Reference has been set");
-    handleCloseModal();
+    handleCloseSizeMenu();
   };
 
-  const handleCloseModal = () => {
+  const handleCloseSizeMenu = () => {
     if (isSizeMenuOpen) {
       setIsSizeMenu(false);
     }
@@ -63,7 +63,7 @@ const CartProductSize = () => {
           <div className=" flex flex-row w-5/12 justify-end">
             <span>
               <IoMdClose
-                onClick={handleCloseModal}
+                onClick={handleCloseSizeMenu}
                 className="cursor-pointer"
               />
             </span>

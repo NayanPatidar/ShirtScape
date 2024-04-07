@@ -17,6 +17,9 @@ const CartProduct = ({ products, index }) => {
     done,
     quantity,
     setQuantity,
+    isQuantityMenuOpen,
+    setIsQuantityMenuOpen,
+    setProductId,
   } = useContext(SizeSelectionContext);
 
   const [mainSize, setMainSize] = useState();
@@ -25,6 +28,13 @@ const CartProduct = ({ products, index }) => {
     setIsSizeMenu(true);
     setProduct(product);
     setItemIndex(index);
+  };
+
+  const handleQuantitySelectionClick = (product_id) => {
+    console.log(`Quantity Selection Clicked - ${product_id}`);
+    setIsQuantityMenuOpen(true);
+    // setProductId(product_id);
+    // setItemIndex(index);
   };
 
   useEffect(() => {
@@ -69,7 +79,12 @@ const CartProduct = ({ products, index }) => {
           </div>
 
           <div className=" flex flex-col w-5/12">
-            <div className=" SizeBox flex flex-row justify-center gap-1 cursor-pointer">
+            <div
+              className=" SizeBox flex flex-row justify-center cursor-pointer"
+              onClick={() =>
+                handleQuantitySelectionClick(products.cloths.product_id)
+              }
+            >
               <div className=" SizeTab flex justify-center">Qty: </div>
               <div className=" flex items-center">
                 <MdArrowDropDown className=" size-4" />

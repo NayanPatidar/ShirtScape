@@ -5,6 +5,7 @@ import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
 import Logo from "../../assets/logo/Logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
+import CartProductQuantity from "../../components/CartProdSize&Quantity/SelectionCartProductQty";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -12,7 +13,9 @@ const Cart = () => {
 
   // This are the requirements
   const [isSizeMenuOpen, setIsSizeMenu] = useState(false);
+  const [isQuantityMenuOpen, setIsQuantityMenuOpen] = useState(false);
   const [product, setProduct] = useState(null);
+  const [productId, setProductId] = useState(null);
   const [reference, setReference] = useState(null);
   const [itemIndex, setItemIndex] = useState(null);
   const [done, setDone] = useState(false);
@@ -22,9 +25,15 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-  const handleCloseModal = () => {
+  const handleCloseSizeMenu = () => {
     if (isSizeMenuOpen) {
       setIsSizeMenu(false);
+    }
+  };
+
+  const handleCloseQuantityMenu = () => {
+    if (isQuantityMenuOpen) {
+      setIsQuantityMenuOpen(false);
     }
   };
 
@@ -72,6 +81,8 @@ const Cart = () => {
         setDone,
         quantity,
         setQuantity,
+        isQuantityMenuOpen,
+        setIsQuantityMenuOpen,
       }}
     >
       <div
@@ -102,7 +113,9 @@ const Cart = () => {
         <div className=" flex flex-row justify-between items-center pr-5"></div>
         <div
           className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
-          onClick={handleCloseModal}
+          onClick={
+            (() => handleCloseSizeMenu(), () => handleCloseQuantityMenu())
+          }
         >
           <div className=" w-6/12 flex flex-col gap-4">
             {CartItems &&
@@ -113,7 +126,10 @@ const Cart = () => {
           <div className="ProductsPricesBlock w-4/12 text-black"></div>
         </div>
       </div>
-      {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>}
+      {/* {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>} */}
+      {isQuantityMenuOpen && (
+        <div className=" fixed">{<CartProductQuantity />}</div>
+      )}
     </SizeSelectionContext.Provider>
   );
 };

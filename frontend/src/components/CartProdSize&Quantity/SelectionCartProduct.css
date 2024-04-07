@@ -70,3 +70,58 @@
   font-family: "Source Sans 3", sans-serif;
   color: white;
 }
+
+.QuantitySelectionBox {
+  position: fixed;
+  width: 417px;
+  height: 252px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255, 1);
+  opacity: 1;
+}
+
+.quantityDot {
+  height: 35px;
+  width: 35px;
+  border: solid 1px rgb(133, 133, 133);
+  border-radius: 50%;
+  font-size: small;
+  font-weight: 400;
+  text-align: center;
+  align-content: center;
+}
+
+.quantityDot:hover {
+  border-color: rgb(255, 9, 50);
+}
+
+.quantityDot.active {
+  border-color: rgb(255, 9, 50);
+  color: rgb(255, 9, 50);
+}
+
+.SelectQuantityHeading {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #1e1e1e;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.SelectionSubmit {
+  width: 100%;
+  height: 35px;
+  background-color: rgb(255, 41, 112);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 10px;
+  color: #1e1e1e;
+  font-family: "Source Sans 3", sans-serif;
+  color: white;
+}
+
