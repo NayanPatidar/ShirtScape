@@ -78,8 +78,8 @@ const Cart = () => {
           backgroundColor: isModalOpen ? "rgba(0,0,0,0.2)" : "",
         }}
       >
-        <div className=" bg-gray-200 h-16 flex flex-row align-middle items-center">
-          <div className=" w-1/2 pl-5">
+        <div className="TopBarCartPage h-16 p-10 flex flex-row justify-between align-middle items-center">
+          <div className="">
             <img
               src={Logo}
               alt="LOGO"
@@ -87,11 +87,16 @@ const Cart = () => {
               onClick={() => navigate("/")}
             />
           </div>
-          <div className=" flex flex-row justify-between items-center w-1/2 pr-5">
+          <div className=" BagLogoDesscription">
             <span className="BAGTitle">BAG</span>
-            <span className="BAGSecurity">100% SECURE</span>
+            <span className=" font-thin text-xs"> -------- </span>
+            <span className="BAGAddress">ADDRESS</span>
+            <span className=" font-thin text-xs "> -------- </span>
+            <span className="BAGPayment">PAYMENT</span>
           </div>
+          <span className="BAGSecurity">100% SECURE</span>
         </div>
+        <div className=" flex flex-row justify-between items-center pr-5"></div>
         <div
           className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
           onClick={handleCloseModal}

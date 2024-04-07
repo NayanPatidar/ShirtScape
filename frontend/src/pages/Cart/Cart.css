@@ -93,16 +93,38 @@
   font-weight: 700;
 }
 
-.BAGTitle {
-  color: rgb(93, 201, 50);
+.BAGSecurity {
+  color: #5f5f5f;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 13px;
   font-family: "Source Sans 3", sans-serif;
+  letter-spacing: 0.2em;
 }
 
-.BAGSecurity {
-  color: #555555;
+.BAGTitle {
+  color: #20bd99;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 12px;
   font-family: "Source Sans 3", sans-serif;
+  letter-spacing: 0.2em;
+}
+
+.BAGAddress {
+  color: #5f5f5f;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Source Sans 3", sans-serif;
+  letter-spacing: 0.2em;
+}
+
+.BAGPayment {
+  color: #5f5f5f;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Source Sans 3", sans-serif;
+  letter-spacing: 0.2em;
+}
+
+.TopBarCartPage {
+  border-bottom: solid 1px rgb(219, 219, 219);
 }
