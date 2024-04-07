@@ -34,67 +34,67 @@ const CartProductQuantity = () => {
     setTempQuantity(size);
   };
 
-  useEffect(() => {
-    console.log("Selection Cart Product Quantity");
-  }, []);
-
   return (
     <div>
       <div className="QuantitySelectionBox flex flex-col justify-between ">
-        <div className=" ClothData flex flex-row justify-start">
-          <div className=" flex flex-row w-5/12 justify-end">
-            <span>
-              <IoMdClose
-                onClick={handleCloseQuantityMenu}
-                className="cursor-pointer"
-              />
-            </span>
+        <div>
+          <div className=" ClothData flex flex-row justify-start">
+            <div className=" flex flex-row w-full justify-end">
+              <span>
+                <IoMdClose
+                  onClick={handleCloseQuantityMenu}
+                  className="cursor-pointer"
+                />
+              </span>
+            </div>
           </div>
-        </div>
-        <div className=" flex flex-col ">
           <span className=" SelectQuantityHeading">Select Quantity</span>
-          <div className=" flex gap-10 mt-5 cursor-pointer self-center">
-            <span
-              className={`quantityDot ${
-                selectedQuantity === 1 ? "active" : ""
-              }`}
-              onClick={() => handleTempQuantityClick(1)}
-            >
-              1
-            </span>
-            <span
-              className={`quantityDot ${
-                selectedQuantity === 2 ? "active" : ""
-              }`}
-              onClick={() => handleTempQuantityClick(2)}
-            >
-              2
-            </span>
-            <span
-              className={`quantityDot ${
-                selectedQuantity === 3 ? "active" : ""
-              }`}
-              onClick={() => handleTempQuantityClick(3)}
-            >
-              3
-            </span>
-            <span
-              className={`quantityDot ${
-                selectedQuantity === 4 ? "active" : ""
-              }`}
-              onClick={() => handleTempQuantityClick(4)}
-            >
-              4
-            </span>
-          </div>
         </div>
-        <div className=" submitQuantity flex justify-center align-middle items-center">
-          <button
-            className=" SelectionSubmit "
-            //   onClick={() => handleDone()}
-          >
-            DONE
-          </button>
+        <div>
+          <div className=" flex flex-col ">
+            <div className=" flex gap-10 mt-5 cursor-pointer self-center pb-5">
+              <span
+                className={`quantityDot ${
+                  selectedQuantity === 1 ? "active" : ""
+                }`}
+                onClick={() => handleTempQuantityClick(1)}
+              >
+                1
+              </span>
+              <span
+                className={`quantityDot ${
+                  selectedQuantity === 2 ? "active" : ""
+                }`}
+                onClick={() => handleTempQuantityClick(2)}
+              >
+                2
+              </span>
+              <span
+                className={`quantityDot ${
+                  selectedQuantity === 3 ? "active" : ""
+                }`}
+                onClick={() => handleTempQuantityClick(3)}
+              >
+                3
+              </span>
+              <span
+                className={`quantityDot ${
+                  selectedQuantity === 4 ? "active" : ""
+                }`}
+                onClick={() => handleTempQuantityClick(4)}
+              >
+                4
+              </span>
+            </div>
+          </div>
+          <div className=" submitQuantity flex justify-center align-middle items-center ">
+            <button
+              className=" SelectionSubmit "
+              //   onClick={() => handleDone()}
+            >
+              DONE
+            </button>
+          </div>
         </div>
       </div>
     </div>
