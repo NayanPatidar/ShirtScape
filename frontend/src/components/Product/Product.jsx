@@ -45,7 +45,7 @@ const Product = () => {
   return (
     <div>
       <Navbar />
-      <div className=" flex flex-row justify-around pt-28 ">
+      <div className=" flex flex-row justify-around pt-28 cursor-default">
         <div className="  w-7/12 grid grid-cols-2 justify-items-center items-center p-4 pl-10 gap-2 ">
           <div>
             {product && <img src={product.product.photo1} alt="Image One" />}

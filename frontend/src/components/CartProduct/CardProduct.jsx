@@ -72,7 +72,7 @@ const CartProduct = ({ products, index }) => {
   }, [mainQuantity]);
 
   return (
-    <div className="ProductsBlockMain text-black flex flex-row " key={index}>
+    <div className="ProductsBlockMain text-black flex flex-row cursor-default" key={index}>
       <img className="ImageOfCartItem" src={products.cloths.photo1}></img>
       <div className="CartItemDetails flex flex-col">
         <span className="CartItemTitle">{products.cloths.product_name}</span>

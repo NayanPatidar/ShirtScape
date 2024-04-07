@@ -8,6 +8,7 @@
 }
 
 .ProductsPricesBlock {
+  width: 27%;
   height: 50ch;
   border-left: solid 1px rgb(238, 238, 238);
 }
@@ -127,5 +128,46 @@
 }
 
 .TopBarCartPage {
-  border-bottom: solid 1px rgb(219, 219, 219);
+  border-bottom: solid 1px rgb(234, 234, 234);
+}
+
+/* Price And Coupons */
+
+.CouponsTitle {
+  color: #575757;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.ApplyCouponsText {
+  color: #282828;
+  font-weight: 590;
+  font-size: 15px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.ApplyCouponText {
+  text-align: center;
+  width: 70px;
+  color: rgb(255, 30, 97);
+  font-size: 11px;
+  font-weight: 600;
+  border: solid 1px rgb(255, 30, 97);
+  border-radius: 3px;
+}
+
+.CouponDescription {
+  display: flex;
+  justify-content: center;
+  color: #282828;
+  font-weight: 350;
+  font-size: 14px;
+  font-family: "Source Sans 3", sans-serif;
+  padding-bottom: 20px;
+  border-bottom: solid 1px rgb(228, 228, 228);
+}
+
+.LoginCoupDesc {
+  color: rgb(255, 30, 97);
 }

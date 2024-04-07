@@ -32,13 +32,11 @@ const FindSizeByIdFromLocalStorage = (id) => {
 
 // Change Size using ID from the Local Storage
 const ChangeSizeInLocalStorage = (id, newSize) => {
-  // console.log(`${id} - ${newSize}`);
   const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
 
   if (newSize != undefined && storedData) {
     const updatedData = storedData.map((item) => {
       if (item.id == id) {
-        // console.log("Size Updated");
         return { ...item, size: newSize };
       }
       return item;

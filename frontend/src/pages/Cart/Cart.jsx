@@ -6,6 +6,7 @@ import Logo from "../../assets/logo/Logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import CartProductQuantity from "../../components/CartProdSize&Quantity/SelectionCartProductQty";
+import { IoIosPricetags } from "react-icons/io";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -97,7 +98,7 @@ const Cart = () => {
           backgroundColor: isSizeMenuOpen ? "rgba(0,0,0,0.2)" : "",
         }}
       >
-        <div className="TopBarCartPage h-16 p-10 flex flex-row justify-between align-middle items-center">
+        <div className="TopBarCartPage h-16 p-10 flex flex-row justify-between align-middle items-center cursor-default">
           <div className="">
             <img
               src={Logo}
@@ -129,7 +130,25 @@ const Cart = () => {
                 <CartProduct products={products} key={index} index={index} />
               ))}
           </div>
-          <div className="ProductsPricesBlock w-4/12 text-black"></div>
+          <div className="ProductsPricesBlock text-black cursor-default">
+            <div className=" pl-5 pt-4 flex flex-col">
+              <div className=" flex flex-col gap-4">
+                <span className="CouponsTitle">COUPONS</span>
+                <div className="CouponsApplication flex flex-row justify-between">
+                  <div className=" flex flex-row gap-4 justify-end items-center">
+                    <IoIosPricetags />
+                    <span className="ApplyCouponsText">Apply Coupons</span>
+                  </div>
+                  <div className="ApplyCouponText p-1 cursor-pointer">APPLY</div>
+                </div>
+                <span className="CouponDescription flex gap-1">
+                  <span className=" LoginCoupDesc  cursor-pointer">Login</span>
+                  <span className=" "> to get upto ₹200 OFF on first order</span>
+                </span>
+              </div>
+              <div className=""></div>
+            </div>
+          </div>
         </div>
       </div>
       {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>}

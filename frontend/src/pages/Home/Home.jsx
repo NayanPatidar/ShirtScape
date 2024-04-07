@@ -55,7 +55,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className=" cursor-default">
       <Navbar />
       <div className="slide-container pt-16">
         <Fade>
