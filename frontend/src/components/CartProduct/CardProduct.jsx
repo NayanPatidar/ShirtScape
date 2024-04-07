@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
 import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import {
+  FindSizeByIdFromLocalStorage,
+  ChangeSizeInLocalStorage,
+} from "../../services/storageOperations";
 
 const CartProduct = ({ products, index }) => {
   const { setIsModalOpen, setProduct, size, reference, setItemIndex, done } =
@@ -15,28 +19,6 @@ const CartProduct = ({ products, index }) => {
     setItemIndex(index);
   };
 
-  const findSizeByIdFromLocalStorage = (id) => {
-    const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
-    const filteredData = storedData.filter((item) => item.id == `${id}`);
-    return filteredData ? filteredData[0].size : null;
-  };
-
-  const changeSizeInLocalStorage = (id, newSize) => {
-    console.log(`${id} - ${newSize}`);
-    const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
-
-    if (newSize != undefined && storedData) {
-      const updatedData = storedData.map((item) => {
-        if (item.id == id) {
-          console.log("Size Updated");
-          return { ...item, size: newSize };
-        }
-        return item;
-      });
-      localStorage.setItem("ShirtScape_Cart", JSON.stringify(updatedData));
-    }
-  };
-
   useEffect(() => {
     if (index == reference) {
       console.log(`Size has been set - ${index}`);
@@ -45,13 +27,13 @@ const CartProduct = ({ products, index }) => {
   }, [done]);
 
   useEffect(() => {
-    const size = findSizeByIdFromLocalStorage(products.cloths.product_id);
+    const size = FindSizeByIdFromLocalStorage(products.cloths.product_id);
     setMainSize(size);
   }, []);
 
   useEffect(() => {
     if (mainSize !== undefined) {
-      changeSizeInLocalStorage(products.cloths.product_id, mainSize);
+      ChangeSizeInLocalStorage(products.cloths.product_id, mainSize);
     }
   }, [mainSize]);
 
@@ -69,7 +51,9 @@ const CartProduct = ({ products, index }) => {
               className=" SizeBox flex flex-row justify-center cursor-pointer"
               onClick={() => handleSizeSelectionClick(products)}
             >
-              <div className=" SizeTab flex justify-center">Size: {mainSize}</div>
+              <div className=" SizeTab flex justify-center">
+                Size: {mainSize}
+              </div>
               <div className=" flex items-center">
                 <MdArrowDropDown className=" size-4" />
               </div>
