@@ -8,13 +8,21 @@ import {
 } from "../../services/storageOperations";
 
 const CartProduct = ({ products, index }) => {
-  const { setIsModalOpen, setProduct, size, reference, setItemIndex, done } =
-    useContext(SizeSelectionContext);
+  const {
+    setIsSizeMenu,
+    setProduct,
+    size,
+    reference,
+    setItemIndex,
+    done,
+    quantity,
+    setQuantity,
+  } = useContext(SizeSelectionContext);
 
   const [mainSize, setMainSize] = useState();
 
   const handleSizeSelectionClick = (product) => {
-    setIsModalOpen(true);
+    setIsSizeMenu(true);
     setProduct(product);
     setItemIndex(index);
   };

@@ -6,8 +6,8 @@ import "./SelectionCartProduct.css";
 const CartProductSize = () => {
   const [selectedSize, setTempSize] = useState("");
   const {
-    isModalOpen,
-    setIsModalOpen,
+    isSizeMenuOpen,
+    setIsSizeMenu,
     product,
     setFinalSize,
     setReference,
@@ -29,8 +29,8 @@ const CartProductSize = () => {
   };
 
   const handleCloseModal = () => {
-    if (isModalOpen) {
-      setIsModalOpen(false);
+    if (isSizeMenuOpen) {
+      setIsSizeMenu(false);
     }
   };
 

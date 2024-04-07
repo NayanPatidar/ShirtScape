@@ -11,19 +11,20 @@ const Cart = () => {
   const [CartItems, SetCartItems] = useState(null);
 
   // This are the requirements
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSizeMenuOpen, setIsSizeMenu] = useState(false);
   const [product, setProduct] = useState(null);
   const [reference, setReference] = useState(null);
   const [itemIndex, setItemIndex] = useState(null);
   const [done, setDone] = useState(false);
 
-  const [size, setFinalSize] = useState("");
+  const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState("");
 
   const navigate = useNavigate();
 
   const handleCloseModal = () => {
-    if (isModalOpen) {
-      setIsModalOpen(false);
+    if (isSizeMenuOpen) {
+      setIsSizeMenu(false);
     }
   };
 
@@ -57,25 +58,27 @@ const Cart = () => {
   return (
     <SizeSelectionContext.Provider
       value={{
-        isModalOpen,
-        setIsModalOpen,
+        isSizeMenuOpen,
+        setIsSizeMenu,
         product,
         setProduct,
         size,
-        setFinalSize,
+        setSize,
         reference,
         setReference,
         itemIndex,
         setItemIndex,
         done,
         setDone,
+        quantity,
+        setQuantity,
       }}
     >
       <div
         className="MainCartPage flex flex-col "
         style={{
-          filter: isModalOpen ? "brightness(0.8)" : "none",
-          backgroundColor: isModalOpen ? "rgba(0,0,0,0.2)" : "",
+          filter: isSizeMenuOpen ? "brightness(0.8)" : "none",
+          backgroundColor: isSizeMenuOpen ? "rgba(0,0,0,0.2)" : "",
         }}
       >
         <div className="TopBarCartPage h-16 p-10 flex flex-row justify-between align-middle items-center">
@@ -110,7 +113,7 @@ const Cart = () => {
           <div className="ProductsPricesBlock w-4/12 text-black"></div>
         </div>
       </div>
-      {isModalOpen && <div className=" fixed">{<CartProductSize />}</div>}
+      {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>}
     </SizeSelectionContext.Provider>
   );
 };
