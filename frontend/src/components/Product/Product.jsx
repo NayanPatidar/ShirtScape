@@ -4,8 +4,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar/Nav";
 import "./Product.css";
-import AddProduct from "../../services/AddProduct";
-
+import { AddProduct } from "../../services/storageOperations";
 const Product = () => {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);

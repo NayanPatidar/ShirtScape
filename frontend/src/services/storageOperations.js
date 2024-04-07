@@ -43,4 +43,4 @@ const ChangeSizeInLocalStorage = (id, newSize) => {
   }
 };
 
-export default { AddProduct , FindSizeByIdFromLocalStorage , ChangeSizeInLocalStorage };
+export { AddProduct, FindSizeByIdFromLocalStorage, ChangeSizeInLocalStorage };
