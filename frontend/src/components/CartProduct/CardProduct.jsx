@@ -5,6 +5,8 @@ import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
 import {
   FindSizeByIdFromLocalStorage,
   ChangeSizeInLocalStorage,
+  FindQuantityeByIdFromLocalStorage,
+  ChangeQuantityInLocalStorage,
 } from "../../services/storageOperations";
 
 const CartProduct = ({ products, index }) => {
@@ -14,15 +16,15 @@ const CartProduct = ({ products, index }) => {
     size,
     reference,
     setItemIndex,
-    done,
+    SizeMenuDone,
     quantity,
-    setQuantity,
-    isQuantityMenuOpen,
     setIsQuantityMenuOpen,
     setProductId,
+    QuantityMenuDone,
   } = useContext(SizeSelectionContext);
 
   const [mainSize, setMainSize] = useState();
+  const [mainQuantity, setMainQuantity] = useState();
 
   const handleSizeSelectionClick = (product) => {
     setIsSizeMenu(true);
@@ -31,22 +33,30 @@ const CartProduct = ({ products, index }) => {
   };
 
   const handleQuantitySelectionClick = (product_id) => {
-    console.log(`Quantity Selection Clicked - ${product_id}`);
     setIsQuantityMenuOpen(true);
-    // setProductId(product_id);
-    // setItemIndex(index);
+    setProductId(product_id);
+    setItemIndex(index);
   };
 
   useEffect(() => {
     if (index == reference) {
-      console.log(`Size has been set - ${index}`);
       setMainSize(size);
     }
-  }, [done]);
+  }, [SizeMenuDone]);
+
+  useEffect(() => {
+    if (index == reference) {
+      setMainQuantity(quantity);
+    }
+  }, [QuantityMenuDone]);
 
   useEffect(() => {
     const size = FindSizeByIdFromLocalStorage(products.cloths.product_id);
+    const quantity = FindQuantityeByIdFromLocalStorage(
+      products.cloths.product_id
+    );
     setMainSize(size);
+    setMainQuantity(quantity);
   }, []);
 
   useEffect(() => {
@@ -54,6 +64,12 @@ const CartProduct = ({ products, index }) => {
       ChangeSizeInLocalStorage(products.cloths.product_id, mainSize);
     }
   }, [mainSize]);
+
+  useEffect(() => {
+    if (mainQuantity !== undefined) {
+      ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
+    }
+  }, [mainQuantity]);
 
   return (
     <div className="ProductsBlockMain text-black flex flex-row " key={index}>
@@ -85,7 +101,9 @@ const CartProduct = ({ products, index }) => {
                 handleQuantitySelectionClick(products.cloths.product_id)
               }
             >
-              <div className=" SizeTab flex justify-center">Qty: </div>
+              <div className=" SizeTab flex justify-center">
+                Qty: {mainQuantity}
+              </div>
               <div className=" flex items-center">
                 <MdArrowDropDown className=" size-4" />
               </div>

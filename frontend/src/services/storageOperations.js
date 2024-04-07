@@ -3,7 +3,7 @@ function AddProduct({ product_id }) {
   let Cart_Product = {
     id: product_id,
     size: "S",
-    quantitiy: 1,
+    quantity: 1,
   };
 
   if (localStorage.getItem("ShirtScape_Cart")) {
@@ -23,22 +23,22 @@ function AddProduct({ product_id }) {
   }
 }
 
-// Find Size by ID From the Local Storage 
+// Find Size by ID From the Local Storage
 const FindSizeByIdFromLocalStorage = (id) => {
   const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
   const filteredData = storedData.filter((item) => item.id == `${id}`);
   return filteredData ? filteredData[0].size : null;
 };
 
-// Change Size using ID from the Local Storage 
+// Change Size using ID from the Local Storage
 const ChangeSizeInLocalStorage = (id, newSize) => {
-  console.log(`${id} - ${newSize}`);
+  // console.log(`${id} - ${newSize}`);
   const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
 
   if (newSize != undefined && storedData) {
     const updatedData = storedData.map((item) => {
       if (item.id == id) {
-        console.log("Size Updated");
+        // console.log("Size Updated");
         return { ...item, size: newSize };
       }
       return item;
@@ -47,6 +47,32 @@ const ChangeSizeInLocalStorage = (id, newSize) => {
   }
 };
 
+// Find Quantity by ID From the Local Storage
+const FindQuantityeByIdFromLocalStorage = (id) => {
+  const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
+  const filteredData = storedData.filter((item) => item.id == `${id}`);
+  return filteredData ? filteredData[0].quantity : null;
+};
 
+// Change Qunatity using ID from Local Storage
+const ChangeQuantityInLocalStorage = (id, newQuantity) => {
+  const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
 
-export { AddProduct, FindSizeByIdFromLocalStorage, ChangeSizeInLocalStorage };
+  if (newQuantity != undefined && storedData) {
+    const updatedData = storedData.map((item) => {
+      if (item.id == id) {
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    });
+    localStorage.setItem("ShirtScape_Cart", JSON.stringify(updatedData));
+  }
+};
+
+export {
+  AddProduct,
+  FindSizeByIdFromLocalStorage,
+  ChangeSizeInLocalStorage,
+  FindQuantityeByIdFromLocalStorage,
+  ChangeQuantityInLocalStorage,
+};

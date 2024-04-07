@@ -12,8 +12,8 @@ const CartProductSize = () => {
     setSize,
     setReference,
     itemIndex,
-    done,
-    setDone,
+    SizeMenuDone,
+    setSizeMenuDone,
   } = useContext(SizeSelectionContext);
 
   const handleTempSizeClick = (size) => {
@@ -23,7 +23,7 @@ const CartProductSize = () => {
   const handleDone = () => {
     setSize(selectedSize);
     setReference(itemIndex);
-    setDone(!done);
+    setSizeMenuDone(!SizeMenuDone);
     console.log("Reference has been set");
     handleCloseSizeMenu();
   };

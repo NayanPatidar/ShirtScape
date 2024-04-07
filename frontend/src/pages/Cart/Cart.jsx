@@ -18,7 +18,8 @@ const Cart = () => {
   const [productId, setProductId] = useState(null);
   const [reference, setReference] = useState(null);
   const [itemIndex, setItemIndex] = useState(null);
-  const [done, setDone] = useState(false);
+  const [SizeMenuDone, setSizeMenuDone] = useState(false);
+  const [QuantityMenuDone, setQuantityMenuDone] = useState(false);
 
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -77,16 +78,20 @@ const Cart = () => {
         setReference,
         itemIndex,
         setItemIndex,
-        done,
-        setDone,
+        SizeMenuDone,
+        setSizeMenuDone,
         quantity,
         setQuantity,
         isQuantityMenuOpen,
         setIsQuantityMenuOpen,
+        productId,
+        setProductId,
+        QuantityMenuDone,
+        setQuantityMenuDone,
       }}
     >
       <div
-        className="MainCartPage flex flex-col "
+        className="MainCartPage flex flex-col"
         style={{
           filter: isSizeMenuOpen ? "brightness(0.8)" : "none",
           backgroundColor: isSizeMenuOpen ? "rgba(0,0,0,0.2)" : "",
@@ -113,9 +118,10 @@ const Cart = () => {
         <div className=" flex flex-row justify-between items-center pr-5"></div>
         <div
           className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
-          onClick={
-            (() => handleCloseSizeMenu(), () => handleCloseQuantityMenu())
-          }
+          onClick={() => {
+            handleCloseSizeMenu();
+            handleCloseQuantityMenu();
+          }}
         >
           <div className=" w-6/12 flex flex-col gap-4">
             {CartItems &&
@@ -126,7 +132,7 @@ const Cart = () => {
           <div className="ProductsPricesBlock w-4/12 text-black"></div>
         </div>
       </div>
-      {/* {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>} */}
+      {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>}
       {isQuantityMenuOpen && (
         <div className=" fixed">{<CartProductQuantity />}</div>
       )}

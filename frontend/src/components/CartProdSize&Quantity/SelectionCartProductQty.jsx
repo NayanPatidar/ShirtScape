@@ -8,21 +8,12 @@ const CartProductQuantity = () => {
   const {
     setReference,
     itemIndex,
-    done,
-    setDone,
-    quantity,
     setQuantity,
     isQuantityMenuOpen,
     setIsQuantityMenuOpen,
+    QuantityMenuDone,
+    setQuantityMenuDone,
   } = useContext(SizeSelectionContext);
-
-  //   const handleDone = () => {
-  //     setSize(selectedSize);
-  //     setReference(itemIndex);
-  //     setDone(!done);
-  //     console.log("Reference has been set");
-  //     handleCloseSizeMenu();
-  //   };
 
   const handleCloseQuantityMenu = () => {
     if (isQuantityMenuOpen) {
@@ -32,6 +23,13 @@ const CartProductQuantity = () => {
 
   const handleTempQuantityClick = (size) => {
     setTempQuantity(size);
+  };
+
+  const handleDone = () => {
+    setQuantity(selectedQuantity);
+    setReference(itemIndex);
+    setQuantityMenuDone(!QuantityMenuDone);
+    handleCloseQuantityMenu();
   };
 
   return (
@@ -88,10 +86,7 @@ const CartProductQuantity = () => {
             </div>
           </div>
           <div className=" submitQuantity flex justify-center align-middle items-center ">
-            <button
-              className=" SelectionSubmit "
-              //   onClick={() => handleDone()}
-            >
+            <button className=" SelectionSubmit " onClick={() => handleDone()}>
               DONE
             </button>
           </div>
