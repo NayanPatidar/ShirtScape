@@ -24,11 +24,11 @@ const CartProduct = ({ products, index }) => {
     totalMRPRef,
     totalDiscountRef,
     setTotalPrice,
-    setTotalDiscount,
+    setTotalSellingPrice,
   } = useContext(SizeSelectionContext);
 
   const [mainSize, setMainSize] = useState();
-  const [mainQuantity, setMainQuantity] = useState();
+  const [mainQuantity, setMainQuantity] = useState(1);
 
   const handleSizeSelectionClick = (product) => {
     setIsSizeMenu(true);
@@ -61,11 +61,6 @@ const CartProduct = ({ products, index }) => {
     );
     setMainSize(size);
     setMainQuantity(quantity);
-    totalMRPRef.current = totalMRPRef.current + products.cloths.mrp;
-    totalDiscountRef.current = totalDiscountRef.current + products.cloths.price;
-    console.log(totalDiscountRef.current);
-    setTotalPrice(totalMRPRef.current);
-    setTotalDiscount(totalDiscountRef.current);
   }, []);
 
   useEffect(() => {
@@ -78,6 +73,10 @@ const CartProduct = ({ products, index }) => {
     if (mainQuantity !== undefined) {
       ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
     }
+    totalMRPRef.current = totalMRPRef.current + products.cloths.mrp;
+    totalDiscountRef.current = totalDiscountRef.current + products.cloths.price;
+    setTotalPrice(totalMRPRef.current);
+    setTotalSellingPrice(totalDiscountRef.current);
   }, [mainQuantity]);
 
   return (

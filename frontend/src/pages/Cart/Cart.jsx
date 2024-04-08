@@ -23,7 +23,7 @@ const Cart = () => {
   const [QuantityMenuDone, setQuantityMenuDone] = useState(false);
   const [itemsNum, setItemsNum] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [totalDiscount, setTotalDiscount] = useState(0);
+  const [totalSellingPrice, setTotalSellingPrice] = useState(0);
 
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -101,7 +101,7 @@ const Cart = () => {
         setQuantityMenuDone,
         totalMRPRef,
         setTotalPrice,
-        setTotalDiscount,
+        setTotalSellingPrice,
         totalDiscountRef,
       }}
     >
@@ -175,27 +175,30 @@ const Cart = () => {
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Discount on MRP</span>
                       <span className=" DiscountField text-green-400">
-                        -₹{totalPrice - totalDiscount}{" "}
+                        -₹{totalPrice - totalSellingPrice}{" "}
                       </span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Coupon Discount</span>
-                      <span></span>
+                      <span>-</span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Platform Fee</span>
-                      <span></span>
+                      <span className=" DiscountField">FREE</span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Shipping Fee</span>
-                      <span></span>
+                      <span className=" PriceField flex flex-row gap-1">
+                        <span className=" line-through">₹79 </span>
+                        <span className=" DiscountField"> FREE</span>
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="TotalAmount flex flex-row justify-between pt-3">
                 <span className=" TotalAmountText">Total Amount</span>
-                <span></span>
+                <span className=" TotalItemPrice">₹{totalSellingPrice}</span>
               </div>
               <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
                 <button className=" CheckoutClick ">PLACE ORDER</button>

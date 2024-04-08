@@ -195,6 +195,13 @@
   font-family: "Source Sans 3", sans-serif;
 }
 
+.TotalItemPrice {
+  color: #282c3f;
+  font-weight: 650;
+  font-size: 17px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
 .PriceCalcBox {
   border-bottom: solid 1px rgb(228, 228, 228);
   padding-bottom: 20px;
