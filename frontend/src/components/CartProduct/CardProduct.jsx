@@ -128,10 +128,14 @@ const CartProduct = ({ products, index }) => {
       className="ProductsBlockMain text-black flex flex-row cursor-default"
       key={index}
     >
-      <img className="ImageOfCartItem" src={products.cloths.photo1} onClick={ProductIdCheck}></img>
+      <img
+        className="ImageOfCartItem cursor-pointer"
+        src={products.cloths.photo1}
+        onClick={() => ProductIdCheck()}
+      />
       <div className="CartItemDetails flex flex-col">
         <span className="CartItemTitle">{products.cloths.product_name}</span>
-        <span className="CartItemDescription">
+        <span className="CartItemDescription cursor-pointer" onClick={() => ProductIdCheck() }>
           {products.cloths.genericdesc}
         </span>
         <span className="SizeQty mt-6 flex flex-row justify-start gap-4">
