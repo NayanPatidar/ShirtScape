@@ -198,7 +198,7 @@ const Cart = () => {
               </div>
               <div className="TotalAmount flex flex-row justify-between pt-3">
                 <span className=" TotalAmountText">Total Amount</span>
-                <span className=" TotalItemPrice">₹{totalSellingPrice}</span>
+                <span className=" Total">₹{totalSellingPrice}</span>
               </div>
               <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
                 <button className=" CheckoutClick ">PLACE ORDER</button>

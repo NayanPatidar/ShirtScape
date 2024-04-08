@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
 import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
@@ -29,6 +29,7 @@ const CartProduct = ({ products, index }) => {
 
   const [mainSize, setMainSize] = useState();
   const [mainQuantity, setMainQuantity] = useState(1);
+  const prevQuantity = useRef(1);
 
   const handleSizeSelectionClick = (product) => {
     setIsSizeMenu(true);
@@ -73,10 +74,45 @@ const CartProduct = ({ products, index }) => {
     if (mainQuantity !== undefined) {
       ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
     }
-    totalMRPRef.current = totalMRPRef.current + products.cloths.mrp;
-    totalDiscountRef.current = totalDiscountRef.current + products.cloths.price;
-    setTotalPrice(totalMRPRef.current);
-    setTotalSellingPrice(totalDiscountRef.current);
+    if (prevQuantity.current == mainQuantity) {
+      console.log(`${mainQuantity} - Equal`);
+      totalMRPRef.current =
+        totalMRPRef.current + products.cloths.mrp * mainQuantity;
+      totalDiscountRef.current =
+        totalDiscountRef.current + products.cloths.price * mainQuantity;
+      console.log(
+        `Main Quantity = ${mainQuantity} | Total MRPRef = ${totalMRPRef.current} | Price Of CurrentItem = ${products.cloths.mrp} | Total DiscountRef = ${totalDiscountRef.current} `
+      );
+      setTotalPrice(totalMRPRef.current);
+      setTotalSellingPrice(totalDiscountRef.current);
+      prevQuantity.current = mainQuantity;
+    } else if (prevQuantity.current < mainQuantity) {
+      console.log(`${mainQuantity} - More than prev`);
+      totalMRPRef.current =
+        totalMRPRef.current +
+        products.cloths.mrp * (mainQuantity - prevQuantity.current);
+      totalDiscountRef.current =
+        totalDiscountRef.current +
+        products.cloths.price * (mainQuantity - prevQuantity.current);
+      console.log(
+        `Main Quantity = ${mainQuantity} | Total MRPRef = ${totalMRPRef.current} | Price Of CurrentItem = ${products.cloths.mrp} | Total DiscountRef = ${totalDiscountRef.current} `
+      );
+
+      setTotalPrice(totalMRPRef.current);
+      setTotalSellingPrice(totalDiscountRef.current);
+      prevQuantity.current = mainQuantity;
+    } else {
+      console.log(`${mainQuantity} - Less than prev`);
+      totalMRPRef.current =
+        totalMRPRef.current -
+        products.cloths.mrp * (prevQuantity.current - mainQuantity);
+      totalDiscountRef.current =
+        totalDiscountRef.current -
+        products.cloths.price * (prevQuantity.current - mainQuantity);
+      setTotalPrice(totalMRPRef.current);
+      setTotalSellingPrice(totalDiscountRef.current);
+      prevQuantity.current = mainQuantity;
+    }
   }, [mainQuantity]);
 
   return (
