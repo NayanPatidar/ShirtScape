@@ -8,6 +8,7 @@ import {
   FindQuantityeByIdFromLocalStorage,
   ChangeQuantityInLocalStorage,
 } from "../../services/storageOperations";
+import { useNavigate } from "react-router-dom";
 
 const CartProduct = ({ products, index }) => {
   const {
@@ -41,6 +42,13 @@ const CartProduct = ({ products, index }) => {
     setIsQuantityMenuOpen(true);
     setProductId(product_id);
     setItemIndex(index);
+  };
+
+  const navigate = useNavigate();
+
+  const ProductIdCheck = () => {
+    console.log("Navigate Clicked");
+    navigate(`/products/${products.cloths.product_id}`);
   };
 
   useEffect(() => {
@@ -80,9 +88,9 @@ const CartProduct = ({ products, index }) => {
         totalMRPRef.current + products.cloths.mrp * mainQuantity;
       totalDiscountRef.current =
         totalDiscountRef.current + products.cloths.price * mainQuantity;
-      console.log(
-        `Main Quantity = ${mainQuantity} | Total MRPRef = ${totalMRPRef.current} | Price Of CurrentItem = ${products.cloths.mrp} | Total DiscountRef = ${totalDiscountRef.current} `
-      );
+      // console.log(
+      //   `Main Quantity = ${mainQuantity} | Total MRPRef = ${totalMRPRef.current} | Price Of CurrentItem = ${products.cloths.mrp} | Total DiscountRef = ${totalDiscountRef.current} `
+      // );
       setTotalPrice(totalMRPRef.current);
       setTotalSellingPrice(totalDiscountRef.current);
       prevQuantity.current = mainQuantity;
@@ -120,7 +128,7 @@ const CartProduct = ({ products, index }) => {
       className="ProductsBlockMain text-black flex flex-row cursor-default"
       key={index}
     >
-      <img className="ImageOfCartItem" src={products.cloths.photo1}></img>
+      <img className="ImageOfCartItem" src={products.cloths.photo1} onClick={ProductIdCheck}></img>
       <div className="CartItemDetails flex flex-col">
         <span className="CartItemTitle">{products.cloths.product_name}</span>
         <span className="CartItemDescription">
