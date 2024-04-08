@@ -157,6 +157,14 @@
   border-radius: 3px;
 }
 
+.ApplyCouponPrice {
+  text-align: end;
+  width: 100px;
+  color: rgb(255, 30, 97);
+  font-size: 11px;
+  font-weight: 600;
+}
+
 .CouponDescription {
   display: flex;
   justify-content: center;

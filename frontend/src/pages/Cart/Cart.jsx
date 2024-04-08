@@ -16,6 +16,7 @@ const Cart = () => {
   // This are the requirements
   const [isSizeMenuOpen, setIsSizeMenu] = useState(false);
   const [isQuantityMenuOpen, setIsQuantityMenuOpen] = useState(false);
+  const [IsCouponMenuOpen, setIsCouponMenuOpen] = useState(false);
   const [product, setProduct] = useState(null);
   const [productId, setProductId] = useState(null);
   const [reference, setReference] = useState(null);
@@ -25,12 +26,12 @@ const Cart = () => {
   const [itemsNum, setItemsNum] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalSellingPrice, setTotalSellingPrice] = useState(0);
+  const [couponDiscount, setCouponDiscount] = useState(0);
 
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
   const totalMRPRef = useRef(0);
   const totalDiscountRef = useRef(0);
-  // const totalCouponDiscountRef = useRef(0);
 
   const navigate = useNavigate();
 
@@ -45,6 +46,14 @@ const Cart = () => {
       setIsQuantityMenuOpen(false);
     }
   };
+
+  const handleCouponMenuOpen = () => {
+    setIsCouponMenuOpen(true);
+  };
+
+  useEffect(() => {
+    console.log(couponDiscount);
+  }, [couponDiscount]);
 
   const FetchCartData = async () => {
     let LocalCartData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
@@ -104,6 +113,10 @@ const Cart = () => {
         setTotalPrice,
         setTotalSellingPrice,
         totalDiscountRef,
+        couponDiscount,
+        setCouponDiscount,
+        IsCouponMenuOpen,
+        setIsCouponMenuOpen,
       }}
     >
       <div
@@ -156,7 +169,10 @@ const Cart = () => {
                     <IoIosPricetags />
                     <span className="ApplyCouponsText">Apply Coupons</span>
                   </div>
-                  <div className="ApplyCouponText p-1 cursor-pointer">
+                  <div
+                    className="ApplyCouponText p-1 cursor-pointer"
+                    onClick={() => handleCouponMenuOpen()}
+                  >
                     APPLY
                   </div>
                 </div>
@@ -176,12 +192,25 @@ const Cart = () => {
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Discount on MRP</span>
                       <span className=" DiscountField text-green-400">
-                        -₹{totalPrice - totalSellingPrice}{" "}
+                        -₹{totalPrice - totalSellingPrice}
                       </span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Coupon Discount</span>
-                      <span>-</span>
+                      <span>
+                        {couponDiscount != 0 ? (
+                          <span className=" DiscountField text-green-400 flex justify-end items-center">
+                            -₹{couponDiscount}
+                          </span>
+                        ) : (
+                          <div
+                            className="ApplyCouponPrice cursor-pointer"
+                            onClick={() => handleCouponMenuOpen()}
+                          >
+                            APPLY COUPON
+                          </div>
+                        )}
+                      </span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Platform Fee</span>
@@ -212,7 +241,7 @@ const Cart = () => {
       {isQuantityMenuOpen && (
         <div className=" fixed">{<CartProductQuantity />}</div>
       )}
-      {<div className=" fixed">{<CouponBox />}</div>}
+      {IsCouponMenuOpen && <div className=" fixed">{<CouponBox />}</div>}
     </SizeSelectionContext.Provider>
   );
 };
