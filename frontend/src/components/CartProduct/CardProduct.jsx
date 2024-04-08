@@ -21,6 +21,10 @@ const CartProduct = ({ products, index }) => {
     setIsQuantityMenuOpen,
     setProductId,
     QuantityMenuDone,
+    totalMRPRef,
+    totalDiscountRef,
+    setTotalPrice,
+    setTotalDiscount,
   } = useContext(SizeSelectionContext);
 
   const [mainSize, setMainSize] = useState();
@@ -57,6 +61,11 @@ const CartProduct = ({ products, index }) => {
     );
     setMainSize(size);
     setMainQuantity(quantity);
+    totalMRPRef.current = totalMRPRef.current + products.cloths.mrp;
+    totalDiscountRef.current = totalDiscountRef.current + products.cloths.price;
+    console.log(totalDiscountRef.current);
+    setTotalPrice(totalMRPRef.current);
+    setTotalDiscount(totalDiscountRef.current);
   }, []);
 
   useEffect(() => {
@@ -72,7 +81,10 @@ const CartProduct = ({ products, index }) => {
   }, [mainQuantity]);
 
   return (
-    <div className="ProductsBlockMain text-black flex flex-row cursor-default" key={index}>
+    <div
+      className="ProductsBlockMain text-black flex flex-row cursor-default"
+      key={index}
+    >
       <img className="ImageOfCartItem" src={products.cloths.photo1}></img>
       <div className="CartItemDetails flex flex-col">
         <span className="CartItemTitle">{products.cloths.product_name}</span>

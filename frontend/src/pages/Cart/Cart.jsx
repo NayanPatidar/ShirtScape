@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
 import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
@@ -22,10 +22,14 @@ const Cart = () => {
   const [SizeMenuDone, setSizeMenuDone] = useState(false);
   const [QuantityMenuDone, setQuantityMenuDone] = useState(false);
   const [itemsNum, setItemsNum] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
 
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [price, SetPrice] = useState("");
+  const totalMRPRef = useRef(0);
+  const totalDiscountRef = useRef(0);
+  // const totalCouponDiscountRef = useRef(0);
 
   const navigate = useNavigate();
 
@@ -42,8 +46,11 @@ const Cart = () => {
   };
 
   const FetchCartData = async () => {
+    let LocalCartData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
+    if (!LocalCartData) {
+      return;
+    }
     try {
-      let LocalCartData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
       const productIds = LocalCartData.map((item) => parseInt(item.id));
       let FetchedLocalCartData = await fetch(
         "http://localhost:8080/cart/tempUser",
@@ -92,6 +99,10 @@ const Cart = () => {
         setProductId,
         QuantityMenuDone,
         setQuantityMenuDone,
+        totalMRPRef,
+        setTotalPrice,
+        setTotalDiscount,
+        totalDiscountRef,
       }}
     >
       <div
@@ -159,11 +170,13 @@ const Cart = () => {
                   <div className="PriceCalcBox flex flex-col gap-2 pt-5">
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Total MRP</span>
-                      <span></span>
+                      <span className=" PriceField">₹{totalPrice}</span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Discount on MRP</span>
-                      <span></span>
+                      <span className=" DiscountField text-green-400">
+                        -₹{totalPrice - totalDiscount}{" "}
+                      </span>
                     </div>
                     <div className=" flex flex-row justify-between ">
                       <span className=" PriceField">Coupon Discount</span>
