@@ -1,0 +1,31 @@
+.MainCoupon {
+  position: fixed;
+  width: 417px;
+  height: 250px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(255, 255, 255, 1);
+  opacity: 1;
+}
+
+.Coupons {
+
+}
+
+.CouponName {
+  color: #000000;
+  font-weight: 400;
+  font-size: 18px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.CouponBoxDescription {
+  color: #000000;
+  font-weight: 250;
+  font-size: 15px;
+  font-family: "Source Sans 3", sans-serif;
+}

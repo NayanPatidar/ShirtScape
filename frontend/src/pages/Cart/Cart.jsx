@@ -7,6 +7,7 @@ import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import CartProductQuantity from "../../components/CartProdSize&Quantity/SelectionCartProductQty";
 import { IoIosPricetags } from "react-icons/io";
+import CouponBox from "../../components/Coupon/Coupon";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -112,7 +113,7 @@ const Cart = () => {
             isSizeMenuOpen || isQuantityMenuOpen ? "brightness(0.8)" : "none",
           backgroundColor:
             isSizeMenuOpen || isQuantityMenuOpen ? "rgba(0,0,0,0.2)" : "",
-          height: itemsNum > 2 ? "100%" : "100vh",
+          height: itemsNum > 2 ? "100%" : "100%",
         }}
       >
         <div className="TopBarCartPage h-16 p-10 flex flex-row justify-between align-middle items-center cursor-default">
@@ -134,20 +135,20 @@ const Cart = () => {
           <span className="BAGSecurity">100% SECURE</span>
         </div>
         <div
-          className="MainBackgroundCart flex flex-row justify-center gap-6 p-5 "
+          className="MainBackgroundCart flex flex-row justify-center gap-6 pt-5"
           onClick={() => {
             handleCloseSizeMenu();
             handleCloseQuantityMenu();
           }}
         >
-          <div className=" w-6/12 flex flex-col gap-4">
+          <div className=" w-6/12 flex flex-col gap-4 pb-3">
             {CartItems &&
               CartItems.map((products, index) => (
                 <CartProduct products={products} key={index} index={index} />
               ))}
           </div>
           <div className="ProductsPricesBlock text-black cursor-default">
-            <div className=" pl-5 pt-4 flex flex-col">
+            <div className=" p-2 flex flex-col">
               <div className=" flex flex-col gap-4">
                 <span className="CouponsTitle">COUPONS</span>
                 <div className="CouponsApplication flex flex-row justify-between">
@@ -198,7 +199,7 @@ const Cart = () => {
               </div>
               <div className="TotalAmount flex flex-row justify-between pt-3">
                 <span className=" TotalAmountText">Total Amount</span>
-                <span className=" Total">₹{totalSellingPrice}</span>
+                <span className=" TotalAmountText">₹{totalSellingPrice}</span>
               </div>
               <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
                 <button className=" CheckoutClick ">PLACE ORDER</button>
@@ -211,6 +212,7 @@ const Cart = () => {
       {isQuantityMenuOpen && (
         <div className=" fixed">{<CartProductQuantity />}</div>
       )}
+      {<div className=" fixed">{<CouponBox />}</div>}
     </SizeSelectionContext.Provider>
   );
 };
