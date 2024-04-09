@@ -35,3 +35,7 @@
 .navBarBoundary {
   height: 1px;
 }
+
+.searchIcon {
+  transform: translateX(-30px);
+}

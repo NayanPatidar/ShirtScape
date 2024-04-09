@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo/Logo.png";
 import "./Nav.css";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import { IoSearch } from "react-icons/io5";
 
 function Navbar() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Search term:", searchTerm);
+    setSearchTerm("");
+  };
   let navigate = useNavigate();
 
   return (
@@ -31,12 +43,15 @@ function Navbar() {
             </div>
             <div className=" text-black text-md pb-4">
               <form className="SearchBox">
-                <label>
+                <label className=" flex w-96 items-center justify-center">
                   <input
                     type="text"
                     className="inputBoxNavBar  rounded-md border border-black"
-                    placeholder=" What are you looking for ?"
+                    placeholder=" What are you looking for ? "
+                    value={searchTerm}
+                    onChange={handleChange}
                   />
+                  <IoSearch className=" searchIcon" onClick={handleSubmit} />
                 </label>
               </form>
             </div>
