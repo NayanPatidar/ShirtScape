@@ -26,10 +26,10 @@ const ProductsPage = () => {
     70: false,
   });
   const [SizeFilter, setSizeFilter] = useState({
-    S: false,
-    M: false,
-    L: false,
-    XL: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
   });
 
   const sortToggle = () => {
@@ -242,7 +242,7 @@ const ProductsPage = () => {
                     type="checkbox"
                     value="1"
                     id="checkboxOneInput"
-                    name="S"
+                    name="1"
                     checked={SizeFilter.S}
                     onChange={handleSizeChange}
                   />
@@ -251,9 +251,9 @@ const ProductsPage = () => {
                 <div className="checkbox-example">
                   <input
                     type="checkbox"
-                    value="1"
+                    value="2"
                     id="checkboxOneInput"
-                    name="M"
+                    name="2"
                     checked={SizeFilter.M}
                     onChange={handleSizeChange}
                   />
@@ -262,9 +262,9 @@ const ProductsPage = () => {
                 <div className="checkbox-example">
                   <input
                     type="checkbox"
-                    value="1"
+                    value="3"
                     id="checkboxOneInput"
-                    name="L"
+                    name="3"
                     checked={SizeFilter.L}
                     onChange={handleSizeChange}
                   />
@@ -273,9 +273,9 @@ const ProductsPage = () => {
                 <div className="checkbox-example">
                   <input
                     type="checkbox"
-                    value="1"
+                    value="4"
                     id="checkboxOneInput"
-                    name="XL"
+                    name="4"
                     checked={SizeFilter.XL}
                     onChange={handleSizeChange}
                   />
