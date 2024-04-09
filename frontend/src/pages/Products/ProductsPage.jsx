@@ -25,6 +25,12 @@ const ProductsPage = () => {
     50: false,
     70: false,
   });
+  const [SizeFilter, setSizeFilter] = useState({
+    S: false,
+    M: false,
+    L: false,
+    XL: false,
+  });
 
   const sortToggle = () => {
     setSortFeatures(!SortFeatures);
@@ -43,6 +49,14 @@ const ProductsPage = () => {
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setCategoryFilter((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
+  };
+
+  const handleSizeChange = (event) => {
+    const { name, checked } = event.target;
+    setSizeFilter((prevState) => ({
       ...prevState,
       [name]: checked,
     }));
@@ -98,7 +112,15 @@ const ProductsPage = () => {
         queryParams.append("discount", key);
       }
     }
+
+    for (const key in SizeFilter) {
+      if (SizeFilter[key]) {
+        queryParams.append("size", key);
+      }
+    }
+
     const queryString = queryParams.toString();
+    console.log(queryString);
     const url = queryString
       ? `http://localhost:8080/products/men?${queryString}`
       : "http://localhost:8080/products/men";
@@ -119,7 +141,11 @@ const ProductsPage = () => {
 
   useEffect(() => {
     fetchProductsData();
-  }, [CategoryFilter, SortOption, DiscountFilter]);
+  }, [CategoryFilter, SortOption, DiscountFilter, SizeFilter]);
+
+  useEffect(() => {
+    console.log(SizeFilter);
+  }, [SizeFilter]);
 
   return (
     <div>
@@ -212,28 +238,48 @@ const ProductsPage = () => {
               <span className=" font-semibold text-gray-700 text-sm">SIZE</span>
               <div className="grid grid-cols-3 pt-1">
                 <div className="checkbox-example">
-                  <input type="checkbox" value="1" id="checkboxOneInput" />
-                  <label className="pl-2 text-sm text-gray-700">XS</label>
-                </div>
-                <div className="checkbox-example">
-                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <input
+                    type="checkbox"
+                    value="1"
+                    id="checkboxOneInput"
+                    name="S"
+                    checked={SizeFilter.S}
+                    onChange={handleSizeChange}
+                  />
                   <label className=" pl-2 text-sm text-gray-700">S</label>
                 </div>
                 <div className="checkbox-example">
-                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <input
+                    type="checkbox"
+                    value="1"
+                    id="checkboxOneInput"
+                    name="M"
+                    checked={SizeFilter.M}
+                    onChange={handleSizeChange}
+                  />
                   <label className=" pl-2 text-sm text-gray-700">M</label>
                 </div>
                 <div className="checkbox-example">
-                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <input
+                    type="checkbox"
+                    value="1"
+                    id="checkboxOneInput"
+                    name="L"
+                    checked={SizeFilter.L}
+                    onChange={handleSizeChange}
+                  />
                   <label className=" pl-2 text-sm text-gray-700">L</label>
                 </div>
                 <div className="checkbox-example">
-                  <input type="checkbox" value="1" id="checkboxOneInput" />
+                  <input
+                    type="checkbox"
+                    value="1"
+                    id="checkboxOneInput"
+                    name="XL"
+                    checked={SizeFilter.XL}
+                    onChange={handleSizeChange}
+                  />
                   <label className=" pl-2 text-sm text-gray-700">XL</label>
-                </div>
-                <div className="checkbox-example">
-                  <input type="checkbox" value="1" id="checkboxOneInput" />
-                  <label className=" pl-2 text-sm text-gray-700">XXL</label>
                 </div>
               </div>
             </div>
