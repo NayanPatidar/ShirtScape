@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
 import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import { IoClose } from "react-icons/io5";
 import {
   FindSizeByIdFromLocalStorage,
   ChangeSizeInLocalStorage,
@@ -44,12 +45,16 @@ const CartProduct = ({ products, index }) => {
     setItemIndex(index);
   };
 
-  const navigate = useNavigate();
-
   const ProductIdCheck = () => {
     console.log("Navigate Clicked");
     navigate(`/products/${products.cloths.product_id}`);
   };
+
+  const ItemDeleteFromCart = () => {
+    console.log("Call For Item Delete");
+  };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (index == reference) {
@@ -83,34 +88,25 @@ const CartProduct = ({ products, index }) => {
       ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
     }
     if (prevQuantity.current == mainQuantity) {
-      console.log(`${mainQuantity} - Equal`);
       totalMRPRef.current =
         totalMRPRef.current + products.cloths.mrp * mainQuantity;
       totalDiscountRef.current =
         totalDiscountRef.current + products.cloths.price * mainQuantity;
-      // console.log(
-      //   `Main Quantity = ${mainQuantity} | Total MRPRef = ${totalMRPRef.current} | Price Of CurrentItem = ${products.cloths.mrp} | Total DiscountRef = ${totalDiscountRef.current} `
-      // );
       setTotalPrice(totalMRPRef.current);
       setTotalSellingPrice(totalDiscountRef.current);
       prevQuantity.current = mainQuantity;
     } else if (prevQuantity.current < mainQuantity) {
-      console.log(`${mainQuantity} - More than prev`);
       totalMRPRef.current =
         totalMRPRef.current +
         products.cloths.mrp * (mainQuantity - prevQuantity.current);
       totalDiscountRef.current =
         totalDiscountRef.current +
         products.cloths.price * (mainQuantity - prevQuantity.current);
-      console.log(
-        `Main Quantity = ${mainQuantity} | Total MRPRef = ${totalMRPRef.current} | Price Of CurrentItem = ${products.cloths.mrp} | Total DiscountRef = ${totalDiscountRef.current} `
-      );
 
       setTotalPrice(totalMRPRef.current);
       setTotalSellingPrice(totalDiscountRef.current);
       prevQuantity.current = mainQuantity;
     } else {
-      console.log(`${mainQuantity} - Less than prev`);
       totalMRPRef.current =
         totalMRPRef.current -
         products.cloths.mrp * (prevQuantity.current - mainQuantity);
@@ -133,12 +129,23 @@ const CartProduct = ({ products, index }) => {
         src={products.cloths.photo1}
         onClick={() => ProductIdCheck()}
       />
-      <div className="CartItemDetails flex flex-col">
-        <span className="CartItemTitle">{products.cloths.product_name}</span>
-        <span className="CartItemDescription cursor-pointer" onClick={() => ProductIdCheck() }>
+      <div className="CartItemDetails flex flex-col w-full">
+        <div className=" flex flex-row justify-between pr-5">
+          <span className="CartItemTitle ">{products.cloths.product_name}</span>
+          <span
+            className=" cursor-pointer"
+            onClick={() => ItemDeleteFromCart()}
+          >
+            {<IoClose />}
+          </span>
+        </div>
+        <span
+          className="CartItemDescription cursor-pointer"
+          onClick={() => ProductIdCheck()}
+        >
           {products.cloths.genericdesc}
         </span>
-        <span className="SizeQty mt-6 flex flex-row justify-start gap-4">
+        <span className="SizeQty mt-6 flex flex-row justify-start gap-4 w-2/5">
           <div className=" flex flex-col w-5/12">
             <div
               className=" SizeBox flex flex-row justify-center cursor-pointer"
