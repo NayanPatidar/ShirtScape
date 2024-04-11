@@ -13,6 +13,10 @@
   border-left: solid 1px rgb(238, 238, 238);
 }
 
+.NoItemDiv {
+  height: 300px;
+}
+
 .ImageOfCartItem {
   width: 150px;
   height: 200px;

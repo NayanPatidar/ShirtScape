@@ -27,7 +27,6 @@ const CartProduct = ({ products, index }) => {
     totalDiscountRef,
     setTotalPrice,
     setTotalSellingPrice,
-    IsItemRemovalMenuOpen,
     setIsItemRemovalMenuOpen,
   } = useContext(CartContext);
 

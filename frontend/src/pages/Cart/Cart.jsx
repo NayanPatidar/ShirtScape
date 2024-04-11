@@ -123,7 +123,7 @@ const Cart = () => {
       }}
     >
       <div
-        className="MainCartPage flex flex-col"
+        className="MainCartPage flex flex-col h-full"
         style={{
           filter:
             isSizeMenuOpen ||
@@ -160,97 +160,105 @@ const Cart = () => {
           </div>
           <span className="BAGSecurity">100% SECURE</span>
         </div>
-        <div
-          className="MainBackgroundCart flex flex-row justify-center gap-6 pt-5"
-          onClick={() => {
-            handleCloseSizeMenu();
-            handleCloseQuantityMenu();
-          }}
-        >
-          <div className=" w-6/12 flex flex-col gap-4 pb-3">
-            {CartItems &&
-              CartItems.map((products, index) => (
+
+        {itemsNum > 0 ? (
+          <div
+            className="MainBackgroundCart flex flex-row justify-center gap-6 pt-5"
+            onClick={() => {
+              handleCloseSizeMenu();
+              handleCloseQuantityMenu();
+            }}
+          >
+            <div className=" w-6/12 flex flex-col gap-4 pb-3">
+              {CartItems.map((products, index) => (
                 <CartProduct products={products} key={index} index={index} />
               ))}
-          </div>
-          <div className="ProductsPricesBlock text-black cursor-default">
-            <div className=" p-2 flex flex-col">
-              <div className=" flex flex-col gap-4">
-                <span className="CouponsTitle">COUPONS</span>
-                <div className="CouponsApplication flex flex-row justify-between">
-                  <div className=" flex flex-row gap-4 justify-end items-center">
-                    <IoIosPricetags />
-                    <span className="ApplyCouponsText">Apply Coupons</span>
+            </div>
+            <div className="ProductsPricesBlock text-black cursor-default">
+              <div className=" p-2 flex flex-col">
+                <div className=" flex flex-col gap-4">
+                  <span className="CouponsTitle">COUPONS</span>
+                  <div className="CouponsApplication flex flex-row justify-between">
+                    <div className=" flex flex-row gap-4 justify-end items-center">
+                      <IoIosPricetags />
+                      <span className="ApplyCouponsText">Apply Coupons</span>
+                    </div>
+                    <div
+                      className="ApplyCouponText p-1 cursor-pointer"
+                      onClick={() => handleCouponMenuOpen()}
+                    >
+                      APPLY
+                    </div>
                   </div>
-                  <div
-                    className="ApplyCouponText p-1 cursor-pointer"
-                    onClick={() => handleCouponMenuOpen()}
-                  >
-                    APPLY
+                  <span className="CouponDescription flex gap-1">
+                    <span className=" LoginCoupDesc  cursor-pointer">
+                      Login
+                    </span>
+                    <span>to get upto ₹200 OFF on first order</span>
+                  </span>
+                </div>
+                <div className="CartItemsPriceDetails">
+                  <div className=" flex flex-col pt-4">
+                    <span className="priceDetailsTitle">PRICE DETAILS</span>
+                    <div className="PriceCalcBox flex flex-col gap-2 pt-5">
+                      <div className=" flex flex-row justify-between ">
+                        <span className=" PriceField">Total MRP</span>
+                        <span className=" PriceField">₹{totalPrice}</span>
+                      </div>
+                      <div className=" flex flex-row justify-between ">
+                        <span className=" PriceField">Discount on MRP</span>
+                        <span className=" DiscountField text-green-400">
+                          -₹{totalPrice - totalSellingPrice}
+                        </span>
+                      </div>
+                      <div className=" flex flex-row justify-between ">
+                        <span className=" PriceField">Coupon Discount</span>
+                        <span>
+                          {couponDiscount != 0 ? (
+                            <span className=" DiscountField text-green-400 flex justify-end items-center">
+                              -₹{couponDiscount}
+                            </span>
+                          ) : (
+                            <div
+                              className="ApplyCouponPrice cursor-pointer"
+                              onClick={() => handleCouponMenuOpen()}
+                            >
+                              APPLY COUPON
+                            </div>
+                          )}
+                        </span>
+                      </div>
+                      <div className=" flex flex-row justify-between ">
+                        <span className=" PriceField">Platform Fee</span>
+                        <span className=" DiscountField">FREE</span>
+                      </div>
+                      <div className=" flex flex-row justify-between ">
+                        <span className=" PriceField">Shipping Fee</span>
+                        <span className=" PriceField flex flex-row gap-1">
+                          <span className=" line-through">₹79 </span>
+                          <span className=" DiscountField"> FREE</span>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <span className="CouponDescription flex gap-1">
-                  <span className=" LoginCoupDesc  cursor-pointer">Login</span>
-                  <span>to get upto ₹200 OFF on first order</span>
-                </span>
-              </div>
-              <div className="CartItemsPriceDetails">
-                <div className=" flex flex-col pt-4">
-                  <span className="priceDetailsTitle">PRICE DETAILS</span>
-                  <div className="PriceCalcBox flex flex-col gap-2 pt-5">
-                    <div className=" flex flex-row justify-between ">
-                      <span className=" PriceField">Total MRP</span>
-                      <span className=" PriceField">₹{totalPrice}</span>
-                    </div>
-                    <div className=" flex flex-row justify-between ">
-                      <span className=" PriceField">Discount on MRP</span>
-                      <span className=" DiscountField text-green-400">
-                        -₹{totalPrice - totalSellingPrice}
-                      </span>
-                    </div>
-                    <div className=" flex flex-row justify-between ">
-                      <span className=" PriceField">Coupon Discount</span>
-                      <span>
-                        {couponDiscount != 0 ? (
-                          <span className=" DiscountField text-green-400 flex justify-end items-center">
-                            -₹{couponDiscount}
-                          </span>
-                        ) : (
-                          <div
-                            className="ApplyCouponPrice cursor-pointer"
-                            onClick={() => handleCouponMenuOpen()}
-                          >
-                            APPLY COUPON
-                          </div>
-                        )}
-                      </span>
-                    </div>
-                    <div className=" flex flex-row justify-between ">
-                      <span className=" PriceField">Platform Fee</span>
-                      <span className=" DiscountField">FREE</span>
-                    </div>
-                    <div className=" flex flex-row justify-between ">
-                      <span className=" PriceField">Shipping Fee</span>
-                      <span className=" PriceField flex flex-row gap-1">
-                        <span className=" line-through">₹79 </span>
-                        <span className=" DiscountField"> FREE</span>
-                      </span>
-                    </div>
-                  </div>
+                <div className="TotalAmount flex flex-row justify-between pt-3">
+                  <span className=" TotalAmountText">Total Amount</span>
+                  <span className=" TotalAmountText">
+                    ₹{totalSellingPrice - couponDiscount}
+                  </span>
                 </div>
-              </div>
-              <div className="TotalAmount flex flex-row justify-between pt-3">
-                <span className=" TotalAmountText">Total Amount</span>
-                <span className=" TotalAmountText">
-                  ₹{totalSellingPrice - couponDiscount}
-                </span>
-              </div>
-              <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
-                <button className=" CheckoutClick ">PLACE ORDER</button>
+                <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
+                  <button className=" CheckoutClick ">PLACE ORDER</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <span className="NoItemDiv text-4xl font-semibold flex justify-center items-center align-middle h-3/5">
+            No Item in the cart
+          </span>
+        )}
       </div>
       {isSizeMenuOpen && <div className=" fixed">{<CartProductSize />}</div>}
       {isQuantityMenuOpen && (
