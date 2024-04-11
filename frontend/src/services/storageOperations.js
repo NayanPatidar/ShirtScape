@@ -70,10 +70,10 @@ const ChangeQuantityInLocalStorage = (id, newQuantity) => {
 //Delete the product from the Local Storage
 const DeleteProductFromLocalStorage = (id) => {
   const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
-
   if (storedData && id) {
-    const index = storedData.findIndex((item) => item.id === id);
-    console.log(`Index Found ${index}`);
+    const index = storedData.findIndex((item) => parseInt(item.id) == id);
+    storedData.splice(index, 1);
+    localStorage.setItem("ShirtScape_Cart", JSON.stringify(storedData));
   }
 };
 
