@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo/Logo.png";
 import "./Nav.css";
 import { CiShoppingCart } from "react-icons/ci";
@@ -6,20 +6,30 @@ import { CiHeart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
+import { SearchContext } from "../../contexts/contexts";
 
 function Navbar() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { searchTerm, setSearchTerm } = useContext(SearchContext);
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+    setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Search term:", searchTerm);
-    setSearchTerm("");
+  useEffect(() => {
+    const delaySearch = setTimeout(() => {
+      setSearchTerm(inputValue);
+    }, 800);
+    return () => clearTimeout(delaySearch);
+  }, [inputValue]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
   };
-  let navigate = useNavigate();
+
+  const navigate = useNavigate();
 
   return (
     <div className="NavBarMain flex flex-col fixed shadow-md">
@@ -48,10 +58,11 @@ function Navbar() {
                     type="text"
                     className="inputBoxNavBar  rounded-md border border-black"
                     placeholder=" What are you looking for ? "
-                    value={searchTerm}
+                    value={inputValue}
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                   />
-                  <IoSearch className=" searchIcon" onClick={handleSubmit} />
+                  <IoSearch className=" searchIcon" />
                 </label>
               </form>
             </div>
