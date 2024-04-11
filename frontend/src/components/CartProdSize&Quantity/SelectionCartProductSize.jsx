@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { CartContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/contexts";
 import { IoMdClose } from "react-icons/io";
 import "./SelectionCartProduct.css";
 

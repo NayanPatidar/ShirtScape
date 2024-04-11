@@ -10,6 +10,7 @@
 .ProductsListMain {
   width: 80%;
   border-left: 1px solid rgb(218, 218, 218);
+  overflow-y: overlay;
 }
 
 .ProductDescriptionArea {
@@ -24,6 +25,10 @@
 .ProductBoxMain {
   height: 280px;
   width: 85%;
+}
+
+.ProductGridMain {
+  width: 80%;
 }
 
 .DescriptionAreaContent {

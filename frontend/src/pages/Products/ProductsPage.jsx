@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ProductsPage.css";
 import { useEffect } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import ProductGrid from "../../components/ProductsGrid/ProductsGrid";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Nav";
+import { SearchContext } from "../../contexts/contexts";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState();
@@ -31,6 +32,8 @@ const ProductsPage = () => {
     3: false,
     4: false,
   });
+
+  const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
   const sortToggle = () => {
     setSortFeatures(!SortFeatures);
@@ -119,6 +122,10 @@ const ProductsPage = () => {
       }
     }
 
+    if (searchTerm != "") {
+      queryParams.append("search", searchTerm);
+    }
+
     const queryString = queryParams.toString();
     console.log(queryString);
     const url = queryString
@@ -141,7 +148,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     fetchProductsData();
-  }, [CategoryFilter, SortOption, DiscountFilter, SizeFilter]);
+  }, [CategoryFilter, SortOption, DiscountFilter, SizeFilter, searchTerm]);
 
   useEffect(() => {
     console.log(SizeFilter);
@@ -150,7 +157,6 @@ const ProductsPage = () => {
   return (
     <div>
       <Navbar />
-
       <div
         className="ProductsPageMain flex flex-col pt-16"
         onClick={sortToggleOff}
@@ -328,7 +334,7 @@ const ProductsPage = () => {
               </div>
             </div>
           </div>
-          <ProductGrid className="" productsData={products} />
+          <ProductGrid className=" ProductGridMain" productsData={products} />
         </div>
       </div>
     </div>

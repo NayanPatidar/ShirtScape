@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Coupon.css";
-import { CartContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/contexts";
 import { IoMdClose } from "react-icons/io";
 
 const CouponBox = () => {

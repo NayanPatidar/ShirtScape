@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
-import { CartContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/contexts";
 import { IoClose } from "react-icons/io5";
 import {
   FindSizeByIdFromLocalStorage,

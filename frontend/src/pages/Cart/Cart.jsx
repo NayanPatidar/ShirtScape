@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
-import { CartContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/contexts";
 import Logo from "../../assets/logo/Logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
