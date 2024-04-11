@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/CartSizeSelection";
 import { IoMdClose } from "react-icons/io";
 import "./SelectionCartProduct.css";
 
@@ -14,7 +14,7 @@ const CartProductSize = () => {
     itemIndex,
     SizeMenuDone,
     setSizeMenuDone,
-  } = useContext(SizeSelectionContext);
+  } = useContext(CartContext);
 
   const handleTempSizeClick = (size) => {
     setTempSize(size);

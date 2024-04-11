@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Coupon.css";
-import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/CartSizeSelection";
 import { IoMdClose } from "react-icons/io";
 
 const CouponBox = () => {
   const { setCouponDiscount, setIsCouponMenuOpen } =
-    useContext(SizeSelectionContext);
+    useContext(CartContext);
   const [done, SetDone] = useState(false);
   const [checkboxes, setCheckboxes] = useState({
     checkbox1: false,

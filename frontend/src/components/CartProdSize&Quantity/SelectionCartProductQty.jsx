@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/CartSizeSelection";
 import { IoMdClose } from "react-icons/io";
 import "./SelectionCartProduct.css";
 
@@ -13,7 +13,7 @@ const CartProductQuantity = () => {
     setIsQuantityMenuOpen,
     QuantityMenuDone,
     setQuantityMenuDone,
-  } = useContext(SizeSelectionContext);
+  } = useContext(CartContext);
 
   const handleCloseQuantityMenu = () => {
     if (isQuantityMenuOpen) {

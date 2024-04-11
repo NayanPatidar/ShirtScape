@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
-import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/CartSizeSelection";
 import Logo from "../../assets/logo/Logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import CartProductQuantity from "../../components/CartProdSize&Quantity/SelectionCartProductQty";
 import { IoIosPricetags } from "react-icons/io";
 import CouponBox from "../../components/Coupon/Coupon";
+import ItemRemovalBox from "../../components/ConfirmRemoval/ConfirmationBox";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -17,11 +18,13 @@ const Cart = () => {
   const [isSizeMenuOpen, setIsSizeMenu] = useState(false);
   const [isQuantityMenuOpen, setIsQuantityMenuOpen] = useState(false);
   const [IsCouponMenuOpen, setIsCouponMenuOpen] = useState(false);
+  const [IsItemRemovalMenuOpen, setIsItemRemovalMenuOpen] = useState(false);
   const [product, setProduct] = useState(null);
   const [productId, setProductId] = useState(null);
   const [reference, setReference] = useState(null);
   const [itemIndex, setItemIndex] = useState(null);
   const [SizeMenuDone, setSizeMenuDone] = useState(false);
+  const [ItemRemovalDone, setRemovalDone] = useState(false);
   const [QuantityMenuDone, setQuantityMenuDone] = useState(false);
   const [itemsNum, setItemsNum] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -80,10 +83,10 @@ const Cart = () => {
 
   useEffect(() => {
     FetchCartData();
-  }, []);
+  }, [ItemRemovalDone]);
 
   return (
-    <SizeSelectionContext.Provider
+    <CartContext.Provider
       value={{
         isSizeMenuOpen,
         setIsSizeMenu,
@@ -113,15 +116,29 @@ const Cart = () => {
         setCouponDiscount,
         IsCouponMenuOpen,
         setIsCouponMenuOpen,
+        IsItemRemovalMenuOpen,
+        setIsItemRemovalMenuOpen,
+        ItemRemovalDone,
+        setRemovalDone,
       }}
     >
       <div
         className="MainCartPage flex flex-col"
         style={{
           filter:
-            isSizeMenuOpen || isQuantityMenuOpen ? "brightness(0.8)" : "none",
+            isSizeMenuOpen ||
+            isQuantityMenuOpen ||
+            IsCouponMenuOpen ||
+            IsItemRemovalMenuOpen
+              ? "brightness(0.8)"
+              : "none",
           backgroundColor:
-            isSizeMenuOpen || isQuantityMenuOpen ? "rgba(0,0,0,0.2)" : "",
+            isSizeMenuOpen ||
+            isQuantityMenuOpen ||
+            IsCouponMenuOpen ||
+            IsItemRemovalMenuOpen
+              ? "rgba(0,0,0,0.2)"
+              : "",
           height: itemsNum > 2 ? "100%" : "100%",
         }}
       >
@@ -240,7 +257,10 @@ const Cart = () => {
         <div className=" fixed">{<CartProductQuantity />}</div>
       )}
       {IsCouponMenuOpen && <div className=" fixed">{<CouponBox />}</div>}
-    </SizeSelectionContext.Provider>
+      {IsItemRemovalMenuOpen && (
+        <div className=" fixed">{<ItemRemovalBox />}</div>
+      )}
+    </CartContext.Provider>
   );
 };
 

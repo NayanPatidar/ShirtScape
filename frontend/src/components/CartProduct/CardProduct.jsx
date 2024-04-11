@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
-import { SizeSelectionContext } from "../../contexts/CartSizeSelection";
+import { CartContext } from "../../contexts/CartSizeSelection";
 import { IoClose } from "react-icons/io5";
 import {
   FindSizeByIdFromLocalStorage,
@@ -27,7 +27,9 @@ const CartProduct = ({ products, index }) => {
     totalDiscountRef,
     setTotalPrice,
     setTotalSellingPrice,
-  } = useContext(SizeSelectionContext);
+    IsItemRemovalMenuOpen,
+    setIsItemRemovalMenuOpen,
+  } = useContext(CartContext);
 
   const [mainSize, setMainSize] = useState();
   const [mainQuantity, setMainQuantity] = useState(1);
@@ -50,8 +52,9 @@ const CartProduct = ({ products, index }) => {
     navigate(`/products/${products.cloths.product_id}`);
   };
 
-  const ItemDeleteFromCart = () => {
-    console.log("Call For Item Delete");
+  const ItemDeleteFromCart = (product_id) => {
+    setProductId(product_id);
+    setIsItemRemovalMenuOpen(true);
   };
 
   const navigate = useNavigate();
@@ -134,7 +137,7 @@ const CartProduct = ({ products, index }) => {
           <span className="CartItemTitle ">{products.cloths.product_name}</span>
           <span
             className=" cursor-pointer"
-            onClick={() => ItemDeleteFromCart()}
+            onClick={() => ItemDeleteFromCart(products.cloths.product_id)}
           >
             {<IoClose />}
           </span>

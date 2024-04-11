@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const SizeSelectionContext = createContext();
+export const CartContext = createContext();
