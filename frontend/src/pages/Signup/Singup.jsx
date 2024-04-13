@@ -26,19 +26,50 @@ const Signup = () => {
       ...formData,
       [name]: value,
     });
-    formError[name] = "";
+    setFormError((prevFormError) => ({
+      ...prevFormError,
+      [name]: "",
+    }));
   };
 
   useEffect(() => {
     if (Object.keys(formError).length === 0 && isSubmit) {
       console.log("Signed Up!!");
+      sendData();
     }
   }, [formError]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError(validateInput(formData));
     setSubmit(true);
+  };
+
+  const sendData = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error("Error during signup:", error.message);
+    }
+  };
+
+  const handlePasswordPaste = (e) => {
+    const pastedText = e.clipboardData.getData("text");
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      password: pastedText,
+    }));
   };
 
   const validateInput = (values) => {
@@ -82,8 +113,8 @@ const Signup = () => {
   return (
     <>
       <Navbar />
-      <div className=" absolute z-10 flex items-center justify-center align-middle w-screen h-screen">
-        <div className="SignupBox flex flex-col justify-start items-center  w-80 h-auto min-w-64  border-2  border-solid border-gray-200 rounded-lg p-3 mt-16">
+      <div className=" absolute z-10 flex items-center justify-center align-middle w-screen">
+        <div className="SignupBox flex flex-col justify-start items-center  w-80 h-auto min-w-64 border-2  border-solid rounded-lg p-3 mt-20">
           <h1 className="SignupTitle text-2xl font-bold flex justify-center">
             Signup
           </h1>
@@ -135,6 +166,7 @@ const Signup = () => {
                   name="confirmPassword"
                   className="rounded h-8 pl-1 inputSignup"
                   onChange={handleInputChange}
+                  onPaste={handlePasswordPaste}
                   value={formData.confirmPassword}
                   required
                 />
