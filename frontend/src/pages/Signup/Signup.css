@@ -1,0 +1,23 @@
+.SignupBox {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.SignupTitle {
+  color: rgb(58, 58, 58);
+}
+
+.SignupEmail {
+  color: rgb(58, 58, 58);
+}
+
+.SignupPassword {
+  color: rgb(58, 58, 58);
+}
+
+.SignupAccount {
+  color: rgb(58, 58, 58);
+}
+
+.inputSignup {
+  border: solid 1px black;
+}
