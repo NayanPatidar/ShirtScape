@@ -74,7 +74,7 @@ const Cart = () => {
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         SetCartItems(data.CartData);
-        setItemsNum(data.CartData.length);
+        setItemsNum(LocalCartData.length);
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
@@ -84,6 +84,10 @@ const Cart = () => {
   useEffect(() => {
     FetchCartData();
   }, [ItemRemovalDone]);
+
+  useEffect(() => {
+    console.log(`Item Number - ${itemsNum}`);
+  }, [itemsNum]);
 
   return (
     <CartContext.Provider
