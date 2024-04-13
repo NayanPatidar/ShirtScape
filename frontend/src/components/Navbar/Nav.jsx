@@ -69,7 +69,10 @@ function Navbar() {
           </div>
         </div>
         <div className="flex flex-row justify-around items-center w-1/6">
-          <CiUser className=" size-8 text-black" />
+          <CiUser
+            className=" size-8 text-black"
+            onClick={() => navigate("/signin")}
+          />
           <CiHeart
             className=" size-8 text-black"
             onClick={() => navigate("/wishlist")}
