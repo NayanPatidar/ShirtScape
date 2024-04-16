@@ -34,7 +34,6 @@ const Signup = () => {
 
   useEffect(() => {
     if (Object.keys(formError).length === 0 && isSubmit) {
-      console.log("Signed Up!!");
       sendData();
     }
   }, [formError]);
@@ -56,9 +55,10 @@ const Signup = () => {
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
+      } else {
+        console.log("Signed Up!!");
+        navigate("/signin");
       }
-      const responseData = await response.json();
-      console.log(responseData);
     } catch (error) {
       console.error("Error during signup:", error.message);
     }

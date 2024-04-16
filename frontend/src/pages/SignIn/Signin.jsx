@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Nav";
 import "./Signin.css";
 
+const JWT_SECRET_KEY = "aqwerdftgh";
+
 const Signin = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -14,12 +16,15 @@ const Signin = () => {
     password: "",
   });
 
+  const [backendError, setBackendError] = useState();
+
   const [isSubmit, setSubmit] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     formError[name] = "";
+    setBackendError("");
   };
 
   const handleSubmit = (e) => {
@@ -41,19 +46,41 @@ const Signin = () => {
 
     if (!values.password) {
       errors.password = "Password is required !";
-    } else if (
-      !/^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)
-    ) {
-      errors.password =
-        "8 characters, at least one number and one special character";
     }
 
     return errors;
   };
 
+  const sendLoginDetails = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.message) {
+        console.log(`Error: ${data.message}`);
+        setBackendError(data.message);
+      } else {
+        console.log(data.token);
+        console.log("Logged In!!");
+        document.cookie = `sscape=${data.token}; expires=${new Date(
+          Date.now() + 7200000
+        ).toUTCString()}; path=/`;
+      }
+    } catch (error) {
+      console.error("Error during login: ", error.message);
+    }
+  };
+
   useEffect(() => {
     if (Object.keys(formError).length === 0 && isSubmit) {
-      console.log("Signed In");
+      sendLoginDetails();
     }
   }, [formError]);
 
@@ -95,6 +122,7 @@ const Signin = () => {
                   required
                 />
                 <p className="text-red-600">{formError.password}</p>
+                <p className="text-red-600">{backendError}</p>
               </div>
               <button
                 type="submit"
