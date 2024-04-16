@@ -9,6 +9,7 @@ import Cart from "./pages/Cart/Cart";
 import { SearchContext } from "./contexts/contexts";
 import Signin from "./pages/SignIn/Signin";
 import Signup from "./pages/Signup/Singup";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,6 +27,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </SearchContext.Provider>
     </div>
