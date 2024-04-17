@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 export const SearchContext = createContext();
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(
