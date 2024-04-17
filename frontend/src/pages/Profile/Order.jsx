@@ -11,7 +11,10 @@ const Order = () => {
         <div className="w-1/6">
           <ProfileMenu />
         </div>
-        <div className="  h-96 w-4/6"></div>
+        <div className="MyProfile h-96 w-4/6 pl-10">
+          <span className=" MyProfileTitle">ORDERS</span>
+          <div></div>
+        </div>
       </div>
     </div>
   );

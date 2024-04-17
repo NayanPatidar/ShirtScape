@@ -10,6 +10,8 @@ import { SearchContext } from "./contexts/contexts";
 import Signin from "./pages/SignIn/Signin";
 import Signup from "./pages/Signup/Singup";
 import Profile from "./pages/Profile/Profile";
+import Order from "./pages/Profile/Order";
+import Address from "./pages/Profile/Address";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +30,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/orders" element={<Order />} />
+          <Route path="/address" element={<Address />} />
         </Routes>
       </SearchContext.Provider>
     </div>
