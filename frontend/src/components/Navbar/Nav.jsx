@@ -6,10 +6,12 @@ import { CiHeart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
-import { SearchContext } from "../../contexts/contexts";
+import { AuthContext, SearchContext } from "../../contexts/contexts";
 
 function Navbar() {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
+  const { isUserLoggedIn, setIsUserLogIn } = useContext(AuthContext);
+
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
@@ -71,7 +73,11 @@ function Navbar() {
         <div className="flex flex-row justify-around items-center w-1/6">
           <CiUser
             className=" size-8 text-black"
-            onClick={() => navigate("/signin")}
+            onClick={
+              isUserLoggedIn
+                ? () => navigate("/profile")
+                : () => navigate("/signin")
+            }
           />
           <CiHeart
             className=" size-8 text-black"
