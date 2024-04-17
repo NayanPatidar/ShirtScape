@@ -10,7 +10,7 @@ import { AuthContext, SearchContext } from "../../contexts/contexts";
 
 function Navbar() {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
-  const { isUserLoggedIn, setIsUserLogIn } = useContext(AuthContext);
+  const { isUserLoggedIn } = useContext(AuthContext);
 
   const [inputValue, setInputValue] = useState("");
 

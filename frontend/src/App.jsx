@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
@@ -6,7 +6,11 @@ import ProductsPage from "./pages/Products/ProductsPage";
 import Wishlist from "./components/Wishlist/Wishlist";
 import Product from "./components/Product/Product";
 import Cart from "./pages/Cart/Cart";
-import { AuthContext, SearchContext } from "./contexts/contexts";
+import {
+  AuthContext,
+  AuthContextProvider,
+  SearchContext,
+} from "./contexts/contexts";
 import Signin from "./pages/SignIn/Signin";
 import Signup from "./pages/Signup/Signup";
 import Profile from "./pages/Profile/Profile";
@@ -15,16 +19,10 @@ import Address from "./pages/Profile/Address";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isUserLoggedIn, setIsUserLogIn] = useState(false);
-
-  useEffect(() => {
-    console.log(`User Login Status Changed - ${isUserLoggedIn}`);
-  }, [isUserLoggedIn]);
-
   return (
     <div>
       <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-        <AuthContext.Provider value={{ isUserLoggedIn, setIsUserLogIn }}>
+        <AuthContextProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/men" element={<ProductsPage />} />
@@ -39,7 +37,7 @@ function App() {
             <Route path="/orders" element={<Order />} />
             <Route path="/address" element={<Address />} />
           </Routes>
-        </AuthContext.Provider>
+        </AuthContextProvider>
       </SearchContext.Provider>
     </div>
   );
