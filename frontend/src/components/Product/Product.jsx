@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { json, useParams } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar/Nav";
 import "./Product.css";
 import { AddProduct } from "../../services/storageOperations";
+import { AuthContext } from "../../contexts/contexts";
+import { getCookie } from "../../services/cookieOperations";
+import { toBeChecked } from "@testing-library/jest-dom/matchers";
+
 const Product = () => {
   const [product, setProduct] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSize, setSelectedSize] = useState('S');
+  const { login, isUserLoggedIn } = useContext(AuthContext);
 
   let { productId } = useParams();
 
@@ -40,6 +45,32 @@ const Product = () => {
     let ProductAdditionToCart = AddProduct({
       product_id: `${product.product.product_id}`,
     });
+  };
+
+  const AddProductToDB = () => {
+    if (isUserLoggedIn) {
+      const token = getCookie("sscape");
+      console.log(token);
+      const data = {
+        product_id: productId,
+        quantity: 1,
+        size: `${selectedSize}`,
+      };
+
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      };
+
+      fetch(`http://localhost:8080/addCardItem`, options)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Error:", error));
+    }
   };
 
   return (
@@ -120,7 +151,7 @@ const Product = () => {
               <div className=" flex flex-row gap-5 w-10/12  justify-start items-start mt-6 cursor-pointer">
                 <div
                   className="Add_To_Card_Button w-6/12"
-                  onClick={productData}
+                  onClick={(() => productData, AddProductToDB)}
                 >
                   <CiShoppingCart className=" size-6 w-1/6" />
                   <span>ADD TO CART</span>
