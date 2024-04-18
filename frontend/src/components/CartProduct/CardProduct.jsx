@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
-import { CartContext } from "../../contexts/contexts";
+import { AuthContext, CartContext } from "../../contexts/contexts";
 import { IoClose } from "react-icons/io5";
 import {
   FindSizeByIdFromLocalStorage,
@@ -10,8 +10,10 @@ import {
   ChangeQuantityInLocalStorage,
 } from "../../services/storageOperations";
 import { useNavigate } from "react-router-dom";
+import { getCookie } from "../../services/cookieOperations";
 
 const CartProduct = ({ products, index }) => {
+  const { isUserLoggedIn } = useContext(AuthContext);
   const {
     setIsSizeMenu,
     setProduct,
@@ -79,16 +81,47 @@ const CartProduct = ({ products, index }) => {
     setMainQuantity(quantity);
   }, []);
 
+  const AddProductToDB = () => {
+    if (isUserLoggedIn) {
+      const token = getCookie("sscape");
+      console.log(`${products.cloths.product_id} ${mainQuantity} ${mainSize}`);
+      const data = {
+        product_id: products.cloths.product_id,
+        quantity: mainQuantity,
+        size: mainSize,
+      };
+
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      };
+
+      fetch(`http://localhost:8080/addCardItem`, options)
+        // .then((response) => response.json())
+        // .then((data) => console.log(data))
+        .catch((error) => console.error("Error:", error));
+    }
+  };
+
   useEffect(() => {
-    if (mainSize !== undefined) {
+    if (isUserLoggedIn) {
+      AddProductToDB();
+    } else if (mainSize !== undefined) {
       ChangeSizeInLocalStorage(products.cloths.product_id, mainSize);
     }
   }, [mainSize]);
 
   useEffect(() => {
-    if (mainQuantity !== undefined) {
+    if (isUserLoggedIn) {
+      AddProductToDB();
+    } else if (mainQuantity !== undefined) {
       ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
     }
+
     if (prevQuantity.current == mainQuantity) {
       totalMRPRef.current =
         totalMRPRef.current + products.cloths.mrp * mainQuantity;
