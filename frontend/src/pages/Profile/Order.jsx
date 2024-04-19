@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Navbar from "../../components/Navbar/Nav";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
+import { SearchContext } from "../../contexts/contexts";
 
 const Order = () => {
+  
+  const { setCartVisibility } = useContext(SearchContext);
+
+  useEffect(() => {
+    setCartVisibility(true);
+  }, []);
+
   return (
     <div>
-      <Navbar />
       <div className=" flex flex-row gap-4 pt-24 justify-center">
         <div className="w-1/6">
           <ProfileMenu />

@@ -21,7 +21,39 @@
   font-family: "Source Sans 3", sans-serif;
 }
 
+.ProfileMenuOptionLogout {
+  border-top: solid 1px rgb(235, 235, 235);
+  border-right: solid 1px rgb(235, 235, 235);
+  border-left: solid 1px rgb(235, 235, 235);
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-weight: 400;
+  font-family: "Source Sans 3", sans-serif;
+  background-color: rgb(255, 41, 41);
+}
+
 .MyProfileTitle {
-  font-size: 15px;
-  color: rgb(160, 160, 160);
+  font-size: 17px;
+  color: rgb(139, 139, 139);
+  font-family: "Source Sans 3", sans-serif;
+  padding-left: 30px;
+}
+
+.MyProfileBox {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  border-left: solid 1px rgb(235, 235, 235);
+  height: 300px;
+  padding-left: 30px;
+  padding-top: 30px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.DetailsProfile {
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+  font-family: "Source Sans 3", sans-serif;
 }

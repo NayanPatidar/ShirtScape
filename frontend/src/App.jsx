@@ -16,13 +16,18 @@ import Signup from "./pages/Signup/Signup";
 import Profile from "./pages/Profile/Profile";
 import Order from "./pages/Profile/Order";
 import Address from "./pages/Profile/Address";
+import Navbar from "./components/Navbar/Nav";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [cartVisibility, setCartVisibility] = useState(true);
+
+
   return (
     <div>
-      <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+      <SearchContext.Provider value={{ searchTerm, setSearchTerm, cartVisibility, setCartVisibility }}>
         <AuthContextProvider>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/men" element={<ProductsPage />} />

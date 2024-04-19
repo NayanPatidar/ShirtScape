@@ -2,11 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Nav";
 import "./Signup.css";
-import { AuthContext } from "../../contexts/contexts";
+import { AuthContext, SearchContext } from "../../contexts/contexts";
 
 const Signup = () => {
   const { login, isUserLoggedIn } = useContext(AuthContext);
   const [ShowSignup, SetShowSignup] = useState(true);
+  
+  const { setCartVisibility } = useContext(SearchContext);
+
+  useEffect(() => {
+    setCartVisibility(true);
+  }, []);
 
   const [formData, setFormData] = useState({
     username: "",

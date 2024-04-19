@@ -43,7 +43,7 @@ const ProfileMenu = () => {
           </div>
           <div>
             <div
-              className="ProfileMenuOption h-10 bg-red-500 text-white cursor-pointer"
+              className="ProfileMenuOptionLogout h-10  text-white cursor-pointer"
               onClick={() => Logout()}
             >
               Log out

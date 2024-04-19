@@ -9,9 +9,9 @@ import { IoSearch } from "react-icons/io5";
 import { AuthContext, SearchContext } from "../../contexts/contexts";
 
 function Navbar() {
-  const { searchTerm, setSearchTerm,  } =
-    useContext(SearchContext);
+  const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const { isUserLoggedIn } = useContext(AuthContext);
+  const { cartVisibility, setCartVisibility } = useContext(SearchContext);
 
   const searchHandler = (e) => {
     navigate("/men");
@@ -37,62 +37,69 @@ function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="NavBarMain flex flex-col fixed shadow-md">
-      <div className=" h-16 bg-white pl-5 flex flex-row items-center justify-between">
-        <div className="flex flex-row justify-start items-center w-3/5">
-          <img
-            src={logo}
-            alt="LOGO"
-            className="logo w-16"
-            onClick={() => navigate("/")}
-          />
-          <div className="NavBarObj flex flex-row justify-around w-8/12 text-black">
-            <div
-              className="TextNavbarCategories cursor-pointer mt-2"
-              onClick={() => navigate("/men")}
-            >
-              MEN
+    <>
+      {cartVisibility ? (
+        <div className="NavBarMain flex flex-col fixed shadow-md">
+          <div className=" h-16 bg-white pl-5 flex flex-row items-center justify-between">
+            <div className="flex flex-row justify-start items-center w-3/5">
+              <img
+                src={logo}
+                alt="LOGO"
+                className="logo w-16"
+                onClick={() => navigate("/")}
+              />
+              <div className="NavBarObj flex flex-row justify-around w-8/12 text-black">
+                <div
+                  className="TextNavbarCategories cursor-pointer mt-2"
+                  onClick={() => navigate("/men")}
+                >
+                  MEN
+                </div>
+                <div className="TextNavbarCategories cursor-pointer mt-2">
+                  NEW ARRIVALS
+                </div>
+                <div className=" text-black text-md pb-4">
+                  <form className="SearchBox">
+                    <label className=" flex w-96 items-center justify-center">
+                      <input
+                        type="text"
+                        className="inputBoxNavBar  rounded-md border border-black"
+                        placeholder={" What are you looking for ? "}
+                        onChange={searchProcess}
+                      />
+                      <IoSearch className=" searchIcon" />
+                    </label>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div className="TextNavbarCategories cursor-pointer mt-2">
-              NEW ARRIVALS
-            </div>
-            <div className=" text-black text-md pb-4">
-              <form className="SearchBox">
-                <label className=" flex w-96 items-center justify-center">
-                  <input
-                    type="text"
-                    className="inputBoxNavBar  rounded-md border border-black"
-                    placeholder={
-                      " What are you looking for ? "
-                    }
-                    onChange={searchProcess}
-                  />
-                  <IoSearch className=" searchIcon" />
-                </label>
-              </form>
+            <div className="flex flex-row justify-around items-center w-1/6">
+              <FaRegUserCircle
+                className=" size-6 text-black"
+                onClick={
+                  isUserLoggedIn
+                    ? () => navigate("/profile")
+                    : () => navigate("/signin")
+                }
+              />
+              <FaRegHeart
+                className="IconNavbarTypes size-6 text-black"
+                onClick={() => navigate("/wishlist")}
+              />
+              <LuShoppingCart
+                className="IconNavbarTypes size-6 text-black"
+                onClick={() => {
+                  navigate("/checkout/cart");
+                  setCartVisibility(false);
+                }}
+              />
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-around items-center w-1/6">
-          <FaRegUserCircle
-            className=" size-6 text-black"
-            onClick={
-              isUserLoggedIn
-                ? () => navigate("/profile")
-                : () => navigate("/signin")
-            }
-          />
-          <FaRegHeart
-            className="IconNavbarTypes size-6 text-black"
-            onClick={() => navigate("/wishlist")}
-          />
-          <LuShoppingCart
-            className="IconNavbarTypes size-6 text-black"
-            onClick={() => navigate("/checkout/cart")}
-          />
-        </div>
-      </div>
-    </div>
+      ) : (
+        " "
+      )}
+    </>
   );
 }
 

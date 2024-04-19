@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 import banner1 from "../../assets/banner1.jpg";
 import banner2 from "../../assets/banner2.png";
 import banner3 from "../../assets/banner3.png";
@@ -7,6 +7,7 @@ import "react-slideshow-image/dist/styles.css";
 import "./Home.css";
 import Cards from "../../components/ProductsCard/HomeProductsCard";
 import Navbar from "../../components/Navbar/Nav";
+import { SearchContext } from "../../contexts/contexts";
 
 const slideImages = [
   {
@@ -31,6 +32,12 @@ const divStyle = {
 function Home() {
   const [TShirts, setTShirts] = useState();
   const [Categories, setCategory] = useState();
+
+  const { setCartVisibility } = useContext(SearchContext);
+
+  useEffect(() => {
+    setCartVisibility(true);
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -59,7 +66,6 @@ function Home() {
 
   return (
     <div className=" cursor-default">
-      <Navbar />
       <div className="slide-container pt-16">
         <Fade>
           {slideImages.map((image, index) => (

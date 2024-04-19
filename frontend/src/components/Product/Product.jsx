@@ -42,9 +42,12 @@ const Product = () => {
   };
 
   const productData = () => {
-    let ProductAdditionToCart = AddProduct({
-      product_id: `${product.product.product_id}`,
-    });
+    if (!isUserLoggedIn) {
+      console.log("Add To Cart - Local");
+      AddProduct({
+        product_id: `${product.product.product_id}`,
+      });
+    }
   };
 
   const AddProductToDB = () => {
@@ -151,7 +154,10 @@ const Product = () => {
               <div className=" flex flex-row gap-5 w-10/12  justify-start items-start mt-6 cursor-pointer">
                 <div
                   className="Add_To_Card_Button w-6/12"
-                  onClick={(() => productData, AddProductToDB)}
+                  onClick={() => {
+                    productData();
+                    AddProductToDB();
+                  }}
                 >
                   <CiShoppingCart className=" size-6 w-1/6" />
                   <span>ADD TO CART</span>

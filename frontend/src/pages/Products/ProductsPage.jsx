@@ -33,7 +33,15 @@ const ProductsPage = () => {
     4: false,
   });
 
-  const { searchTerm, setSearchTerm } = useContext(SearchContext);
+  const { searchTerm } = useContext(SearchContext);
+
+  
+  const { setCartVisibility } = useContext(SearchContext);
+
+  useEffect(() => {
+    setCartVisibility(true);
+  }, []);
+
 
   const sortToggle = () => {
     setSortFeatures(!SortFeatures);
@@ -98,7 +106,6 @@ const ProductsPage = () => {
   const seed = 2413;
 
   const fetchProductsData = async () => {
-    console.log("In Fetch Data");
     const queryParams = new URLSearchParams();
 
     for (const key in CategoryFilter) {
@@ -128,14 +135,14 @@ const ProductsPage = () => {
     }
 
     const queryString = queryParams.toString();
-    console.log(queryString);
+    // console.log(queryString);
     const url = queryString
       ? `http://localhost:8080/products/men?${queryString}`
       : "http://localhost:8080/products/men";
 
     const response = await fetch(url);
     const ProductsData = await response.json();
-    console.log(url);
+    // console.log(url);
 
     if (queryString == "" || !queryString.includes("sort")) {
       const shuffledData = shuffleArray(ProductsData.clothsData.slice(), seed);
@@ -151,13 +158,12 @@ const ProductsPage = () => {
     fetchProductsData();
   }, [CategoryFilter, SortOption, DiscountFilter, SizeFilter, searchTerm]);
 
-  useEffect(() => {
-    console.log(SizeFilter);
-  }, [SizeFilter]);
+  // useEffect(() => {
+  //   console.log(SizeFilter);
+  // }, [SizeFilter]);
 
   return (
     <div>
-      <Navbar />
       <div
         className="ProductsPageMain flex flex-col pt-16"
         onClick={sortToggleOff}

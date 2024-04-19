@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Nav";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
+import { SearchContext } from "../../contexts/contexts";
+import { getCookie } from "../../services/cookieOperations";
+import { jwtDecode } from "jwt-decode";
 
 const Profile = () => {
+  const { setCartVisibility } = useContext(SearchContext);
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    const userData = jwtDecode(getCookie("sscape"));
+    setUserData(userData.userData);
+    setCartVisibility(true);
+  }, []);
+
   return (
     <div>
-      <Navbar />
       <div className=" flex flex-row gap-4 pt-24 justify-center">
         <div className="w-1/6">
           <ProfileMenu />
         </div>
         <div className="MyProfile h-96 w-4/6 pl-10">
           <span className=" MyProfileTitle">MY PROFILE</span>
-          <div></div>
+          <div className=" MyProfileBox">
+            <div className="DetailsProfile">
+              <div className=" flex flex-row gap-2">
+                <span>Username </span>{" "}
+                <span className=" text-red-500"> {userData.username}</span>
+              </div>
+              <div className=" flex flex-row gap-2">
+                <span>Email </span>{" "}
+                <span className=" text-red-500"> {userData.email}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
-import { AuthContext, CartContext } from "../../contexts/contexts";
+import { AuthContext, CartContext, SearchContext } from "../../contexts/contexts";
 import Logo from "../../assets/logo/logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +39,14 @@ const Cart = () => {
   const totalDiscountRef = useRef(0);
 
   const { isUserLoggedIn } = useContext(AuthContext);
+
+  
+  const { setCartVisibility } = useContext(SearchContext);
+
+  useEffect(() => {
+    setCartVisibility(false);
+  }, []);
+
 
   const navigate = useNavigate();
 

@@ -87,7 +87,7 @@
 .DiscountCart {
   font-size: 13px;
   font-weight: 400;
-  color: rgb(255, 64, 64);
+  color:  rgb(255, 41, 41);
 }
 
 .CartPorductInfo {
@@ -154,17 +154,17 @@
 .ApplyCouponText {
   text-align: center;
   width: 70px;
-  color: rgb(255, 30, 97);
+  color:  rgb(255, 41, 41);
   font-size: 11px;
   font-weight: 600;
-  border: solid 1px rgb(255, 30, 97);
+  border: solid 1px  rgb(255, 41, 41);
   border-radius: 3px;
 }
 
 .ApplyCouponPrice {
   text-align: end;
   width: 100px;
-  color: rgb(255, 30, 97);
+  color:  rgb(255, 41, 41);
   font-size: 11px;
   font-weight: 600;
 }
@@ -181,7 +181,7 @@
 }
 
 .LoginCoupDesc {
-  color: rgb(255, 30, 97);
+  color:  rgb(255, 41, 41);
 }
 
 /* Price Details  */
@@ -229,7 +229,7 @@
 .CheckoutClick {
   width: 100%;
   height: 35px;
-  background-color: rgb(255, 41, 112);
+  background-color: rgb(255, 41, 41);
   font-weight: 560;
   font-size: 15px;
   line-height: 10px;

@@ -8,6 +8,13 @@ const JWT_SECRET_KEY = "aqwerdftgh";
 
 const Signin = () => {
   const { login, isUserLoggedIn } = useContext(AuthContext);
+  
+  const { setCartVisibility } = useContext(SearchContext);
+
+  useEffect(() => {
+    setCartVisibility(true);
+  }, []);
+
 
   useEffect(() => {
     console.log(`User Login Status Changed - ${isUserLoggedIn}`);
