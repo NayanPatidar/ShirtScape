@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import logo from "../../assets/logo/Logo.png";
+import logo from "../../assets/logo/logo.png";
 import "./Nav.css";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";

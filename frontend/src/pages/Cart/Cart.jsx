@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
-import { CartContext } from "../../contexts/contexts";
-import Logo from "../../assets/logo/Logo.png";
+import { AuthContext, CartContext } from "../../contexts/contexts";
+import Logo from "../../assets/logo/logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import CartProductQuantity from "../../components/CartProdSize&Quantity/SelectionCartProductQty";
 import { IoIosPricetags } from "react-icons/io";
 import CouponBox from "../../components/Coupon/Coupon";
 import ItemRemovalBox from "../../components/ConfirmRemoval/ConfirmationBox";
+import { getCookie } from "../../services/cookieOperations";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -26,7 +27,7 @@ const Cart = () => {
   const [SizeMenuDone, setSizeMenuDone] = useState(false);
   const [ItemRemovalDone, setRemovalDone] = useState(false);
   const [QuantityMenuDone, setQuantityMenuDone] = useState(false);
-  const [itemsNum, setItemsNum] = useState(0);
+  const [itemsNum, setItemsNum] = useState(-1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalSellingPrice, setTotalSellingPrice] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0);
@@ -35,6 +36,8 @@ const Cart = () => {
   const [quantity, setQuantity] = useState("");
   const totalMRPRef = useRef(0);
   const totalDiscountRef = useRef(0);
+
+  const { isUserLoggedIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -52,6 +55,32 @@ const Cart = () => {
 
   const handleCouponMenuOpen = () => {
     setIsCouponMenuOpen(true);
+  };
+
+  const GetPermUserCartData = async () => {
+    if (isUserLoggedIn) {
+      const token = getCookie("sscape");
+      console.log("Fetching Data for the Cart ");
+
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      let FetchedLPermCartData = await fetch(
+        `http://localhost:8080/cart/permUser`,
+        options
+      );
+
+      if (FetchedLPermCartData.ok) {
+        const data = await FetchedLPermCartData.json();
+        SetCartItems(data.CartData);
+        setItemsNum(data.CartData.length);
+      }
+    }
   };
 
   const FetchCartData = async () => {
@@ -74,7 +103,7 @@ const Cart = () => {
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         SetCartItems(data.CartData);
-        setItemsNum(LocalCartData.length);
+        // setItemsNum(LocalCartData.length);
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
@@ -82,12 +111,16 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    FetchCartData();
+    if (isUserLoggedIn) {
+      GetPermUserCartData();
+    } else {
+      FetchCartData();
+    }
   }, [ItemRemovalDone]);
 
   useEffect(() => {
-    console.log(`Item Number - ${itemsNum}`);
-  }, [itemsNum]);
+    // console.log(`Item Number - ${itemsNum}`);
+  }, [itemsNum, CartItems]);
 
   return (
     <CartContext.Provider
