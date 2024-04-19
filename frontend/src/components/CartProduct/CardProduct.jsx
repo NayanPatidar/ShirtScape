@@ -23,6 +23,7 @@ const CartProduct = ({ products, index }) => {
     setItemIndex,
     SizeMenuDone,
     quantity,
+    setCartItemID,
     setIsQuantityMenuOpen,
     setProductId,
     QuantityMenuDone,
@@ -57,6 +58,7 @@ const CartProduct = ({ products, index }) => {
   const ItemDeleteFromCart = (product_id) => {
     setProductId(product_id);
     setIsItemRemovalMenuOpen(true);
+    setCartItemID(products.cloths.id);
   };
 
   const navigate = useNavigate();
@@ -103,6 +105,7 @@ const CartProduct = ({ products, index }) => {
         product_id: products.cloths.product_id,
         quantity: mainQuantity,
         size: mainSize,
+        cart_item_id: products.cloths.id,
       };
       const options = {
         method: "POST",
@@ -117,7 +120,7 @@ const CartProduct = ({ products, index }) => {
       const updateCartItem = async () => {
         try {
           let response = await fetch(
-            `http://localhost:8080/AddCardItem`,
+            `http://localhost:8080/UpdateUserCart`,
             options
           );
           if (!response.ok) {

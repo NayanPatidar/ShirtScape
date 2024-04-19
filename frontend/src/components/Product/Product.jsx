@@ -11,7 +11,7 @@ import { toBeChecked } from "@testing-library/jest-dom/matchers";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
-  const [selectedSize, setSelectedSize] = useState('S');
+  const [selectedSize, setSelectedSize] = useState("S");
   const { login, isUserLoggedIn } = useContext(AuthContext);
 
   let { productId } = useParams();
@@ -66,7 +66,7 @@ const Product = () => {
         body: JSON.stringify(data),
       };
 
-      fetch(`http://localhost:8080/addCardItem`, options)
+      fetch(`http://localhost:8080/AddUserCart`, options)
         .then((response) => response.json())
         .then((data) => console.log(data))
         .catch((error) => console.error("Error:", error));

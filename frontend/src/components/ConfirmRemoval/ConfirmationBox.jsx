@@ -1,21 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
-import { CartContext } from "../../contexts/contexts";
+import { AuthContext, CartContext } from "../../contexts/contexts";
 import { IoMdClose } from "react-icons/io";
 import "./Confirmation.css";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { DeleteProductFromLocalStorage } from "../../services/storageOperations";
+import { getCookie } from "../../services/cookieOperations";
 
 const ItemRemovalBox = () => {
   const {
+    product,
     IsItemRemovalMenuOpen,
     setIsItemRemovalMenuOpen,
     productId,
     ItemRemovalDone,
     setRemovalDone,
+    CartItemID,
   } = useContext(CartContext);
 
+  const { isUserLoggedIn } = useContext(AuthContext);
+
   const handleYes = () => {
-    DeleteProductFromLocalStorage(productId);
+    if (isUserLoggedIn) {
+      console.log(CartItemID);
+      AllowDelete();
+    } else {
+      DeleteProductFromLocalStorage(productId);
+    }
     setRemovalDone(!ItemRemovalDone);
     handleCloseRemovalBox();
   };
@@ -27,6 +37,33 @@ const ItemRemovalBox = () => {
   const handleCloseRemovalBox = () => {
     if (IsItemRemovalMenuOpen) {
       setIsItemRemovalMenuOpen(false);
+    }
+  };
+
+  const AllowDelete = async () => {
+    const token = getCookie("sscape");
+    const data = {
+      cart_item_id: CartItemID,
+    };
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    };
+    console.log("Delete Item from Cart");
+    try {
+      let response = await fetch(
+        `http://localhost:8080/DeleteUserCartItem`,
+        options
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update cart item");
+      }
+    } catch (error) {
+      console.error("Error updating cart item:", error);
     }
   };
 

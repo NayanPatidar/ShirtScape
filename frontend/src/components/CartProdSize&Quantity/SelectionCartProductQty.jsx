@@ -3,8 +3,8 @@ import { CartContext } from "../../contexts/contexts";
 import { IoMdClose } from "react-icons/io";
 import "./SelectionCartProduct.css";
 
-const CartProductQuantity = () => {
-  const [selectedQuantity, setTempQuantity] = useState("");
+const CartProductQuantity = ({ ProductQuantity }) => {
+  const [selectedQuantity, setTempQuantity] = useState(1);
   const {
     setReference,
     itemIndex,

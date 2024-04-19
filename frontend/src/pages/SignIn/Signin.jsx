@@ -76,7 +76,7 @@ const Signin = () => {
       } else {
         console.log("Logged In!!");
         document.cookie = `sscape=${data.token}; expires=${new Date(
-          Date.now() + 7200000
+          Date.now() + 43200000
         ).toUTCString()}; path=/`;
         navigate("/profile");
         login();
