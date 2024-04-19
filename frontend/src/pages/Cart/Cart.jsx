@@ -31,6 +31,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalSellingPrice, setTotalSellingPrice] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0);
+  const [CartItemID, setCartItemID] = useState(0);
 
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -60,7 +61,7 @@ const Cart = () => {
   const GetPermUserCartData = async () => {
     if (isUserLoggedIn) {
       const token = getCookie("sscape");
-      console.log("Fetching Data for the Cart ");
+      console.log(`Fetching Data for the Cart ${token}`);
 
       const options = {
         method: "GET",
@@ -71,12 +72,13 @@ const Cart = () => {
       };
 
       let FetchedLPermCartData = await fetch(
-        `http://localhost:8080/cart/permUser`,
+        `http://localhost:8080/cart/PermUserData`,
         options
       );
 
       if (FetchedLPermCartData.ok) {
         const data = await FetchedLPermCartData.json();
+        console.log(data.CartData);
         SetCartItems(data.CartData);
         setItemsNum(data.CartData.length);
       }
@@ -103,7 +105,7 @@ const Cart = () => {
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         SetCartItems(data.CartData);
-        // setItemsNum(LocalCartData.length);
+        setItemsNum(LocalCartData.length);
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
@@ -157,6 +159,8 @@ const Cart = () => {
         setIsItemRemovalMenuOpen,
         ItemRemovalDone,
         setRemovalDone,
+        CartItemID,
+        setCartItemID,
       }}
     >
       <div
@@ -291,6 +295,8 @@ const Cart = () => {
               </div>
             </div>
           </div>
+        ) : itemsNum == -1 ? (
+          " "
         ) : (
           <span className="NoItemDiv text-4xl font-semibold flex justify-center items-center align-middle h-3/5">
             No Item in the cart

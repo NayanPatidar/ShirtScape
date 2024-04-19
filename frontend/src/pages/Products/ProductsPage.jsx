@@ -98,6 +98,7 @@ const ProductsPage = () => {
   const seed = 2413;
 
   const fetchProductsData = async () => {
+    console.log("In Fetch Data");
     const queryParams = new URLSearchParams();
 
     for (const key in CategoryFilter) {
