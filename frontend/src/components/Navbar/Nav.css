@@ -6,8 +6,8 @@
 
 .NavBarObj {
   font-family: "Source Sans 3", sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 650;
+  font-size: 17px;
   padding-left: 5%;
   color: white;
 }
@@ -38,4 +38,17 @@
 
 .searchIcon {
   transform: translateX(-30px);
+}
+
+.TextNavbarCategories:hover {
+  /* text-decoration: underline; */
+  color: rgb(255, 41, 41);
+}
+
+.TextNavbarCategories {
+  /* width: 6px; */
+}
+
+.IconNavbarTypes {
+  
 }

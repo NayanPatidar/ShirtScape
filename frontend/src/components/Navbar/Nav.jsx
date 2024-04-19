@@ -1,35 +1,38 @@
 import React, { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import "./Nav.css";
-import { CiShoppingCart } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
-import { CiUser } from "react-icons/ci";
+import { LuShoppingCart } from "react-icons/lu";
+import { FaRegHeart } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { AuthContext, SearchContext } from "../../contexts/contexts";
 
 function Navbar() {
-  const { searchTerm, setSearchTerm } = useContext(SearchContext);
+  const { searchTerm, setSearchTerm,  } =
+    useContext(SearchContext);
   const { isUserLoggedIn } = useContext(AuthContext);
 
-  const [inputValue, setInputValue] = useState("");
-
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
+  const searchHandler = (e) => {
+    navigate("/men");
+    setSearchTerm(e.target.value);
   };
+
+  const debounce = (cb, delay) => {
+    let timer;
+    return (e) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = cb(e);
+      }, delay);
+    };
+  };
+
+  const searchProcess = debounce(searchHandler, 400);
 
   useEffect(() => {
-    const delaySearch = setTimeout(() => {
-      setSearchTerm(inputValue);
-    }, 800);
-    return () => clearTimeout(delaySearch);
-  }, [inputValue]);
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
-  };
+    console.log(`searchTerm - ${searchTerm}`);
+  }, [searchTerm]);
 
   const navigate = useNavigate();
 
@@ -45,12 +48,12 @@ function Navbar() {
           />
           <div className="NavBarObj flex flex-row justify-around w-8/12 text-black">
             <div
-              className=" hover:underline text-black cursor-pointer mt-2"
+              className="TextNavbarCategories cursor-pointer mt-2"
               onClick={() => navigate("/men")}
             >
               MEN
             </div>
-            <div className=" hover:underline text-black cursor-pointer mt-2">
+            <div className="TextNavbarCategories cursor-pointer mt-2">
               NEW ARRIVALS
             </div>
             <div className=" text-black text-md pb-4">
@@ -59,10 +62,10 @@ function Navbar() {
                   <input
                     type="text"
                     className="inputBoxNavBar  rounded-md border border-black"
-                    placeholder=" What are you looking for ? "
-                    value={inputValue}
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
+                    placeholder={
+                      " What are you looking for ? "
+                    }
+                    onChange={searchProcess}
                   />
                   <IoSearch className=" searchIcon" />
                 </label>
@@ -71,20 +74,20 @@ function Navbar() {
           </div>
         </div>
         <div className="flex flex-row justify-around items-center w-1/6">
-          <CiUser
-            className=" size-8 text-black"
+          <FaRegUserCircle
+            className=" size-6 text-black"
             onClick={
               isUserLoggedIn
                 ? () => navigate("/profile")
                 : () => navigate("/signin")
             }
           />
-          <CiHeart
-            className=" size-8 text-black"
+          <FaRegHeart
+            className="IconNavbarTypes size-6 text-black"
             onClick={() => navigate("/wishlist")}
           />
-          <CiShoppingCart
-            className=" size-8 text-black"
+          <LuShoppingCart
+            className="IconNavbarTypes size-6 text-black"
             onClick={() => navigate("/checkout/cart")}
           />
         </div>
