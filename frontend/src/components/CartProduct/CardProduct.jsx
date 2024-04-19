@@ -11,6 +11,7 @@ import {
 } from "../../services/storageOperations";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../services/cookieOperations";
+import { BiUnderline } from "react-icons/bi";
 
 const CartProduct = ({ products, index }) => {
   const { isUserLoggedIn } = useContext(AuthContext);
@@ -73,24 +74,36 @@ const CartProduct = ({ products, index }) => {
   }, [QuantityMenuDone]);
 
   useEffect(() => {
-    const size = FindSizeByIdFromLocalStorage(products.cloths.product_id);
-    const quantity = FindQuantityeByIdFromLocalStorage(
-      products.cloths.product_id
-    );
-    setMainSize(size);
-    setMainQuantity(quantity);
+    if (isUserLoggedIn) {
+      setMainSize(products.cloths.size);
+      setMainQuantity(products.cloths.quantity);
+    } else {
+      const size = FindSizeByIdFromLocalStorage(products.cloths.product_id);
+      const quantity = FindQuantityeByIdFromLocalStorage(
+        products.cloths.product_id
+      );
+      setMainSize(size);
+      setMainQuantity(quantity);
+    }
   }, []);
 
-  const AddProductToDB = () => {
-    if (isUserLoggedIn) {
+  useEffect(() => {
+    if (
+      isUserLoggedIn &&
+      mainQuantity !== undefined &&
+      mainSize !== undefined &&
+      (mainSize != products.cloths.size ||
+        mainQuantity != products.cloths.quantity)
+    ) {
+      console.log(
+        `${mainSize}-${products.cloths.size}   ${mainQuantity}-${products.cloths.quantity}`
+      );
       const token = getCookie("sscape");
-      console.log(`${products.cloths.product_id} ${mainQuantity} ${mainSize}`);
       const data = {
         product_id: products.cloths.product_id,
         quantity: mainQuantity,
         size: mainSize,
       };
-
       const options = {
         method: "POST",
         headers: {
@@ -99,27 +112,40 @@ const CartProduct = ({ products, index }) => {
         },
         body: JSON.stringify(data),
       };
+      console.log("Update Item Call");
 
-      fetch(`http://localhost:8080/addCardItem`, options)
-        // .then((response) => response.json())
-        // .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
+      const updateCartItem = async () => {
+        try {
+          let response = await fetch(
+            `http://localhost:8080/AddCardItem`,
+            options
+          );
+          if (!response.ok) {
+            throw new Error("Failed to update cart item");
+          }
+          // Handle successful update if needed
+        } catch (error) {
+          console.error("Error updating cart item:", error);
+        }
+      };
+
+      updateCartItem();
     }
-  };
+  }, [mainSize, mainQuantity]);
 
   useEffect(() => {
-    if (isUserLoggedIn) {
-      AddProductToDB();
-    } else if (mainSize !== undefined) {
-      ChangeSizeInLocalStorage(products.cloths.product_id, mainSize);
+    if (!isUserLoggedIn) {
+      if (mainSize !== undefined) {
+        ChangeSizeInLocalStorage(products.cloths.product_id, mainSize);
+      }
     }
   }, [mainSize]);
 
   useEffect(() => {
-    if (isUserLoggedIn) {
-      AddProductToDB();
-    } else if (mainQuantity !== undefined) {
-      ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
+    if (!isUserLoggedIn) {
+      if (mainQuantity !== undefined) {
+        ChangeQuantityInLocalStorage(products.cloths.product_id, mainQuantity);
+      }
     }
 
     if (prevQuantity.current == mainQuantity) {
