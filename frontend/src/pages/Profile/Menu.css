@@ -57,3 +57,68 @@
   font-size: 17px;
   font-family: "Source Sans 3", sans-serif;
 }
+
+.AddresFormMain {
+  width: 350px;
+  margin-left: 30px;
+  margin-top: 50px;
+}
+
+.InputAddressForm {
+  background-color: rgb(243, 243, 243);
+  font-size: 16px;
+  height: 30px;
+  font-family: "Source Sans 3", sans-serif;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgb(30, 30, 30);
+}
+
+.InputAddressForm::placeholder {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.ButtonAddressFormSave {
+  color: rgb(255, 255, 255);
+  border: solid 1px rgb(235, 235, 235);
+  background-color: rgb(255, 41, 41);
+  font-family: "Source Sans 3", sans-serif;
+  width: 50px;
+}
+
+.ButtonAddressFormCancel {
+  color: rgb(255, 255, 255);
+  border: solid 1px rgb(235, 235, 235);
+  background-color: rgb(255, 41, 41);
+  font-family: "Source Sans 3", sans-serif;
+  width: 60px;
+}
+
+.AddAdressButton {
+  font-family: "Source Sans 3", sans-serif;
+  margin-left: 30px;
+  margin-top: 20px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 41, 41);
+  width: 120px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.AddIcon {
+  height: 30px;
+}
