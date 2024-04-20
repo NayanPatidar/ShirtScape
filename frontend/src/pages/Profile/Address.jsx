@@ -18,6 +18,9 @@ const Address = () => {
     setCartVisibility(true);
   }, []);
 
+  useEffect(() => {
+    console.log(JSON.stringify(address));
+  }, [address]);
   
 
   const formHandler = (e) => {
@@ -61,6 +64,7 @@ const Address = () => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  console.log("Submit");
                   // submitHandler();
                 }}
                 className="AddresFormMain flex flex-col gap-2 "

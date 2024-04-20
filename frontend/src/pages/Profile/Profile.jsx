@@ -2,19 +2,29 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Nav";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
-import { SearchContext } from "../../contexts/contexts";
+import { AuthContext, SearchContext } from "../../contexts/contexts";
 import { getCookie } from "../../services/cookieOperations";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { setCartVisibility } = useContext(SearchContext);
+  const { logout } = useContext(AuthContext);
   const [userData, setUserData] = useState("");
 
   useEffect(() => {
-    const userData = jwtDecode(getCookie("sscape"));
-    setUserData(userData.userData);
-    setCartVisibility(true);
+    try {
+      const userData = jwtDecode(getCookie("sscape"));
+      setUserData(userData.userData);
+      setCartVisibility(true);
+    } catch (error) {
+      logout();
+      navigate("/signin");
+      console.log(error.message);
+    }
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <div>
