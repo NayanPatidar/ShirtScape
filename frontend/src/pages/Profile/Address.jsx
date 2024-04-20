@@ -1,15 +1,52 @@
-import React, { useContext, useEffect } from "react";
-import Navbar from "../../components/Navbar/Nav";
+import React, { useContext, useEffect, useState } from "react";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import { SearchContext } from "../../contexts/contexts";
+import { IoIosAdd } from "react-icons/io";
+import { omit } from "lodash";
+
+import { AddressContext, useAddress } from "../../contexts/AddressContext";
+import { editAddressHandler } from "../../handlers/AddressHandlers";
 
 const Address = () => {
   const { setCartVisibility } = useContext(SearchContext);
+  const { address, setAddress, showForm, setShowForm } =
+    useContext(AddressContext);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setCartVisibility(true);
   }, []);
+
+  
+
+  const formHandler = (e) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+    switch (e.target.name) {
+      case "mobile":
+        if (e.target.value.length !== 10) {
+          setErrors({
+            ...errors,
+            mobile: "Enter 10 digit mobile number",
+          });
+        } else {
+          const newObj = omit(errors, "mobile");
+          setErrors(newObj);
+        }
+        break;
+      case "zipCode": {
+        if (e.target.value.length !== 6) {
+          setErrors({
+            ...errors,
+            zipCode: "Invalid pincode",
+          });
+        } else {
+          const newObj = omit(errors, "zipCode");
+          setErrors(newObj);
+        }
+      }
+    }
+  };
 
   return (
     <div>
@@ -19,21 +56,20 @@ const Address = () => {
         </div>
         <div className="MyProfile h-96 w-4/6 pl-10">
           <span className=" MyProfileTitle">ADDRESS</span>
-          <div className="address-container pd-lg">
-            <AddressList />
+          <div className="AddressContainer ">
             {showForm ? (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  submitHandler();
+                  // submitHandler();
                 }}
-                className="address-form"
+                className="AddresFormMain flex flex-col gap-2 "
               >
                 <input
                   onChange={formHandler}
                   value={address.name}
                   name="name"
-                  className="input is-input-primary"
+                  className="InputAddressForm"
                   type="text"
                   placeholder="Name"
                   required
@@ -42,7 +78,7 @@ const Address = () => {
                   onChange={formHandler}
                   value={address.street}
                   type="text"
-                  className="input is-input-primary mg-top"
+                  className="InputAddressForm"
                   name="street"
                   placeholder="Street"
                   required
@@ -51,7 +87,7 @@ const Address = () => {
                   onChange={formHandler}
                   value={address.city}
                   type="text"
-                  className="input is-input-primary mg-top"
+                  className="InputAddressForm"
                   name="city"
                   placeholder="City"
                   required
@@ -60,7 +96,7 @@ const Address = () => {
                   onChange={formHandler}
                   value={address.state}
                   type="text"
-                  className="input is-input-primary mg-top"
+                  className="InputAddressForm"
                   name="state"
                   placeholder="State"
                   required
@@ -69,7 +105,7 @@ const Address = () => {
                   onChange={formHandler}
                   value={address.country}
                   type="text"
-                  className="input is-input-primary mg-top"
+                  className="InputAddressForm"
                   name="country"
                   setShowForm
                   placeholder="Country"
@@ -79,7 +115,7 @@ const Address = () => {
                   onChange={formHandler}
                   value={address.zipCode}
                   type="number"
-                  className="input is-input-primary mg-top"
+                  className="InputAddressForm"
                   name="zipCode"
                   placeholder="6-digit zipcode"
                   maxLength="6"
@@ -93,7 +129,7 @@ const Address = () => {
                   value={address.mobile}
                   maxLength="10"
                   name="mobile"
-                  className="input is-input-primary mg-top"
+                  className="InputAddressForm"
                   type="number"
                   placeholder="10-digit phone number"
                   required
@@ -101,11 +137,11 @@ const Address = () => {
                 {errors.mobile && (
                   <p style={{ color: "red" }}>{errors.mobile}</p>
                 )}
-                <div className="button-container">
+                <div className="ButtonContainer ">
                   <button
                     type="submit"
                     disabled={Object.keys(errors).length === 0 ? false : true}
-                    className="btn is-solid"
+                    className="ButtonAddressFormSave "
                   >
                     Save
                   </button>
@@ -113,30 +149,23 @@ const Address = () => {
                     type="button"
                     onClick={() => {
                       setShowForm(false);
-                      setAddress(defaultAddress);
+                      // setAddress(defaultAddress);
                     }}
-                    className="btn is-outline mg-sm"
+                    className="ButtonAddressFormCancel  mg-sm"
                   >
                     Cancel
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAddress(dummyAddress)}
-                    className="btn is-btn-secondary mg-sm"
-                  >
-                    Fill dummy data
                   </button>
                 </div>
               </form>
             ) : (
               <button
                 onClick={() => setShowForm(true)}
-                className="btn is-solid"
+                className="AddAdressButton "
               >
-                + Add Address
+                <IoIosAdd className="AddIcon size-5" /> Add Address
               </button>
             )}
-          </div>{" "}
+          </div>
         </div>
       </div>
     </div>
