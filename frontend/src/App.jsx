@@ -6,11 +6,7 @@ import ProductsPage from "./pages/Products/ProductsPage";
 import Wishlist from "./components/Wishlist/Wishlist";
 import Product from "./components/Product/Product";
 import Cart from "./pages/Cart/Cart";
-import {
-  AuthContext,
-  AuthContextProvider,
-  SearchContext,
-} from "./contexts/contexts";
+import { SearchContext } from "./contexts/contexts";
 import Signin from "./pages/SignIn/Signin";
 import Signup from "./pages/Signup/Signup";
 import Profile from "./pages/Profile/Profile";
@@ -18,6 +14,7 @@ import Order from "./pages/Profile/Order";
 import Address from "./pages/Profile/Address";
 import Navbar from "./components/Navbar/Nav";
 import { AddressProvider } from "./contexts/AddressContext";
+import { AuthContextProvider } from "./contexts/AuthContexts";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");

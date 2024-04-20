@@ -6,7 +6,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
-import { AuthContext, SearchContext } from "../../contexts/contexts";
+import { SearchContext } from "../../contexts/contexts";
+import { AuthContext } from "../../contexts/AuthContexts";
 
 function Navbar() {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);

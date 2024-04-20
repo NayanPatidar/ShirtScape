@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext, CartContext } from "../../contexts/contexts";
 import { IoMdClose } from "react-icons/io";
 import "./Confirmation.css";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { DeleteProductFromLocalStorage } from "../../services/storageOperations";
 import { getCookie } from "../../services/cookieOperations";
+import { AuthContext } from "../../contexts/AuthContexts";
+import { CartContext } from "../../contexts/contexts";
 
 const ItemRemovalBox = () => {
   const {

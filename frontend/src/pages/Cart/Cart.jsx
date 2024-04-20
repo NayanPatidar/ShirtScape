@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import CartProductSize from "../../components/CartProdSize&Quantity/SelectionCartProductSize";
 import CartProduct from "../../components/CartProduct/CardProduct";
-import { AuthContext, CartContext, SearchContext } from "../../contexts/contexts";
 import Logo from "../../assets/logo/logo.png";
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +9,8 @@ import { IoIosPricetags } from "react-icons/io";
 import CouponBox from "../../components/Coupon/Coupon";
 import ItemRemovalBox from "../../components/ConfirmRemoval/ConfirmationBox";
 import { getCookie } from "../../services/cookieOperations";
+import { CartContext, SearchContext } from "../../contexts/contexts";
+import { AuthContext } from "../../contexts/AuthContexts";
 
 const Cart = () => {
   // This is the Cart Complete Data

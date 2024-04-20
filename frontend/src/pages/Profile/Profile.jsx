@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Nav";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
-import { AuthContext, SearchContext } from "../../contexts/contexts";
+import {  SearchContext } from "../../contexts/contexts";
 import { getCookie } from "../../services/cookieOperations";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContexts";
+
 
 const Profile = () => {
   const { setCartVisibility } = useContext(SearchContext);

@@ -5,9 +5,9 @@ import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar/Nav";
 import "./Product.css";
 import { AddProduct } from "../../services/storageOperations";
-import { AuthContext } from "../../contexts/contexts";
 import { getCookie } from "../../services/cookieOperations";
 import { toBeChecked } from "@testing-library/jest-dom/matchers";
+import { AuthContext } from "../../contexts/AuthContexts";
 
 const Product = () => {
   const [product, setProduct] = useState(null);

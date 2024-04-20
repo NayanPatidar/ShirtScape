@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoIosReturnLeft } from "react-icons/io";
-import { AuthContext, CartContext } from "../../contexts/contexts";
 import { IoClose } from "react-icons/io5";
 import {
   FindSizeByIdFromLocalStorage,
@@ -12,6 +11,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../services/cookieOperations";
 import { BiUnderline } from "react-icons/bi";
+import { AuthContext } from "../../contexts/AuthContexts";
+import { CartContext } from "../../contexts/contexts";
 
 const CartProduct = ({ products, index }) => {
   const { isUserLoggedIn } = useContext(AuthContext);

@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Nav";
 import "./Signin.css";
-import { AuthContext, SearchContext } from "../../contexts/contexts";
+import {  SearchContext } from "../../contexts/contexts";
+import { AuthContext } from "../../contexts/AuthContexts";
+
 
 const JWT_SECRET_KEY = "aqwerdftgh";
 
