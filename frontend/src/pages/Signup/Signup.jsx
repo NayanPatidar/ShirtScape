@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/AuthContexts";
 const Signup = () => {
   const { login, isUserLoggedIn } = useContext(AuthContext);
   const [ShowSignup, SetShowSignup] = useState(true);
-  
+
   const { setCartVisibility } = useContext(SearchContext);
 
   useEffect(() => {
@@ -65,7 +65,11 @@ const Signup = () => {
         body: JSON.stringify(formData),
       });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        console.log("Signed Up Failed ");
+        if (response.status == 400) {
+          console.log("User Already Exist");
+        }
+        // throw new Error("Network response was not ok");
       } else {
         console.log("Signed Up!!");
         navigate("/signin");

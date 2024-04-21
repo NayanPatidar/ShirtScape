@@ -6,7 +6,7 @@ import { IoIosAdd } from "react-icons/io";
 import { omit } from "lodash";
 
 import { AddressContext, useAddress } from "../../contexts/AddressContext";
-import { editAddressHandler } from "../../handlers/AddressHandlers";
+import { AddressList } from "../../components/AddressList/UserAddress";
 
 const Address = () => {
   const { setCartVisibility } = useContext(SearchContext);
@@ -21,7 +21,6 @@ const Address = () => {
   useEffect(() => {
     console.log(JSON.stringify(address));
   }, [address]);
-  
 
   const formHandler = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
@@ -59,6 +58,7 @@ const Address = () => {
         </div>
         <div className="MyProfile h-96 w-4/6 pl-10">
           <span className=" MyProfileTitle">ADDRESS</span>
+          <AddressList />
           <div className="AddressContainer ">
             {showForm ? (
               <form
@@ -111,7 +111,6 @@ const Address = () => {
                   type="text"
                   className="InputAddressForm"
                   name="country"
-                  setShowForm
                   placeholder="Country"
                   required
                 />

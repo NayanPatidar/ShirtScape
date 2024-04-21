@@ -39,15 +39,13 @@ const Cart = () => {
   const totalMRPRef = useRef(0);
   const totalDiscountRef = useRef(0);
 
-  const { isUserLoggedIn } = useContext(AuthContext);
+  const { isUserLoggedIn, logout } = useContext(AuthContext);
 
-  
   const { setCartVisibility } = useContext(SearchContext);
 
   useEffect(() => {
     setCartVisibility(false);
   }, []);
-
 
   const navigate = useNavigate();
 
@@ -84,6 +82,14 @@ const Cart = () => {
         `http://localhost:8080/cart/PermUserData`,
         options
       );
+
+      if (!FetchedLPermCartData.ok) {
+        if (FetchedLPermCartData.status == 403) {
+          console.log("Either invalid Token or User Not Present");
+          logout();
+          navigate("/login");
+        }
+      }
 
       if (FetchedLPermCartData.ok) {
         const data = await FetchedLPermCartData.json();
