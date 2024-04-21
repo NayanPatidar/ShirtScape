@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getCookie } from "../../services/cookieOperations";
 import "./UserAddressCard.css";
+import { AuthContext } from "../../contexts/AuthContexts";
+import { useNavigate } from "react-router-dom";
 
 export const AddressList = () => {
   const [Address, setAddress] = useState("");
+  const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchAddress = async () => {
@@ -22,14 +25,16 @@ export const AddressList = () => {
           `http://localhost:8080/FetchAddress`,
           options
         );
-        console.log(UserAddress);
         const data = await UserAddress.json();
 
         if (!UserAddress.ok || UserAddress.message) {
-          console.log(`Error: ${data.message}`);
+          console.log(`Error: ${data.error}`);
+          logout();
+          navigate("/signin");
         } else {
-          console.log(data);
-          setAddress(data.Address);
+          // console.log(data.Address[0].address.address);
+          console.log("Fetch : ", data);
+          setAddress(data.Address[0].address.address);
         }
       } catch (error) {
         console.error("Error during login: ", error.message);
@@ -38,31 +43,29 @@ export const AddressList = () => {
     fetchAddress();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <div>
       {Address != "" &&
         Address.map((item, index) => (
           <div key={index} className="AddressCard">
-            <p className="AddressUserName">
-              {item.address.address[index].name}
+            <p className="AddressUserName">{item.name}</p>
+            <p>
+              <small>{item.street}</small>
             </p>
             <p>
-              <small>{item.address.address[index].street}</small>
+              <small>{item.city}, </small>
+              <small>{item.state}, </small>
+              <small>{item.zipCode}</small>
             </p>
             <p>
-              <small>{item.address.address[index].city}, </small>
-              <small>{item.address.address[index].state}, </small>
-              <small>{item.address.address[index].zipCode}</small>
+              <small>{item.country}</small>
             </p>
             <p>
-              <small>{item.address.address[index].country}</small>
-            </p>
-            <p className=" flex flex-row ">
-              <small className=" flex flex-row">
+              <small className=" flex flex-row gap-1">
                 Mobile :
-                <p className=" text-red-500 font-medium">
-                   {item.address.address[index].mobile}
-                </p>
+                <p className=" text-red-500 font-medium">{item.mobile}</p>
               </small>
             </p>
           </div>
