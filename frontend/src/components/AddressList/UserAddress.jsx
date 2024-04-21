@@ -58,7 +58,7 @@ export const AddressList = () => {
               <small>{item.address.address[index].country}</small>
             </p>
             <p className=" flex flex-row ">
-              <small className=" flex flex-row ">
+              <small className=" flex flex-row">
                 Mobile :
                 <p className=" text-red-500 font-medium">
                    {item.address.address[index].mobile}

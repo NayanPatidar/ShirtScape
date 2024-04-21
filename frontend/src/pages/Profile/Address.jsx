@@ -52,22 +52,22 @@ const Address = () => {
 
   return (
     <div>
-      <div className=" flex flex-row gap-4 pt-24 justify-center">
+      <div className=" flex flex-row gap-4 pt-24 justify-center ">
         <div className="w-1/6">
           <ProfileMenu />
         </div>
-        <div className="MyProfile h-96 w-4/6 pl-10">
+        <div className="MyProfile w-4/6 pl-10 h-fit">
           <span className=" MyProfileTitle">ADDRESS</span>
           <AddressList />
-          <div className="AddressContainer ">
+          <div className="AddressContainer">
             {showForm ? (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  console.log("Submit");
+                  console.log("Submit", JSON.stringify(address));
                   // submitHandler();
                 }}
-                className="AddresFormMain flex flex-col gap-2 "
+                className="AddresFormMain flex flex-col gap-2 mb-10"
               >
                 <input
                   onChange={formHandler}
@@ -152,7 +152,8 @@ const Address = () => {
                     type="button"
                     onClick={() => {
                       setShowForm(false);
-                      // setAddress(defaultAddress);
+                      setAddress("");
+                      setErrors("");
                     }}
                     className="ButtonAddressFormCancel  mg-sm"
                   >
