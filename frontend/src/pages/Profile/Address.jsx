@@ -1,26 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
-import { SearchContext } from "../../contexts/contexts";
+import { AddressUpdateContext, SearchContext } from "../../contexts/contexts";
 import { IoIosAdd } from "react-icons/io";
 import { omit } from "lodash";
 
 import { AddressContext, useAddress } from "../../contexts/AddressContext";
 import { AddressList } from "../../components/AddressList/UserAddress";
+import { AddAddress } from "../../handlers/AddressHandlers";
 
 const Address = () => {
   const { setCartVisibility } = useContext(SearchContext);
   const { address, setAddress, showForm, setShowForm } =
     useContext(AddressContext);
   const [errors, setErrors] = useState({});
+  const [AddressUpdate, SetAddressUpdate] = useState(false);
 
   useEffect(() => {
     setCartVisibility(true);
   }, []);
 
-  useEffect(() => {
-    console.log(JSON.stringify(address));
-  }, [address]);
+  const submitHandler = () => {
+    AddAddress(address);
+    setShowForm(false);
+    setAddress("");
+    setErrors("");
+    setTimeout(() => {
+      SetAddressUpdate(!AddressUpdate);
+    }, 1000);
+  };
 
   const formHandler = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
@@ -51,128 +59,130 @@ const Address = () => {
   };
 
   return (
-    <div>
-      <div className=" flex flex-row gap-4 pt-24 justify-center ">
-        <div className="w-1/6">
-          <ProfileMenu />
-        </div>
-        <div className="MyProfile w-4/6 pl-10 h-fit">
-          <span className=" MyProfileTitle">ADDRESS</span>
-          <AddressList />
-          <div className="AddressContainer">
-            {showForm ? (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  console.log("Submit", JSON.stringify(address));
-                  // submitHandler();
-                }}
-                className="AddresFormMain flex flex-col gap-2 mb-10"
-              >
-                <input
-                  onChange={formHandler}
-                  value={address.name}
-                  name="name"
-                  className="InputAddressForm"
-                  type="text"
-                  placeholder="Name"
-                  required
-                />
-                <input
-                  onChange={formHandler}
-                  value={address.street}
-                  type="text"
-                  className="InputAddressForm"
-                  name="street"
-                  placeholder="Street"
-                  required
-                />
-                <input
-                  onChange={formHandler}
-                  value={address.city}
-                  type="text"
-                  className="InputAddressForm"
-                  name="city"
-                  placeholder="City"
-                  required
-                />
-                <input
-                  onChange={formHandler}
-                  value={address.state}
-                  type="text"
-                  className="InputAddressForm"
-                  name="state"
-                  placeholder="State"
-                  required
-                />
-                <input
-                  onChange={formHandler}
-                  value={address.country}
-                  type="text"
-                  className="InputAddressForm"
-                  name="country"
-                  placeholder="Country"
-                  required
-                />
-                <input
-                  onChange={formHandler}
-                  value={address.zipCode}
-                  type="number"
-                  className="InputAddressForm"
-                  name="zipCode"
-                  placeholder="6-digit zipcode"
-                  maxLength="6"
-                  required
-                />
-                {errors.zipCode && (
-                  <p style={{ color: "red" }}>{errors.zipCode}</p>
-                )}
-                <input
-                  onChange={formHandler}
-                  value={address.mobile}
-                  maxLength="10"
-                  name="mobile"
-                  className="InputAddressForm"
-                  type="number"
-                  placeholder="10-digit phone number"
-                  required
-                />
-                {errors.mobile && (
-                  <p style={{ color: "red" }}>{errors.mobile}</p>
-                )}
-                <div className="ButtonContainer ">
-                  <button
-                    type="submit"
-                    disabled={Object.keys(errors).length === 0 ? false : true}
-                    className="ButtonAddressFormSave "
-                  >
-                    Save
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowForm(false);
-                      setAddress("");
-                      setErrors("");
-                    }}
-                    className="ButtonAddressFormCancel  mg-sm"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            ) : (
-              <button
-                onClick={() => setShowForm(true)}
-                className="AddAdressButton "
-              >
-                <IoIosAdd className="AddIcon size-5" /> Add Address
-              </button>
-            )}
+    <AddressUpdateContext.Provider value={{ AddressUpdate, SetAddressUpdate }}>
+      <div>
+        <div className=" flex flex-row gap-4 pt-24 justify-center ">
+          <div className="w-1/6">
+            <ProfileMenu />
+          </div>
+          <div className="MyProfile w-4/6 pl-10 h-fit">
+            <span className=" MyProfileTitle">ADDRESS</span>
+            <AddressList />
+            <div className="AddressContainer">
+              {showForm ? (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    console.log("Submit", JSON.stringify(address));
+                    submitHandler();
+                  }}
+                  className="AddresFormMain flex flex-col gap-2 mb-10"
+                >
+                  <input
+                    onChange={formHandler}
+                    value={address.name}
+                    name="name"
+                    className="InputAddressForm"
+                    type="text"
+                    placeholder="Name"
+                    required
+                  />
+                  <input
+                    onChange={formHandler}
+                    value={address.street}
+                    type="text"
+                    className="InputAddressForm"
+                    name="street"
+                    placeholder="Street"
+                    required
+                  />
+                  <input
+                    onChange={formHandler}
+                    value={address.city}
+                    type="text"
+                    className="InputAddressForm"
+                    name="city"
+                    placeholder="City"
+                    required
+                  />
+                  <input
+                    onChange={formHandler}
+                    value={address.state}
+                    type="text"
+                    className="InputAddressForm"
+                    name="state"
+                    placeholder="State"
+                    required
+                  />
+                  <input
+                    onChange={formHandler}
+                    value={address.country}
+                    type="text"
+                    className="InputAddressForm"
+                    name="country"
+                    placeholder="Country"
+                    required
+                  />
+                  <input
+                    onChange={formHandler}
+                    value={address.zipCode}
+                    type="number"
+                    className="InputAddressForm"
+                    name="zipCode"
+                    placeholder="6-digit zipcode"
+                    maxLength="6"
+                    required
+                  />
+                  {errors.zipCode && (
+                    <p style={{ color: "red" }}>{errors.zipCode}</p>
+                  )}
+                  <input
+                    onChange={formHandler}
+                    value={address.mobile}
+                    maxLength="10"
+                    name="mobile"
+                    className="InputAddressForm"
+                    type="number"
+                    placeholder="10-digit phone number"
+                    required
+                  />
+                  {errors.mobile && (
+                    <p style={{ color: "red" }}>{errors.mobile}</p>
+                  )}
+                  <div className="ButtonContainer ">
+                    <button
+                      type="submit"
+                      disabled={Object.keys(errors).length === 0 ? false : true}
+                      className="ButtonAddressFormSave "
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowForm(false);
+                        setAddress("");
+                        setErrors("");
+                      }}
+                      className="ButtonAddressFormCancel  mg-sm"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="AddAdressButton "
+                >
+                  <IoIosAdd className="AddIcon size-5" /> Add Address
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </AddressUpdateContext.Provider>
   );
 };
 
