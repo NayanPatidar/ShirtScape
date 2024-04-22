@@ -3,16 +3,27 @@ import { getCookie } from "../../services/cookieOperations";
 import "./UserAddressCard.css";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { useNavigate } from "react-router-dom";
+import { AddressUpdateContext } from "../../contexts/contexts";
+import { MdClose } from "react-icons/md";
+import { FaPencilAlt } from "react-icons/fa";
+import { DeleteAddress } from "../../handlers/AddressHandlers";
 
 export const AddressList = () => {
   const [Address, setAddress] = useState("");
   const { logout } = useContext(AuthContext);
+  const { AddressUpdate, SetAddressUpdate } = useContext(AddressUpdateContext);
+
+  const HandleClose = (AddressID) => {
+    DeleteAddress(AddressID);
+    setTimeout(() => {
+      SetAddressUpdate(!AddressUpdate);
+    }, 1000);
+  };
 
   useEffect(() => {
     const fetchAddress = async () => {
       try {
         const token = getCookie("sscape");
-        console.log("Here In the Fetch Address");
         const options = {
           method: "GET",
           headers: {
@@ -32,7 +43,6 @@ export const AddressList = () => {
           logout();
           navigate("/signin");
         } else {
-          // console.log(data.Address[0].address.address);
           console.log("Fetch : ", data);
           setAddress(data.Address[0].address.address);
         }
@@ -41,16 +51,28 @@ export const AddressList = () => {
       }
     };
     fetchAddress();
-  }, []);
+  }, [AddressUpdate]);
 
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className=" grid grid-cols-2 justify-center items-center">
       {Address != "" &&
         Address.map((item, index) => (
           <div key={index} className="AddressCard">
-            <p className="AddressUserName">{item.name}</p>
+            <span className="AddressUserName flex flex-row justify-between items-center">
+              <span>{item.name}</span>
+              <span className=" flex flex-row gap-2">
+                <FaPencilAlt
+                  className=" size-3 cursor-pointer"
+                  onClick={() => console.log(index)}
+                />
+                <MdClose
+                  className=" size-3 cursor-pointer"
+                  onClick={() => HandleClose(index)}
+                />
+              </span>
+            </span>
             <p>
               <small>{item.street}</small>
             </p>
@@ -65,7 +87,7 @@ export const AddressList = () => {
             <p>
               <small className=" flex flex-row gap-1">
                 Mobile :
-                <p className=" text-red-500 font-medium">{item.mobile}</p>
+                <span className=" text-red-500 font-medium">{item.mobile}</span>
               </small>
             </p>
           </div>
