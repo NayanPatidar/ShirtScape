@@ -8,3 +8,58 @@
   color: rgb(81, 81, 81);
   font-family: "Source Sans 3", sans-serif;
 }
+
+.WishlistProductCard {
+  border: solid 1px rgb(231, 231, 231);
+}
+
+.WishlistProductName {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 14px;
+  border-bottom: solid 1px rgb(212, 212, 212);
+  font-weight: 650;
+  color: rgb(90, 90, 90);
+}
+
+.WishlistProductDesc {
+  font-size: 15px;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 400;
+  color: rgb(105, 105, 105);
+  line-height: 30px;
+}
+
+.WishlistProductPrice {
+  font-size: 14px;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.CurrentMRP {
+  text-decoration: line-through;
+  color: rgb(202, 202, 202);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.CurrentPrice {
+  color: rgb(100, 100, 100);
+  font-weight: 650;
+  font-size: 15px;
+}
+
+.MoveToCartButton {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-top: solid 1px rgb(212, 212, 212);
+  margin-top: 5px;
+}
+
+.ButtonTextMoveToCart {
+  font-family: "Source Sans 3", sans-serif;
+  color: rgb(0, 132, 95);
+  font-weight: 600;
+  font-size: 15px;
+}
