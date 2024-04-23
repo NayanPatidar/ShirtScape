@@ -72,7 +72,7 @@ export const AddressList = () => {
 
   return (
     <div className=" grid grid-cols-2 justify-center items-center">
-      {Address != "" &&
+      {Address != "" ? (
         Address.map((item, index) => (
           <div key={index} className="AddressCard">
             <span className="AddressUserName flex flex-row justify-between items-center">
@@ -106,7 +106,10 @@ export const AddressList = () => {
               </small>
             </p>
           </div>
-        ))}
+        ))
+      ) : (
+        <span className="NoAddressFoundText text-xl ">No Address Found !</span>
+      )}
     </div>
   );
 };

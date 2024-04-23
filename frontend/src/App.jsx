@@ -3,7 +3,7 @@ import Home from "./pages/Home/Home";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "./pages/Products/ProductsPage";
-import Wishlist from "./components/Wishlist/Wishlist";
+import Wishlist from "./pages/Wishlist/Wishlist";
 import Product from "./components/Product/Product";
 import Cart from "./pages/Cart/Cart";
 import { SearchContext } from "./contexts/contexts";
