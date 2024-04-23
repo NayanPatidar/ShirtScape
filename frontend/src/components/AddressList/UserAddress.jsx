@@ -7,17 +7,32 @@ import { AddressUpdateContext } from "../../contexts/contexts";
 import { MdClose } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 import { DeleteAddress } from "../../handlers/AddressHandlers";
+import { AddressContext } from "../../contexts/AddressContext";
 
 export const AddressList = () => {
   const [Address, setAddress] = useState("");
   const { logout } = useContext(AuthContext);
   const { AddressUpdate, SetAddressUpdate } = useContext(AddressUpdateContext);
+  const {
+    setAddressInForm,
+    setShowForm,
+    setAddressID,
+    AllowEdit,
+    setAllowEdit,
+  } = useContext(AddressContext);
 
   const HandleClose = (AddressID) => {
     DeleteAddress(AddressID);
     setTimeout(() => {
       SetAddressUpdate(!AddressUpdate);
     }, 1000);
+  };
+
+  const HandleEdit = (AddressID, Address) => {
+    setAddressInForm(Address);
+    setAddressID(AddressID);
+    setAllowEdit(true);
+    setShowForm(true);
   };
 
   useEffect(() => {
@@ -65,7 +80,7 @@ export const AddressList = () => {
               <span className=" flex flex-row gap-2">
                 <FaPencilAlt
                   className=" size-3 cursor-pointer"
-                  onClick={() => console.log(index)}
+                  onClick={() => HandleEdit(index, item)}
                 />
                 <MdClose
                   className=" size-3 cursor-pointer"

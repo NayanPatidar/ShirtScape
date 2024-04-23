@@ -1,11 +1,19 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 const AddressContext = createContext();
 
 const AddressProvider = ({ children }) => {
   const [showForm, setShowForm] = useState(false);
+  const [AllowEdit, setAllowEdit] = useState(false);
+  const [AddressID, setAddressID] = useState(-1);
 
-  const [address, setAddress] = useState({
+  const [addressInForm, setAddressInForm] = useState({
     name: "",
     street: "",
     city: "",
@@ -20,8 +28,12 @@ const AddressProvider = ({ children }) => {
       value={{
         showForm,
         setShowForm,
-        address,
-        setAddress,
+        addressInForm,
+        setAddressInForm,
+        AllowEdit,
+        setAllowEdit,
+        AddressID,
+        setAddressID,
       }}
     >
       {children}
