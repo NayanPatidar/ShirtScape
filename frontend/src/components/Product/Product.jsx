@@ -8,6 +8,7 @@ import { AddProduct } from "../../services/storageOperations";
 import { getCookie } from "../../services/cookieOperations";
 import { toBeChecked } from "@testing-library/jest-dom/matchers";
 import { AuthContext } from "../../contexts/AuthContexts";
+import { AddProductToWishlist } from "../../handlers/WishlistHandlers";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
@@ -74,6 +75,10 @@ const Product = () => {
         .then((data) => console.log(data))
         .catch((error) => console.error("Error:", error));
     }
+  };
+
+  const AddToWishlist = () => {
+    AddProductToWishlist(productId);
   };
 
   return (
@@ -162,7 +167,12 @@ const Product = () => {
                   <CiShoppingCart className=" size-6 w-1/6" />
                   <span>ADD TO CART</span>
                 </div>
-                <div className="Add_To_Wishlist_Button w-2/5 flex flex-row">
+                <div
+                  className="Add_To_Wishlist_Button w-2/5 flex flex-row"
+                  onClick={() => {
+                    AddToWishlist();
+                  }}
+                >
                   <CiHeart className=" size-5 w-1/6" />
                   <span className=" w-5/12">WISHLIST</span>
                 </div>
