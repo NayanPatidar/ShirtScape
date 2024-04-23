@@ -7,12 +7,19 @@ import { omit } from "lodash";
 
 import { AddressContext, useAddress } from "../../contexts/AddressContext";
 import { AddressList } from "../../components/AddressList/UserAddress";
-import { AddAddress } from "../../handlers/AddressHandlers";
+import { AddAddress, UpdateAddress } from "../../handlers/AddressHandlers";
 
 const Address = () => {
   const { setCartVisibility } = useContext(SearchContext);
-  const { address, setAddress, showForm, setShowForm } =
-    useContext(AddressContext);
+  const {
+    addressInForm,
+    setAddressInForm,
+    showForm,
+    setShowForm,
+    AllowEdit,
+    setAllowEdit,
+    AddressID,
+  } = useContext(AddressContext);
   const [errors, setErrors] = useState({});
   const [AddressUpdate, SetAddressUpdate] = useState(false);
 
@@ -21,17 +28,23 @@ const Address = () => {
   }, []);
 
   const submitHandler = () => {
-    AddAddress(address);
+    if (!AllowEdit) {
+      AddAddress(addressInForm);
+    } else {
+      // Update the Original Address using AddressID
+      UpdateAddress(AddressID, addressInForm);
+    }
     setShowForm(false);
-    setAddress("");
+    setAddressInForm("");
     setErrors("");
     setTimeout(() => {
       SetAddressUpdate(!AddressUpdate);
     }, 1000);
+    setAllowEdit(false);
   };
 
   const formHandler = (e) => {
-    setAddress({ ...address, [e.target.name]: e.target.value });
+    setAddressInForm({ ...addressInForm, [e.target.name]: e.target.value });
     switch (e.target.name) {
       case "mobile":
         if (e.target.value.length !== 10) {
@@ -73,14 +86,14 @@ const Address = () => {
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    console.log("Submit", JSON.stringify(address));
+                    console.log("Submit", JSON.stringify(addressInForm));
                     submitHandler();
                   }}
                   className="AddresFormMain flex flex-col gap-2 mb-10"
                 >
                   <input
                     onChange={formHandler}
-                    value={address.name}
+                    value={addressInForm.name}
                     name="name"
                     className="InputAddressForm"
                     type="text"
@@ -89,7 +102,7 @@ const Address = () => {
                   />
                   <input
                     onChange={formHandler}
-                    value={address.street}
+                    value={addressInForm.street}
                     type="text"
                     className="InputAddressForm"
                     name="street"
@@ -98,7 +111,7 @@ const Address = () => {
                   />
                   <input
                     onChange={formHandler}
-                    value={address.city}
+                    value={addressInForm.city}
                     type="text"
                     className="InputAddressForm"
                     name="city"
@@ -107,7 +120,7 @@ const Address = () => {
                   />
                   <input
                     onChange={formHandler}
-                    value={address.state}
+                    value={addressInForm.state}
                     type="text"
                     className="InputAddressForm"
                     name="state"
@@ -116,7 +129,7 @@ const Address = () => {
                   />
                   <input
                     onChange={formHandler}
-                    value={address.country}
+                    value={addressInForm.country}
                     type="text"
                     className="InputAddressForm"
                     name="country"
@@ -125,7 +138,7 @@ const Address = () => {
                   />
                   <input
                     onChange={formHandler}
-                    value={address.zipCode}
+                    value={addressInForm.zipCode}
                     type="number"
                     className="InputAddressForm"
                     name="zipCode"
@@ -138,7 +151,7 @@ const Address = () => {
                   )}
                   <input
                     onChange={formHandler}
-                    value={address.mobile}
+                    value={addressInForm.mobile}
                     maxLength="10"
                     name="mobile"
                     className="InputAddressForm"
@@ -161,8 +174,9 @@ const Address = () => {
                       type="button"
                       onClick={() => {
                         setShowForm(false);
-                        setAddress("");
+                        setAddressInForm("");
                         setErrors("");
+                        setAllowEdit(false);
                       }}
                       className="ButtonAddressFormCancel  mg-sm"
                     >
