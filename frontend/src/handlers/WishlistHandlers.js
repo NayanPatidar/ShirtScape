@@ -51,12 +51,12 @@ export const RemoveProductFromWishlist = (ProductID) => {
         return response.json();
       })
       .then((data) => {
-        console.log("Product Added To Wishlist:", data);
+        console.log("Product Deleted From Wishlist:", data);
       })
       .catch((error) => {
-        console.error("Error Adding product to wishlist :", error.message);
+        console.error("Error Deleting Product from Wishlist :", error.message);
       });
   } catch (error) {
-    console.error("Failed to Add the Address : ", error.message);
+    console.error("Failed to Delete the Product from Wishlist : ", error.message);
   }
 };

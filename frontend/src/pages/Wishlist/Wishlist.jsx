@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Wishlist.css";
 import { getCookie } from "../../services/cookieOperations";
 import { AuthContext } from "../../contexts/AuthContexts";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+import { RemoveProductFromWishlist } from "../../handlers/WishlistHandlers";
+import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
   const [WishlistProducts, SetWishlistProducts] = useState("");
   const { isUserLoggedIn } = useContext(AuthContext);
+  const [WishlistChanged, setWishlistChange] = useState(false);
 
   const FetchTheWishlistProducts = () => {
     const token = getCookie("sscape");
@@ -33,11 +36,24 @@ const Wishlist = () => {
       });
   };
 
+  const HandleRemoveProductFromWishlist = (product_id) => {
+    if (isUserLoggedIn) {
+      RemoveProductFromWishlist(product_id);
+      setWishlistChange(!WishlistChanged);
+    }
+  };
+
+  const ProductClickeOnWishlist = (product_id) => {
+    navigate(`/products/${product_id}`);
+  };
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (isUserLoggedIn) {
       FetchTheWishlistProducts();
     }
-  }, []);
+  }, [WishlistChanged]);
 
   return (
     <div>
@@ -47,11 +63,21 @@ const Wishlist = () => {
           {WishlistProducts != "" &&
             WishlistProducts.map((product, index) => (
               <div key={index} className=" WishlistProductCard ">
-                <div className=" flex flex-col justify-end items-end ">
-                  <IoCloseCircleOutline className="text-black z-100 flex items-end translate-y-5" />
+                <div className=" flex flex-col justify-end items-end relative">
+                  <IoClose
+                    className="text-white z-100 absolute top-2 right-2 size-5 cursor-pointer"
+                    onClick={() => {
+                      HandleRemoveProductFromWishlist(
+                        product.cloths.product_id
+                      );
+                    }}
+                  />
                   <img
                     src={product.cloths.photo1}
-                    className=" WishlsitProductPhoto"
+                    className=" WishlsitProductPhoto cursor-pointer"
+                    onClick={() =>
+                      ProductClickeOnWishlist(product.cloths.product_id)
+                    }
                   />
                 </div>
                 <div className=" flex flex-col justify-center pl-3 pr-3">
