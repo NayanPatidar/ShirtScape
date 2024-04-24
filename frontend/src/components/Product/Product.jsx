@@ -9,7 +9,6 @@ import {
   AddProductToWishlistInLocalStorage,
 } from "../../services/storageOperations";
 import { getCookie } from "../../services/cookieOperations";
-import { toBeChecked } from "@testing-library/jest-dom/matchers";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { AddProductToWishlist } from "../../handlers/WishlistHandlers";
 

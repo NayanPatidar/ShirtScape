@@ -8,6 +8,11 @@ import {
   RemoveProductFromWishlist,
 } from "../../handlers/WishlistHandlers";
 import { useNavigate } from "react-router-dom";
+import {
+  AddProduct,
+  DeleteProductFromLocalStorage,
+  DeleteProductOfWishlistFromLocalStorage,
+} from "../../services/storageOperations";
 
 const Wishlist = () => {
   const [WishlistProducts, SetWishlistProducts] = useState("");
@@ -46,10 +51,11 @@ const Wishlist = () => {
     }
     try {
       const productIds = LocalCartData.map((item) => parseInt(item.id));
+      console.log(JSON.stringify({ productIds }));
       let FetchedLocalCartData = await fetch(
-        "http://localhost:8080/cart/tempUser",
+        "http://localhost:8080/wishlist/tempUser",
         {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -58,6 +64,7 @@ const Wishlist = () => {
       );
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
+        SetWishlistProducts(data.CartData);
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
@@ -67,6 +74,9 @@ const Wishlist = () => {
   const HandleRemoveProductFromWishlist = (product_id) => {
     if (isUserLoggedIn) {
       RemoveProductFromWishlist(product_id);
+      setWishlistChange(!WishlistChanged);
+    } else {
+      DeleteProductOfWishlistFromLocalStorage(product_id);
       setWishlistChange(!WishlistChanged);
     }
   };
@@ -78,6 +88,12 @@ const Wishlist = () => {
   const MoveProductToWishlist = (product_id) => {
     if (isUserLoggedIn) {
       MoveProductToCart(product_id);
+      setTimeout(() => {
+        setWishlistChange(!WishlistChanged);
+      }, 1000);
+    } else {
+      AddProduct({ product_id: product_id });
+      DeleteProductOfWishlistFromLocalStorage(product_id);
       setTimeout(() => {
         setWishlistChange(!WishlistChanged);
       }, 1000);
@@ -100,6 +116,7 @@ const Wishlist = () => {
         <span className=" WishlistAreaTitle">My Wishlist</span>
         <div className=" grid grid-cols-4 gap-10 mt-5">
           {WishlistProducts != "" &&
+            WishlistProducts &&
             WishlistProducts.map((product, index) => (
               <div key={index} className=" WishlistProductCard ">
                 <div className=" flex flex-col justify-end items-end relative">
