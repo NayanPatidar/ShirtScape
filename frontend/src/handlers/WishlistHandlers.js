@@ -86,7 +86,8 @@ export const MoveProductToCart = (ProductID) => {
     fetch(`http://localhost:8080/AddUserCart`, options)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("Successfully Added Product to cart");
+        RemoveProductFromWishlist(ProductID);
       })
       .catch((error) => console.error("Error:", error));
   } catch (error) {

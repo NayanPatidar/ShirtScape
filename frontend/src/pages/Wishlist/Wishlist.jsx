@@ -3,7 +3,10 @@ import "./Wishlist.css";
 import { getCookie } from "../../services/cookieOperations";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { IoClose } from "react-icons/io5";
-import { RemoveProductFromWishlist } from "../../handlers/WishlistHandlers";
+import {
+  MoveProductToCart,
+  RemoveProductFromWishlist,
+} from "../../handlers/WishlistHandlers";
 import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
@@ -45,6 +48,15 @@ const Wishlist = () => {
 
   const ProductClickeOnWishlist = (product_id) => {
     navigate(`/products/${product_id}`);
+  };
+
+  const MoveProductToWishlist = (product_id) => {
+    if (isUserLoggedIn) {
+      MoveProductToCart(product_id);
+      setTimeout(() => {
+        setWishlistChange(!WishlistChanged);
+      }, 1000);
+    }
   };
 
   const navigate = useNavigate();
@@ -94,7 +106,12 @@ const Wishlist = () => {
                     <span className=" CurrentMRP">₹{product.cloths.mrp}</span>
                   </span>
                 </div>
-                <div className="MoveToCartButton flex flex-row cursor-pointer">
+                <div
+                  className="MoveToCartButton flex flex-row cursor-pointer"
+                  onClick={() =>
+                    MoveProductToWishlist(product.cloths.product_id)
+                  }
+                >
                   <span className=" ButtonTextMoveToCart">MOVE TO CART</span>
                 </div>
               </div>
