@@ -77,6 +77,41 @@ const DeleteProductFromLocalStorage = (id) => {
   }
 };
 
+// Add Product to the Local Storage
+function AddProductToWishlist({ product_id }) {
+  let Cart_Product = {
+    id: product_id,
+    size: "S",
+    quantity: 1,
+  };
+
+  if (localStorage.getItem("ShirtScape_Wishilist")) {
+    let cart = JSON.parse(localStorage.getItem("ShirtScape_Wishlist"));
+
+    if (!cart.some((item) => item.id === product_id)) {
+      cart.push(Cart_Product);
+      localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(cart));
+      return "Product Added to Wishlist";
+    }
+
+    return "Product Already Present In Wishlist";
+  } else {
+    let cart = [Cart_Product];
+    localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(cart));
+    return "Product Added to Wishlist";
+  }
+}
+
+//Delete the product from the Local Storage
+const DeleteProductOfWishlistFromLocalStorage = (id) => {
+  const storedData = JSON.parse(localStorage.getItem("ShirtScape_Wishlist"));
+  if (storedData && id) {
+    const index = storedData.findIndex((item) => parseInt(item.id) == id);
+    storedData.splice(index, 1);
+    localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(storedData));
+  }
+};
+
 export {
   AddProduct,
   FindSizeByIdFromLocalStorage,
@@ -84,4 +119,6 @@ export {
   FindQuantityeByIdFromLocalStorage,
   ChangeQuantityInLocalStorage,
   DeleteProductFromLocalStorage,
+  AddProductToWishlist,
+  DeleteProductOfWishlistFromLocalStorage,
 };
