@@ -67,7 +67,7 @@ const ChangeQuantityInLocalStorage = (id, newQuantity) => {
   }
 };
 
-//Delete the product from the Local Storage
+//Delete the product from the Local Storage For Wishlist
 const DeleteProductFromLocalStorage = (id) => {
   const storedData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
   if (storedData && id) {
@@ -77,27 +77,31 @@ const DeleteProductFromLocalStorage = (id) => {
   }
 };
 
-// Add Product to the Local Storage
-function AddProductToWishlist({ product_id }) {
-  let Cart_Product = {
+// Add Product to the Local Storage For Wishlist
+function AddProductToWishlistInLocalStorage({ product_id }) {
+  let Wishlist_Product = {
     id: product_id,
     size: "S",
     quantity: 1,
   };
+  console.log("Product ID In : ", product_id);
 
-  if (localStorage.getItem("ShirtScape_Wishilist")) {
-    let cart = JSON.parse(localStorage.getItem("ShirtScape_Wishlist"));
+  if (localStorage.getItem("ShirtScape_Wishlist")) {
+    let wishlist = JSON.parse(localStorage.getItem("ShirtScape_Wishlist"));
 
-    if (!cart.some((item) => item.id === product_id)) {
-      cart.push(Cart_Product);
-      localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(cart));
+    if (!wishlist.some((item) => item.id === product_id)) {
+      wishlist.push(Wishlist_Product);
+      localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(wishlist));
+      console.log("Product Added to Wishlist");
       return "Product Added to Wishlist";
     }
+    console.log("Product Already Present In Wishlist");
 
     return "Product Already Present In Wishlist";
   } else {
-    let cart = [Cart_Product];
-    localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(cart));
+    let wishlist = [Wishlist_Product];
+    localStorage.setItem("ShirtScape_Wishlist", JSON.stringify(wishlist));
+    console.log("Product Added to Wishlist: New Local Storage");
     return "Product Added to Wishlist";
   }
 }
@@ -119,6 +123,6 @@ export {
   FindQuantityeByIdFromLocalStorage,
   ChangeQuantityInLocalStorage,
   DeleteProductFromLocalStorage,
-  AddProductToWishlist,
+  AddProductToWishlistInLocalStorage,
   DeleteProductOfWishlistFromLocalStorage,
 };

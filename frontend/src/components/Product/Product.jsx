@@ -4,7 +4,10 @@ import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../Navbar/Nav";
 import "./Product.css";
-import { AddProduct } from "../../services/storageOperations";
+import {
+  AddProduct,
+  AddProductToWishlistInLocalStorage,
+} from "../../services/storageOperations";
 import { getCookie } from "../../services/cookieOperations";
 import { toBeChecked } from "@testing-library/jest-dom/matchers";
 import { AuthContext } from "../../contexts/AuthContexts";
@@ -78,7 +81,11 @@ const Product = () => {
   };
 
   const AddToWishlist = () => {
-    AddProductToWishlist(productId);
+    if (isUserLoggedIn) {
+      AddProductToWishlist(productId);
+    } else {
+      AddProductToWishlistInLocalStorage({ product_id: `${productId}` });
+    }
   };
 
   return (

@@ -39,6 +39,31 @@ const Wishlist = () => {
       });
   };
 
+  const FetchWishlistProductsFromLocalStorage = async () => {
+    let LocalCartData = JSON.parse(localStorage.getItem("ShirtScape_Wishlist"));
+    if (!LocalCartData) {
+      return;
+    }
+    try {
+      const productIds = LocalCartData.map((item) => parseInt(item.id));
+      let FetchedLocalCartData = await fetch(
+        "http://localhost:8080/cart/tempUser",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productIds }),
+        }
+      );
+      if (FetchedLocalCartData.ok) {
+        const data = await FetchedLocalCartData.json();
+      }
+    } catch (error) {
+      console.log("Error fetching the data: ", error.message);
+    }
+  };
+
   const HandleRemoveProductFromWishlist = (product_id) => {
     if (isUserLoggedIn) {
       RemoveProductFromWishlist(product_id);
@@ -64,6 +89,8 @@ const Wishlist = () => {
   useEffect(() => {
     if (isUserLoggedIn) {
       FetchTheWishlistProducts();
+    } else {
+      FetchWishlistProductsFromLocalStorage();
     }
   }, [WishlistChanged]);
 
