@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { SearchContext } from "../../contexts/contexts";
 import { AuthContext } from "../../contexts/AuthContexts";
+import { IoHomeSharp } from "react-icons/io5";
+import { FaShoppingBag } from "react-icons/fa";
 
 function Navbar() {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
@@ -40,26 +42,34 @@ function Navbar() {
   return (
     <>
       {cartVisibility ? (
-        <div className="NavBarMain flex flex-col fixed shadow-md">
-          <div className=" h-16 bg-white pl-5 flex flex-row items-center justify-between">
+        <div className="NavBarMain flex flex-col fixed shadow-md ">
+          <div className=" h-16 pl-5 flex flex-row items-center justify-between">
             <div className="flex flex-row justify-start items-center w-3/5">
               <img
                 src={logo}
                 alt="LOGO"
-                className="logo w-16"
+                className="logo"
                 onClick={() => navigate("/")}
               />
-              <div className="NavBarObj flex flex-row justify-around w-8/12 text-black">
-                <div
-                  className="TextNavbarCategories cursor-pointer mt-2"
-                  onClick={() => navigate("/men")}
-                >
-                  MEN
+              <div className="NavBarObj flex flex-row justify-start gap-40 w-8/12 text-black">
+                <div className=" flex flex-row gap-10">
+                  <div
+                    className="TextNavbarCategories cursor-pointer mt-2 flex flex-col justify-center items-center"
+                    onClick={() => navigate("/")}
+                  >
+                    <IoHomeSharp className=" HomeShopIcons  text-black" />
+                    <span className=" HomeTitle">HOME</span>
+                  </div>
+                  <div
+                    className="TextNavbarCategories cursor-pointer mt-2 flex flex-col justify-center items-center"
+                    onClick={() => navigate("/men")}
+                  >
+                    <FaShoppingBag className=" HomeShopIcons  text-black" />
+                    <span className=" HomeTitle">SHOP</span>
+                  </div>
                 </div>
-                <div className="TextNavbarCategories cursor-pointer mt-2">
-                  NEW ARRIVALS
-                </div>
-                <div className=" text-black text-md pb-4">
+
+                <div className=" text-black text-md pb-4 flex justify-center items-center">
                   <form className="SearchBox">
                     <label className=" flex w-96 items-center justify-center">
                       <input

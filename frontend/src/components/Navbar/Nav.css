@@ -1,15 +1,15 @@
 .NavBarMain {
   width: 100%;
-  /* position: fixed; */
   z-index: 100;
+  background-color: white;
 }
 
 .NavBarObj {
   font-family: "Source Sans 3", sans-serif;
   font-weight: 650;
   font-size: 17px;
-  padding-left: 5%;
   color: white;
+  padding-left: 5%;
 }
 
 .inputBoxNavBar::placeholder {
@@ -41,14 +41,18 @@
 }
 
 .TextNavbarCategories:hover {
-  /* text-decoration: underline; */
-  color: rgb(255, 41, 41);
 }
 
-.TextNavbarCategories {
-  /* width: 6px; */
+.HomeShopIcons {
+  width: 20px;
+  height: 20px;
 }
 
-.IconNavbarTypes {
-  
+.HomeTitle {
+  color: black;
+  font-size: 16px;
+}
+
+.logo {
+  width: 200px;
 }
