@@ -135,10 +135,6 @@ const Cart = () => {
     }
   }, [ItemRemovalDone]);
 
-  useEffect(() => {
-    // console.log(`Item Number - ${itemsNum}`);
-  }, [itemsNum, CartItems]);
-
   return (
     <CartContext.Provider
       value={{
@@ -203,7 +199,7 @@ const Cart = () => {
             <img
               src={Logo}
               alt="LOGO"
-              className="logo w-16"
+              className=" w-32"
               onClick={() => navigate("/")}
             />
           </div>

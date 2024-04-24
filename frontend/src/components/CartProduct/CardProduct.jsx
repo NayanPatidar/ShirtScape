@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../services/cookieOperations";
 import { BiUnderline } from "react-icons/bi";
 import { AuthContext } from "../../contexts/AuthContexts";
-import { CartContext } from "../../contexts/contexts";
+import { CartContext, SearchContext } from "../../contexts/contexts";
 
 const CartProduct = ({ products, index }) => {
   const { isUserLoggedIn } = useContext(AuthContext);
@@ -37,6 +37,8 @@ const CartProduct = ({ products, index }) => {
 
   const [mainSize, setMainSize] = useState();
   const [mainQuantity, setMainQuantity] = useState(1);
+  const { setCartVisibility } = useContext(SearchContext);
+
   const prevQuantity = useRef(1);
 
   const handleSizeSelectionClick = (product) => {
@@ -53,6 +55,7 @@ const CartProduct = ({ products, index }) => {
 
   const ProductIdCheck = () => {
     console.log("Navigate Clicked");
+    setCartVisibility(true);
     navigate(`/products/${products.cloths.product_id}`);
   };
 
