@@ -1,5 +1,5 @@
 import React, { Component, useContext, useEffect, useState } from "react";
-import banner1 from "../../assets/banner1.jpg";
+import banner1 from "../../assets/banner1.png";
 import banner2 from "../../assets/banner2.png";
 import banner3 from "../../assets/banner3.png";
 import { Fade } from "react-slideshow-image";
@@ -8,6 +8,7 @@ import "./Home.css";
 import Cards from "../../components/ProductsCard/HomeProductsCard";
 import Navbar from "../../components/Navbar/Nav";
 import { SearchContext } from "../../contexts/contexts";
+import { useNavigate } from "react-router-dom";
 
 const slideImages = [
   {
@@ -32,6 +33,7 @@ const divStyle = {
 function Home() {
   const [TShirts, setTShirts] = useState();
   const [Categories, setCategory] = useState();
+  const [NewArrivals, setNewArrivals] = useState();
 
   const { setCartVisibility } = useContext(SearchContext);
 
@@ -46,6 +48,9 @@ function Home() {
   const fetchData = async () => {
     try {
       const TshirtData = await fetch("http://localhost:8080/mainpage/TShirts");
+      const NewArrivalsData = await fetch(
+        "http://localhost:8080/mainpage/NewArrivals"
+      );
       const categories = await fetch("http://localhost:8080/mainpage/images");
 
       if (!TshirtData.ok || !categories.ok) {
@@ -54,7 +59,10 @@ function Home() {
 
       const data = await TshirtData.json();
       const categoryData = await categories.json();
+      const newArrivalData = await NewArrivalsData.json();
       setCategory(categoryData.images);
+      setNewArrivals(newArrivalData.tshirtsDetails);
+      console.log(newArrivalData.tshirtsDetails);
 
       if (JSON.stringify(data) !== JSON.stringify(TShirts)) {
         setTShirts(data.tshirtsDetails);
@@ -62,6 +70,11 @@ function Home() {
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
+  };
+
+  const navigate = useNavigate();
+  const ProductIdCheck = (ProductId) => {
+    navigate(`/products/${ProductId}`);
   };
 
   return (
@@ -77,7 +90,6 @@ function Home() {
           ))}
         </Fade>
       </div>
-      <div className=" h-1 bg-black"></div>
 
       <div className=" flex flex-col justify-center items-center align-middle mt-14">
         <span className="Categories">CATEGORIES</span>
@@ -112,6 +124,39 @@ function Home() {
                   discount={tShirt.tshirts.discount}
                   ProductId={tShirt.tshirts.product_id}
                 />
+              </div>
+            ))}
+        </div>
+
+        <span className="Categories mt-24">NEW ARRIVALS</span>
+        <div className="NewArrivalsTypes mb-10 mt-6">
+          {NewArrivals &&
+            NewArrivals.map((category, index) => (
+              <div
+                className=" NewArrivalsMainCard relative"
+                key={index}
+                onClick={() => ProductIdCheck(category.tshirts.product_id)}
+              >
+                <div className=" relative flex flex-col">
+                  <img
+                    src={category.tshirts.photo1}
+                    className=" EachImageCategory"
+                  />
+                  <span className="ProductName">
+                    {category.tshirts.product_name}
+                  </span>
+                  <span className="ProductDesc">
+                    {category.tshirts.genericdesc}
+                  </span>
+                  <div>
+                    <span className="ProductPrice">
+                      ₹{category.tshirts.price}
+                    </span>
+                    <span className="ProductDiscount">
+                      ₹{category.tshirts.mrp}
+                    </span>
+                  </div>
+                </div>
               </div>
             ))}
         </div>
