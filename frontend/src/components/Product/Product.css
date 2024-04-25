@@ -31,7 +31,7 @@
 .Product_Discount {
   font-weight: 500;
   font-size: 20px;
-  color: rgb(255, 106, 0);
+  color: rgb(255, 41, 41);
 }
 
 .Product_Size {
@@ -68,7 +68,7 @@
   justify-content: center;
   border-radius: 5px;
   color: white;
-  background-color: rgb(255, 9, 50);
+  background-color: rgb(255, 41, 41);
 }
 
 .Add_To_Wishlist_Button {

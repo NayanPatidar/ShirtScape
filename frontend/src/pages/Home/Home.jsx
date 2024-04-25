@@ -84,11 +84,8 @@ function Home() {
         <div className="CategoryTypes">
           {Categories &&
             Categories.map((category, index) => (
-              <div className=" CategoriesMainCard relative">
-                <div
-                  key={index}
-                  className=" EachCategoryProp relative flex flex-col"
-                >
+              <div className=" CategoriesMainCard relative" key={index}>
+                <div className=" EachCategoryProp relative flex flex-col">
                   <img
                     src={category.photos.photo1}
                     className=" EachImageCategory"

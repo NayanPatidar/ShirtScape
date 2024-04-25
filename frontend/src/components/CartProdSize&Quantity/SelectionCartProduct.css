@@ -24,12 +24,12 @@
 }
 
 .sizeDot:hover {
-  border-color: rgb(255, 9, 50);
+  border-color: rgb(255, 41, 41);
 }
 
 .sizeDot.active {
-  border-color: rgb(255, 9, 50);
-  color: rgb(255, 9, 50);
+  border-color: rgb(255, 41, 41);
+  color: rgb(255, 41, 41);
 }
 
 .SizeSelectionPhoto {
@@ -62,7 +62,7 @@
 .SelectionSubmit {
   width: 100%;
   height: 35px;
-  background-color: rgb(255, 41, 112);
+  background-color: rgb(255, 41, 41);
   font-weight: 600;
   font-size: 16px;
   line-height: 10px;
@@ -97,12 +97,12 @@
 }
 
 .quantityDot:hover {
-  border-color: rgb(255, 9, 50);
+  border-color: rgb(255, 41, 41);
 }
 
 .quantityDot.active {
-  border-color: rgb(255, 9, 50);
-  color: rgb(255, 9, 50);
+  border-color: rgb(255, 41, 41);
+  color: rgb(255, 41, 41);
 }
 
 .SelectQuantityHeading {
@@ -116,7 +116,7 @@
 .SelectionSubmit {
   width: 100%;
   height: 35px;
-  background-color: rgb(255, 41, 112);
+  background-color: rgb(255, 41, 41);
   font-weight: 600;
   font-size: 16px;
   line-height: 10px;

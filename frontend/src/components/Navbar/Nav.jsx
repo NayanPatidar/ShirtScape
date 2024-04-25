@@ -21,6 +21,12 @@ function Navbar() {
     setSearchTerm(e.target.value);
   };
 
+  function preventEnter(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+    }
+  }
+
   const debounce = (cb, delay) => {
     let timer;
     return (e) => {
@@ -32,10 +38,6 @@ function Navbar() {
   };
 
   const searchProcess = debounce(searchHandler, 400);
-
-  useEffect(() => {
-    console.log(`searchTerm - ${searchTerm}`);
-  }, [searchTerm]);
 
   const navigate = useNavigate();
 
@@ -77,6 +79,7 @@ function Navbar() {
                         className="inputBoxNavBar  rounded-md border border-black"
                         placeholder={" What are you looking for ? "}
                         onChange={searchProcess}
+                        onKeyDown={preventEnter}
                       />
                       <IoSearch className=" searchIcon" />
                     </label>
