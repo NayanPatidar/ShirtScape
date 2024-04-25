@@ -84,14 +84,25 @@ function Home() {
         <div className="CategoryTypes">
           {Categories &&
             Categories.map((category, index) => (
-              <div key={index} className=" EachCategoryProp">
-                <img src={category.photo1} className=" EachImageCategory" />
+              <div className=" CategoriesMainCard relative">
+                <div
+                  key={index}
+                  className=" EachCategoryProp relative flex flex-col"
+                >
+                  <img
+                    src={category.photos.photo1}
+                    className=" EachImageCategory"
+                  />
+                </div>
+                <div className="CategoryNameEachCard z-100 h-5 absolute bottom-5">
+                  {category.photos.category}
+                </div>
               </div>
             ))}
         </div>
 
         <span className="TopSellingTitle mt-20">TOP SELLING</span>
-        <div className="TopSellingProds flex flex-row justify-around items-center mt-3 mb-3">
+        <div className="TopSellingProds flex flex-row gap-5 justify-around items-center mt-3 mb-3">
           {TShirts &&
             TShirts.map((tShirt, index) => (
               <div key={index} className="" style={{ width: "23.5%" }}>
