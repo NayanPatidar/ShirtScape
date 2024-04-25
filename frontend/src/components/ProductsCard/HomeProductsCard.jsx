@@ -17,11 +17,17 @@ const Cards = ({
   };
   return (
     <div className=" flex flex-col" onClick={ProductIdCheck}>
-      <img className="rounded-3xl cursor-pointer" src={photo} />
+      <img
+        className="ImageHomePageCard rounded-2xl cursor-pointer "
+        src={photo}
+      />
       <div className=" flex flex-col">
         <span className="ProductName">{name}</span>
         <span className="ProductDesc">{description}</span>
-        <span className="ProductPrice">₹{price}</span>
+        <div>
+          <span className="ProductPrice">₹{price}</span>
+          <span className="ProductDiscount">₹{mrp}</span>
+        </div>
       </div>
     </div>
   );
