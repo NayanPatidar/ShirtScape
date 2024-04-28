@@ -91,7 +91,7 @@ function Home() {
         </Fade>
       </div>
 
-      <div className=" flex flex-col justify-center items-center align-middle mt-14">
+      <div className=" flex flex-col justify-center items-center align-middle mt-16">
         <span className="Categories">CATEGORIES</span>
         <div className="CategoryTypes">
           {Categories &&

@@ -14,7 +14,7 @@ import { AddProductToWishlist } from "../../handlers/WishlistHandlers";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
-  const [selectedSize, setSelectedSize] = useState("S");
+  const [selectedSize, setSelectedSize] = useState("");
   const { login, isUserLoggedIn } = useContext(AuthContext);
 
   let { productId } = useParams();
@@ -45,37 +45,46 @@ const Product = () => {
   };
 
   const productData = () => {
-    if (!isUserLoggedIn) {
-      console.log("Add To Cart - Local");
-      AddProduct({
-        product_id: `${product.product.product_id}`,
-      });
+    if (selectedSize != "") {
+      if (!isUserLoggedIn) {
+        console.log("Add To Cart - Local");
+        AddProduct({
+          product_id: `${product.product.product_id}`,
+          size: `${selectedSize}`,
+        });
+      }
+    } else {
+      console.log("Select the Size to Add to Cart");
     }
   };
 
   const AddProductToDB = () => {
-    if (isUserLoggedIn) {
-      const token = getCookie("sscape");
-      console.log(token);
-      const data = {
-        product_id: productId,
-        quantity: 1,
-        size: `${selectedSize}`,
-      };
+    if (selectedSize != "") {
+      if (isUserLoggedIn) {
+        const token = getCookie("sscape");
+        console.log(token);
+        const data = {
+          product_id: productId,
+          quantity: 1,
+          size: `${selectedSize}`,
+        };
 
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(data),
-      };
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
+        };
 
-      fetch(`http://localhost:8080/AddUserCart`, options)
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
+        fetch(`http://localhost:8080/AddUserCart`, options)
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error("Error:", error));
+      }
+    } else {
+      console.log("Select the Size to Add to Cart");
     }
   };
 

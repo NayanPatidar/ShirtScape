@@ -1,8 +1,8 @@
 // Add Product to the Local Storage
-function AddProduct({ product_id }) {
+function AddProduct({ product_id, size }) {
   let Cart_Product = {
     id: product_id,
-    size: "S",
+    size: size,
     quantity: 1,
   };
 
