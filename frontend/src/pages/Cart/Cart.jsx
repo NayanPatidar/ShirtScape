@@ -300,7 +300,10 @@ const Cart = () => {
                     ₹{totalSellingPrice - couponDiscount}
                   </span>
                 </div>
-                <div className=" CheckOutButton flex justify-center align-middle items-center pt-2">
+                <div
+                  className=" CheckOutButton flex justify-center align-middle items-center pt-2"
+                  onClick={() => navigate("/checkout")}
+                >
                   <button className=" CheckoutClick ">PLACE ORDER</button>
                 </div>
               </div>

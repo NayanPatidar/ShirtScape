@@ -15,6 +15,7 @@ import Address from "./pages/Profile/Address";
 import Navbar from "./components/Navbar/Nav";
 import { AddressProvider } from "./contexts/AddressContext";
 import { AuthContextProvider } from "./contexts/AuthContexts";
+import CheckoutPage from "./pages/Checkout/Checkout";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,13 +35,14 @@ function App() {
               <Route path="/products">
                 <Route path=":productId" element={<Product />} />
               </Route>
-              <Route path="/checkout/cart" element={<Cart />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/signin" element={<Signin />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/orders" element={<Order />} />
               <Route path="/address" element={<Address />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
             </Routes>
           </AddressProvider>
         </AuthContextProvider>

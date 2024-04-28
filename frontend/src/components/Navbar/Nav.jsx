@@ -103,7 +103,7 @@ function Navbar() {
               <LuShoppingCart
                 className="IconNavbarTypes size-6 text-black"
                 onClick={() => {
-                  navigate("/checkout/cart");
+                  navigate("/cart");
                   setCartVisibility(false);
                 }}
               />
