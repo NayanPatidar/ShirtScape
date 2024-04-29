@@ -11,16 +11,19 @@ import {
 import { getCookie } from "../../services/cookieOperations";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { AddProductToWishlist } from "../../handlers/WishlistHandlers";
+import { SearchContext } from "../../contexts/contexts";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
   const { login, isUserLoggedIn } = useContext(AuthContext);
+  const { setCartVisibility } = useContext(SearchContext);
 
   let { productId } = useParams();
 
   useEffect(() => {
     fetchProductData();
+    setCartVisibility(true);
   }, []);
 
   async function fetchProductData() {

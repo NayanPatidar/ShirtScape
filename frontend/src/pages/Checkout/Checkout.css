@@ -30,3 +30,27 @@
   font-family: "Source Sans 3", sans-serif;
   letter-spacing: 0.2em;
 }
+
+.DetailsSectionCheckout {
+  width: 100%;
+  height: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+}
+
+.AddressSelection {
+  border-right: solid 1px rgb(220, 220, 220);
+}
+
+.OrderDetailsCheckout {
+  border: solid 1px rgb(220, 220, 220);
+  padding: 10px;
+}
+
+.CheckoutPriceField {
+  color: #414141;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Source Sans 3", sans-serif;
+}
