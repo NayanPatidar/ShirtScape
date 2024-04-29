@@ -1,16 +1,67 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { SearchContext } from "../../contexts/contexts";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo/logo.png";
 import "./Checkout.css";
+import { AuthContext } from "../../contexts/AuthContexts";
+import { getCookie } from "../../services/cookieOperations";
+import { jwtDecode } from "jwt-decode";
+import { getItemAndCouponPrice } from "../../services/CouponDetails";
 
 const CheckoutPage = () => {
   const { setCartVisibility } = useContext(SearchContext);
+  const { isUserLoggedIn, logout } = useContext(AuthContext);
+  const [priceDetails, setPriceDetails] = useState("");
+  const [couponDiscount, setCouponDiscount] = useState(0);
+
+  const CartItemsPriceDetailsFetch = async () => {
+    if (isUserLoggedIn) {
+      const token = getCookie("sscape");
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      let FetchedLPermCartData = await fetch(
+        `http://localhost:8080/checkout/PermUserData/Details`,
+        options
+      );
+
+      if (!FetchedLPermCartData.ok) {
+        if (FetchedLPermCartData.status == 403) {
+          console.log("Either invalid Token or User Not Present");
+          logout();
+          navigate("/login");
+        }
+      }
+
+      if (FetchedLPermCartData.ok) {
+        const data = await FetchedLPermCartData.json();
+        console.log(data.CartData[0].pricedetails);
+        setPriceDetails(data.CartData[0].pricedetails);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const userData = jwtDecode(getCookie("sscape"));
+    setCouponDiscount(
+      getItemAndCouponPrice(userData.userData.user_id).couponPrice
+    );
+  });
 
   useEffect(() => {
     setCartVisibility(false);
   }, []);
 
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      CartItemsPriceDetailsFetch();
+    }
+  }, []);
   const navigate = useNavigate();
 
   return (
@@ -41,18 +92,18 @@ const CheckoutPage = () => {
             <div className=" OrderDetailsCheckout mt-5">
               <div className="PriceCalcBox flex flex-col gap-2">
                 <div className=" flex flex-row justify-between ">
-                  <span className=" CheckoutPriceField">Total MRP</span>
-                  {/* <span className=" CheckoutPriceField">₹{totalPrice}</span> */}
+                  <span className=" PriceField">Total MRP</span>
+                  <span className=" PriceField">₹{priceDetails.total_mrp}</span>
                 </div>
                 <div className=" flex flex-row justify-between ">
-                  <span className=" CheckoutPriceField">Discount on MRP</span>
+                  <span className=" PriceField">Discount on MRP</span>
                   <span className=" DiscountField text-green-400">
-                    {/* -₹{totalPrice - totalSellingPrice} */}
+                    -₹{priceDetails.total_mrp - priceDetails.total_price}
                   </span>
                 </div>
                 <div className=" flex flex-row justify-between ">
-                  <span className=" CheckoutPriceField">Coupon Discount</span>
-                  {/* <span>
+                  <span className=" PriceField">Coupon Discount</span>
+                  <span>
                     {couponDiscount != 0 ? (
                       <span className=" DiscountField text-green-400 flex justify-end items-center">
                         -₹{couponDiscount}
@@ -61,19 +112,17 @@ const CheckoutPage = () => {
                       <div
                         className="ApplyCouponPrice cursor-pointer"
                         // onClick={() => handleCouponMenuOpen()}
-                      >
-                        APPLY COUPON
-                      </div>
+                      ></div>
                     )}
-                  </span> */}
+                  </span>
                 </div>
                 <div className=" flex flex-row justify-between ">
-                  <span className=" CheckoutPriceField">Platform Fee</span>
+                  <span className=" PriceField">Platform Fee</span>
                   <span className=" DiscountField">FREE</span>
                 </div>
                 <div className=" flex flex-row justify-between ">
-                  <span className=" CheckoutPriceField">Shipping Fee</span>
-                  <span className=" CheckoutCheckoutPriceField flex flex-row gap-1">
+                  <span className=" PriceField">Shipping Fee</span>
+                  <span className=" PriceField flex flex-row gap-1">
                     <span className=" line-through">₹79 </span>
                     <span className=" DiscountField"> FREE</span>
                   </span>
@@ -82,9 +131,15 @@ const CheckoutPage = () => {
               <div className="TotalAmount flex flex-row justify-between pt-3">
                 <span className=" TotalAmountText">Total Amount</span>
                 <span className=" TotalAmountText">
-                  {/* ₹{totalSellingPrice - couponDiscount} */}
+                  ₹{priceDetails.total_price - couponDiscount}
                 </span>
               </div>
+            </div>
+            <div
+              className=" CheckOutButton flex justify-center align-middle items-center pt-2"
+              // onClick={() => navigate("/checkout")}
+            >
+              <button className=" CheckoutClick ">CONFIRM ORDER</button>
             </div>
           </div>
         </div>
