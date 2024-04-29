@@ -11,6 +11,8 @@ import ItemRemovalBox from "../../components/ConfirmRemoval/ConfirmationBox";
 import { getCookie } from "../../services/cookieOperations";
 import { CartContext, SearchContext } from "../../contexts/contexts";
 import { AuthContext } from "../../contexts/AuthContexts";
+import { getItemAndCouponPrice } from "../../services/CouponDetails";
+import { jwtDecode } from "jwt-decode";
 
 const Cart = () => {
   // This is the Cart Complete Data
@@ -32,6 +34,8 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalSellingPrice, setTotalSellingPrice] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0);
+  const [couponDiscountFromLocalStorage, setDiscountFromLocalStorage] =
+    useState(0);
   const [CartItemID, setCartItemID] = useState(0);
 
   const [size, setSize] = useState("");
@@ -126,6 +130,13 @@ const Cart = () => {
       console.log("Error fetching the data: ", error.message);
     }
   };
+
+  useEffect(() => {
+    const userData = jwtDecode(getCookie("sscape"));
+    setDiscountFromLocalStorage(
+      getItemAndCouponPrice(userData.userData.user_id).couponPrice
+    );
+  }, [couponDiscount]);
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -266,9 +277,9 @@ const Cart = () => {
                       <div className=" flex flex-row justify-between ">
                         <span className=" PriceField">Coupon Discount</span>
                         <span>
-                          {couponDiscount != 0 ? (
+                          {couponDiscountFromLocalStorage != 0 || null ? (
                             <span className=" DiscountField text-green-400 flex justify-end items-center">
-                              -₹{couponDiscount}
+                              -₹{couponDiscountFromLocalStorage}
                             </span>
                           ) : (
                             <div
@@ -297,7 +308,7 @@ const Cart = () => {
                 <div className="TotalAmount flex flex-row justify-between pt-3">
                   <span className=" TotalAmountText">Total Amount</span>
                   <span className=" TotalAmountText">
-                    ₹{totalSellingPrice - couponDiscount}
+                    ₹{totalSellingPrice - couponDiscountFromLocalStorage}
                   </span>
                 </div>
                 <div

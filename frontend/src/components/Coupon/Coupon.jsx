@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Coupon.css";
 import { CartContext } from "../../contexts/contexts";
 import { IoMdClose } from "react-icons/io";
+import { getCookie } from "../../services/cookieOperations";
+import { jwtDecode } from "jwt-decode";
+import { addCouponToLocalStorage } from "../../services/CouponDetails";
 
 const CouponBox = () => {
-  const { setCouponDiscount, setIsCouponMenuOpen } =
-    useContext(CartContext);
+  const { setCouponDiscount, setIsCouponMenuOpen } = useContext(CartContext);
   const [done, SetDone] = useState(false);
+  const [userData, setUserData] = useState("");
   const [checkboxes, setCheckboxes] = useState({
     checkbox1: false,
     checkbox2: false,
@@ -38,8 +41,10 @@ const CouponBox = () => {
     }
 
     if (done) {
+      const userData = jwtDecode(getCookie("sscape"));
+      setUserData(userData.userData);
+      addCouponToLocalStorage(userData.userData.user_id, newDiscount);
       setCouponDiscount(newDiscount);
-
       setIsCouponMenuOpen(false);
     }
   }, [done]);
