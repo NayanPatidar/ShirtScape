@@ -144,7 +144,7 @@ const Cart = () => {
     } else {
       FetchCartData();
     }
-  }, [ItemRemovalDone]);
+  }, []);
 
   return (
     <CartContext.Provider

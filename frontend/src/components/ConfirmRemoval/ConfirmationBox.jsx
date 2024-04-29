@@ -9,7 +9,6 @@ import { CartContext } from "../../contexts/contexts";
 
 const ItemRemovalBox = () => {
   const {
-    product,
     IsItemRemovalMenuOpen,
     setIsItemRemovalMenuOpen,
     productId,
@@ -28,6 +27,7 @@ const ItemRemovalBox = () => {
       DeleteProductFromLocalStorage(productId);
     }
     setRemovalDone(!ItemRemovalDone);
+    window.location.reload();
     handleCloseRemovalBox();
   };
 

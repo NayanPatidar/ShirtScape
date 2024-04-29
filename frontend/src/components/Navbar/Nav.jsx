@@ -4,7 +4,7 @@ import "./Nav.css";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { SearchContext } from "../../contexts/contexts";
 import { AuthContext } from "../../contexts/AuthContexts";
@@ -15,6 +15,15 @@ function Navbar() {
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const { isUserLoggedIn } = useContext(AuthContext);
   const { cartVisibility, setCartVisibility } = useContext(SearchContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isCartOrCheckout =
+    location.pathname === "/cart" || location.pathname === "/checkout";
+
+  if (isCartOrCheckout) {
+    return null;
+  }
 
   const searchHandler = (e) => {
     navigate("/men");
@@ -38,8 +47,6 @@ function Navbar() {
   };
 
   const searchProcess = debounce(searchHandler, 400);
-
-  const navigate = useNavigate();
 
   return (
     <>
