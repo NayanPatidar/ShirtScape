@@ -13,6 +13,40 @@ const CheckoutPage = () => {
   const { isUserLoggedIn, logout } = useContext(AuthContext);
   const [priceDetails, setPriceDetails] = useState("");
   const [couponDiscount, setCouponDiscount] = useState(0);
+  const [Address, setAddress] = useState("");
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const token = getCookie("sscape");
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        let UserAddress = await fetch(
+          `http://localhost:8080/FetchAddress`,
+          options
+        );
+        const data = await UserAddress.json();
+
+        if (!UserAddress.ok || UserAddress.message) {
+          console.log(`Error: ${data.error}`);
+          logout();
+          navigate("/signin");
+        } else {
+          console.log("Fetch : ", data);
+          setAddress(data.Address[0].address.address);
+        }
+      } catch (error) {
+        console.error("Error during login: ", error.message);
+      }
+    };
+    fetchAddress();
+  }, []);
 
   const CartItemsPriceDetailsFetch = async () => {
     if (isUserLoggedIn) {
@@ -62,6 +96,7 @@ const CheckoutPage = () => {
       CartItemsPriceDetailsFetch();
     }
   }, []);
+
   const navigate = useNavigate();
 
   return (
@@ -85,8 +120,45 @@ const CheckoutPage = () => {
           </div>
           <span className="CheckoutSecurity">100% SECURE</span>
         </div>
-        <div className="DetailsSectionCheckout flex flex-row gap-10 justify-center items-center">
-          <div className=" AddressSelection w-3/5 "></div>
+        <div className="DetailsSectionCheckout flex flex-row gap-10 justify-center">
+          <div className=" w-3/5 flex flex-col gap-5 ">
+            <span>ADDRESS</span>
+            {Address != "" ? (
+              Address.map((item, index) => (
+                <label>
+                  <input type="radio" name="selectedAddress" value={index} />
+                  <div key={index} className="CheckoutAddressCard">
+                    <span className="AddressUserName flex flex-row justify-between items-center">
+                      <span>{item.name}</span>
+                    </span>
+                    <p>
+                      <small>{item.street}</small>
+                    </p>
+                    <p>
+                      <small>{item.city}, </small>
+                      <small>{item.state}, </small>
+                      <small>{item.zipCode}</small>
+                    </p>
+                    <p>
+                      <small>{item.country}</small>
+                    </p>
+                    <p>
+                      <small className=" flex flex-row gap-1">
+                        Mobile :
+                        <span className=" text-red-500 font-medium">
+                          {item.mobile}
+                        </span>
+                      </small>
+                    </p>
+                  </div>
+                </label>
+              ))
+            ) : (
+              <span className="NoAddressFoundText text-xl ">
+                No Address Found !
+              </span>
+            )}
+          </div>
           <div className=" OrderDetails w-4/12 flex flex-col">
             BILLING DETAILS
             <div className=" OrderDetailsCheckout mt-5">
