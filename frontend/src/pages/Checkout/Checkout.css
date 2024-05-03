@@ -54,3 +54,16 @@
   font-size: 16px;
   font-family: "Source Sans 3", sans-serif;
 }
+
+.CheckoutAddressCard {
+  border: solid 1px rgb(202, 202, 202);
+  border-radius: 3px;
+  padding: 10px;
+  font-family: "Source Sans 3", sans-serif;
+  color: rgb(28, 28, 28);
+  background-color: rgb(241, 241, 241);
+}
+
+.AddressTitle {
+  
+}
