@@ -125,11 +125,16 @@ const CheckoutPage = () => {
             <span>ADDRESS</span>
             {Address != "" ? (
               Address.map((item, index) => (
-                <label>
-                  <input type="radio" name="selectedAddress" value={index} />
-                  <div key={index} className="CheckoutAddressCard">
+                <div key={index} className="CheckoutAddressCard">
+                  <label>
+
                     <span className="AddressUserName flex flex-row justify-between items-center">
                       <span>{item.name}</span>
+                      <input
+                      type="radio"
+                      name="selectedAddress"
+                      value={index}
+                    />
                     </span>
                     <p>
                       <small>{item.street}</small>
@@ -150,8 +155,8 @@ const CheckoutPage = () => {
                         </span>
                       </small>
                     </p>
-                  </div>
-                </label>
+                  </label>
+                </div>
               ))
             ) : (
               <span className="NoAddressFoundText text-xl ">
