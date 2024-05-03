@@ -5,9 +5,11 @@ import { IoMdClose } from "react-icons/io";
 import { getCookie } from "../../services/cookieOperations";
 import { jwtDecode } from "jwt-decode";
 import { addCouponToLocalStorage } from "../../services/CouponDetails";
+import { AuthContext } from "../../contexts/AuthContexts";
 
 const CouponBox = () => {
   const { setCouponDiscount, setIsCouponMenuOpen } = useContext(CartContext);
+  const { login, isUserLoggedIn } = useContext(AuthContext);
   const [done, SetDone] = useState(false);
   const [userData, setUserData] = useState("");
   const [checkboxes, setCheckboxes] = useState({
@@ -41,9 +43,14 @@ const CouponBox = () => {
     }
 
     if (done) {
-      const userData = jwtDecode(getCookie("sscape"));
-      setUserData(userData.userData);
-      addCouponToLocalStorage(userData.userData.user_id, newDiscount);
+      if (isUserLoggedIn) {
+        const userData = jwtDecode(getCookie("sscape"));
+        setUserData(userData.userData);
+        addCouponToLocalStorage(userData.userData.user_id, newDiscount);
+      } else {
+        addCouponToLocalStorage("Local", newDiscount);
+      }
+
       setCouponDiscount(newDiscount);
       setIsCouponMenuOpen(false);
     }

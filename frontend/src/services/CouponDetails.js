@@ -4,11 +4,9 @@ function addCouponToLocalStorage(userID, couponPrice = 0) {
 
   if (existingUserData) {
     userDataArray = JSON.parse(existingUserData);
-    console.log("Present");
     let existingUserDataIndex = userDataArray.findIndex(
       (item) => item.userID === userID
     );
-    console.log(existingUserDataIndex);
 
     if (existingUserDataIndex !== -1) {
       userDataArray[existingUserDataIndex].couponPrice = couponPrice;
@@ -18,7 +16,6 @@ function addCouponToLocalStorage(userID, couponPrice = 0) {
   } else {
     userDataArray.push({ userID, couponPrice });
   }
-  console.log(userDataArray);
   localStorage.setItem("UserCouponDetails", JSON.stringify(userDataArray));
 }
 

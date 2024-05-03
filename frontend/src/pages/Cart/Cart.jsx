@@ -69,6 +69,14 @@ const Cart = () => {
     setIsCouponMenuOpen(true);
   };
 
+  const PlaceOrder = () => {
+    if (isUserLoggedIn) {
+      navigate("/checkout");
+    } else {
+      navigate("/signin");
+    }
+  };
+
   const GetPermUserCartData = async () => {
     if (isUserLoggedIn) {
       const token = getCookie("sscape");
@@ -132,10 +140,14 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    const userData = jwtDecode(getCookie("sscape"));
-    setDiscountFromLocalStorage(
-      getItemAndCouponPrice(userData.userData.user_id).couponPrice
-    );
+    if (isUserLoggedIn) {
+      const userData = jwtDecode(getCookie("sscape"));
+      setDiscountFromLocalStorage(
+        getItemAndCouponPrice(userData.userData.user_id).couponPrice
+      );
+    } else {
+      setDiscountFromLocalStorage(getItemAndCouponPrice("Local").couponPrice);
+    }
   }, [couponDiscount]);
 
   useEffect(() => {
@@ -313,7 +325,7 @@ const Cart = () => {
                 </div>
                 <div
                   className=" CheckOutButton flex justify-center align-middle items-center pt-2"
-                  onClick={() => navigate("/checkout")}
+                  onClick={() => PlaceOrder()}
                 >
                   <button className=" CheckoutClick ">PLACE ORDER</button>
                 </div>
