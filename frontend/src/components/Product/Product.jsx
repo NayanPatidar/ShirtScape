@@ -50,7 +50,6 @@ const Product = () => {
   const productData = () => {
     if (selectedSize != "") {
       if (!isUserLoggedIn) {
-        console.log("Add To Cart - Local");
         AddProduct({
           product_id: `${product.product.product_id}`,
           size: `${selectedSize}`,

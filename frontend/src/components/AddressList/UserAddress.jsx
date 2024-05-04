@@ -58,7 +58,6 @@ export const AddressList = () => {
           logout();
           navigate("/signin");
         } else {
-          console.log("Fetch : ", data);
           setAddress(data.Address[0].address.address);
         }
       } catch (error) {

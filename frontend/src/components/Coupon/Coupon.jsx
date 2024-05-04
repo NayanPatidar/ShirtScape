@@ -44,6 +44,7 @@ const CouponBox = () => {
 
     if (done) {
       if (isUserLoggedIn) {
+        console.log("Added Discount Coupon");
         const userData = jwtDecode(getCookie("sscape"));
         setUserData(userData.userData);
         addCouponToLocalStorage(userData.userData.user_id, newDiscount);
@@ -86,7 +87,7 @@ const CouponBox = () => {
             checked={checkboxes.checkbox2}
             onChange={handleCheckboxChange}
           />
-          <div className=" Coupons flex flex-col  justify-center w-full ">
+          <div className=" Coupons flex flex-col  justify-center w-full">
             <span className=" CouponName">MUSTGRAB50</span>
             <span className=" CouponBoxDescription">
               Get ₹50 OFF ON SHOPPING
@@ -95,8 +96,8 @@ const CouponBox = () => {
         </div>
       </div>
       <div
-        className=" SelectionSubmit flex justify-center items-center"
-        onClick={handleApply}
+        className=" SelectionSubmit flex justify-center items-center cursor-pointer"
+        onClick={() => handleApply()}
       >
         APPLY
       </div>
