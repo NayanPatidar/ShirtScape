@@ -3,13 +3,41 @@ import Navbar from "../../components/Navbar/Nav";
 import "./Menu.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import { SearchContext } from "../../contexts/contexts";
+import { getCookie } from "../../services/cookieOperations";
+import { AuthContext } from "../../contexts/AuthContexts";
 
 const Order = () => {
-  
   const { setCartVisibility } = useContext(SearchContext);
+  const { isUserLoggedIn } = useContext(AuthContext);
+
+  const FetchOrder = async () => {
+    if (isUserLoggedIn) {
+      const token = getCookie("sscape");
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      try {
+        let response = await fetch(
+          `http://localhost:8080/FetchOrders`,
+          options
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch orders");
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    }
+  };
 
   useEffect(() => {
     setCartVisibility(true);
+    FetchOrder();
   }, []);
 
   return (
