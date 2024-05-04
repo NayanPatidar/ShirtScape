@@ -13,11 +13,13 @@ import {
   DeleteProductFromLocalStorage,
   DeleteProductOfWishlistFromLocalStorage,
 } from "../../services/storageOperations";
+import { SearchContext } from "../../contexts/contexts";
 
 const Wishlist = () => {
   const [WishlistProducts, SetWishlistProducts] = useState("");
   const { isUserLoggedIn } = useContext(AuthContext);
   const [WishlistChanged, setWishlistChange] = useState(false);
+  const { setCartVisibility } = useContext(SearchContext);
 
   const FetchTheWishlistProducts = () => {
     const token = getCookie("sscape");
@@ -103,6 +105,7 @@ const Wishlist = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setCartVisibility(true);
     if (isUserLoggedIn) {
       FetchTheWishlistProducts();
     } else {

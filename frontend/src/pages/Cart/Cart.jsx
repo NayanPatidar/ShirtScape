@@ -80,8 +80,6 @@ const Cart = () => {
   const GetPermUserCartData = async () => {
     if (isUserLoggedIn) {
       const token = getCookie("sscape");
-      console.log(`Fetching Data for the Cart ${token}`);
-
       const options = {
         method: "GET",
         headers: {
@@ -105,7 +103,6 @@ const Cart = () => {
 
       if (FetchedLPermCartData.ok) {
         const data = await FetchedLPermCartData.json();
-        console.log(data.CartData);
         SetCartItems(data.CartData);
         setItemsNum(data.CartData.length);
       }
@@ -115,6 +112,7 @@ const Cart = () => {
   const FetchCartData = async () => {
     let LocalCartData = JSON.parse(localStorage.getItem("ShirtScape_Cart"));
     if (!LocalCartData) {
+      setItemsNum(0);
       return;
     }
     try {
@@ -129,6 +127,7 @@ const Cart = () => {
           body: JSON.stringify({ productIds }),
         }
       );
+
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         SetCartItems(data.CartData);
@@ -141,14 +140,20 @@ const Cart = () => {
 
   useEffect(() => {
     if (isUserLoggedIn) {
+      console.log("Cart Coupon");
       const userData = jwtDecode(getCookie("sscape"));
-      setDiscountFromLocalStorage(
-        getItemAndCouponPrice(userData.userData.user_id).couponPrice
-      );
+      const coupPrice = getItemAndCouponPrice(userData.userData.user_id);
+
+      if (userData != null && coupPrice != null) {
+        setDiscountFromLocalStorage(coupPrice.couponPrice);
+      }
     } else {
-      setDiscountFromLocalStorage(getItemAndCouponPrice("Local").couponPrice);
+      const coupPrice = getItemAndCouponPrice("Local");
+      if (coupPrice != null) {
+        setDiscountFromLocalStorage(coupPrice.couponPrice);
+      }
     }
-  }, [couponDiscount]);
+  }, [couponDiscount, IsCouponMenuOpen]);
 
   useEffect(() => {
     if (isUserLoggedIn) {
