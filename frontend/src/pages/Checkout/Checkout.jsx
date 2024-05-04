@@ -6,7 +6,11 @@ import "./Checkout.css";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { getCookie } from "../../services/cookieOperations";
 import { jwtDecode } from "jwt-decode";
-import { getItemAndCouponPrice } from "../../services/CouponDetails";
+import {
+  getItemAndCouponPrice,
+  setUserCouponDetails,
+} from "../../services/CouponDetails";
+import { ConfirmOrder } from "../../handlers/OrderConfirmation";
 
 const CheckoutPage = () => {
   const { setCartVisibility } = useContext(SearchContext);
@@ -17,10 +21,22 @@ const CheckoutPage = () => {
   const [AddressIndex, setAddressIndex] = useState(-1);
 
   function handleAddressSelection(index) {
-    setAddress(index);
+    setAddressIndex(index);
   }
 
-  const ConfirmOrder = () => {};
+  const ConfirmationOfOrder = () => {
+    const userData = jwtDecode(getCookie("sscape"));
+    if (AddressIndex != -1) {
+      const orderPlaced = ConfirmOrder(AddressIndex);
+      if (orderPlaced) {
+        console.log("Order Placed");
+        setUserCouponDetails(userData.userData.user_id);
+        navigate("/men");
+      } else {
+        console.log("Failed to place order");
+      }
+    }
+  };
 
   const fetchAddress = async () => {
     try {
@@ -78,6 +94,9 @@ const CheckoutPage = () => {
 
       if (FetchedLPermCartData.ok) {
         const data = await FetchedLPermCartData.json();
+        if (data.CartData[0].pricedetails.total_mrp == null) {
+          navigate("/cart");
+        }
         setPriceDetails(data.CartData[0].pricedetails);
       }
     }
@@ -187,10 +206,7 @@ const CheckoutPage = () => {
                         -₹{couponDiscount}
                       </span>
                     ) : (
-                      <div
-                        className="ApplyCouponPrice cursor-pointer"
-                        // onClick={() => handleCouponMenuOpen()}
-                      >
+                      <div className="ApplyCouponPrice cursor-pointer">
                         ------
                       </div>
                     )}
@@ -217,7 +233,7 @@ const CheckoutPage = () => {
             </div>
             <div
               className=" CheckOutButton flex justify-center align-middle items-center pt-2"
-              onClick={() => ConfirmOrder()}
+              onClick={() => ConfirmationOfOrder()}
             >
               <button className=" CheckoutClick ">CONFIRM ORDER</button>
             </div>

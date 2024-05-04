@@ -40,4 +40,19 @@ function getItemAndCouponPrice(userID) {
   }
 }
 
-export { getItemAndCouponPrice, addCouponToLocalStorage };
+function setUserCouponDetails(userId) {
+  let existingUserData = localStorage.getItem("UserCouponDetails");
+  let userDataArray = [];
+
+  if (existingUserData) {
+    userDataArray = JSON.parse(existingUserData);
+    let existingUserDataIndex = userDataArray.findIndex(
+      (item) => item.userID === userId
+    );
+    if (existingUserDataIndex !== -1) {
+      userDataArray[existingUserDataIndex].couponPrice = "0";
+    }
+  }
+}
+
+export { getItemAndCouponPrice, addCouponToLocalStorage , setUserCouponDetails};
