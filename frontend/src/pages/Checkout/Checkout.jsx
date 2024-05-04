@@ -14,39 +14,43 @@ const CheckoutPage = () => {
   const [priceDetails, setPriceDetails] = useState("");
   const [couponDiscount, setCouponDiscount] = useState(0);
   const [Address, setAddress] = useState("");
+  const [AddressIndex, setAddressIndex] = useState(-1);
 
-  useEffect(() => {
-    const fetchAddress = async () => {
-      try {
-        const token = getCookie("sscape");
-        const options = {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
+  function handleAddressSelection(index) {
+    setAddress(index);
+  }
 
-        let UserAddress = await fetch(
-          `http://localhost:8080/FetchAddress`,
-          options
-        );
-        const data = await UserAddress.json();
+  const ConfirmOrder = () => {};
 
-        if (!UserAddress.ok || UserAddress.message) {
-          console.log(`Error: ${data.error}`);
-          logout();
-          navigate("/signin");
-        } else {
-          console.log("Fetch : ", data);
-          setAddress(data.Address[0].address.address);
-        }
-      } catch (error) {
-        console.error("Error during login: ", error.message);
+  const fetchAddress = async () => {
+    try {
+      const token = getCookie("sscape");
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      let UserAddress = await fetch(
+        `http://localhost:8080/FetchAddress`,
+        options
+      );
+      const data = await UserAddress.json();
+
+      if (!UserAddress.ok || UserAddress.message) {
+        console.log(`Error: ${data.error}`);
+        logout();
+        navigate("/signin");
+      } else {
+        console.log("Fetch : ", data);
+        setAddress(data.Address[0].address.address);
       }
-    };
-    fetchAddress();
-  }, []);
+    } catch (error) {
+      console.error("Error during login: ", error.message);
+    }
+  };
 
   const CartItemsPriceDetailsFetch = async () => {
     if (isUserLoggedIn) {
@@ -74,26 +78,23 @@ const CheckoutPage = () => {
 
       if (FetchedLPermCartData.ok) {
         const data = await FetchedLPermCartData.json();
-        console.log(data.CartData[0].pricedetails);
         setPriceDetails(data.CartData[0].pricedetails);
       }
     }
   };
 
   useEffect(() => {
-    const userData = jwtDecode(getCookie("sscape"));
-    setCouponDiscount(
-      getItemAndCouponPrice(userData.userData.user_id).couponPrice
-    );
-  });
-
-  useEffect(() => {
     setCartVisibility(false);
-  }, []);
 
-  useEffect(() => {
     if (isUserLoggedIn) {
+      fetchAddress();
+      const userData = jwtDecode(getCookie("sscape"));
+      setCouponDiscount(
+        getItemAndCouponPrice(userData.userData.user_id).couponPrice
+      );
       CartItemsPriceDetailsFetch();
+    } else {
+      navigate("/signin");
     }
   }, []);
 
@@ -127,14 +128,14 @@ const CheckoutPage = () => {
               Address.map((item, index) => (
                 <div key={index} className="CheckoutAddressCard">
                   <label>
-
                     <span className="AddressUserName flex flex-row justify-between items-center">
                       <span>{item.name}</span>
                       <input
-                      type="radio"
-                      name="selectedAddress"
-                      value={index}
-                    />
+                        type="radio"
+                        name="selectedAddress"
+                        value={index}
+                        onChange={() => handleAddressSelection(index)}
+                      />
                     </span>
                     <p>
                       <small>{item.street}</small>
@@ -189,7 +190,9 @@ const CheckoutPage = () => {
                       <div
                         className="ApplyCouponPrice cursor-pointer"
                         // onClick={() => handleCouponMenuOpen()}
-                      ></div>
+                      >
+                        ------
+                      </div>
                     )}
                   </span>
                 </div>
@@ -214,7 +217,7 @@ const CheckoutPage = () => {
             </div>
             <div
               className=" CheckOutButton flex justify-center align-middle items-center pt-2"
-              // onClick={() => navigate("/checkout")}
+              onClick={() => ConfirmOrder()}
             >
               <button className=" CheckoutClick ">CONFIRM ORDER</button>
             </div>

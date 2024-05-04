@@ -62,7 +62,6 @@ function Home() {
       const newArrivalData = await NewArrivalsData.json();
       setCategory(categoryData.images);
       setNewArrivals(newArrivalData.tshirtsDetails);
-      console.log(newArrivalData.tshirtsDetails);
 
       if (JSON.stringify(data) !== JSON.stringify(TShirts)) {
         setTShirts(data.tshirtsDetails);
