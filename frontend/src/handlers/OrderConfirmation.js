@@ -1,10 +1,6 @@
-export const ConfirmOrder = async (
-  product_id,
-  quantity,
-  size,
-  amountPaid,
-  addressId
-) => {
+import { getCookie } from "../services/cookieOperations";
+
+export const ConfirmOrder = async (AddressIndex) => {
   try {
     const token = getCookie("sscape");
     const options = {
@@ -14,15 +10,11 @@ export const ConfirmOrder = async (
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        product_id: product_id,
-        quantity: quantity,
-        size: size,
-        amountPaid: amountPaid,
-        addressId: addressId,
+        address_Id: AddressIndex,
       }),
     };
 
-    fetch("http://localhost:8080/address/add", options)
+    fetch("http://localhost:8080/order/confirmation", options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -30,12 +22,15 @@ export const ConfirmOrder = async (
         return response.json();
       })
       .then((data) => {
-        console.log("Address addition successful:", data);
+        console.log("Order Placed Successfully:", data);
+        return 1;
       })
       .catch((error) => {
         console.error("Error adding address:", error);
+        return 0;
       });
   } catch (error) {
-    console.error("Failed to Add the Address : ", error.message);
+    console.error("Failed to Place Order : ", error.message);
+    return 0;
   }
 };

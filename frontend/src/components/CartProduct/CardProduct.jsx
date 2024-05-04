@@ -101,9 +101,6 @@ const CartProduct = ({ products, index }) => {
       (mainSize != products.cloths.size ||
         mainQuantity != products.cloths.quantity)
     ) {
-      console.log(
-        `${mainSize}-${products.cloths.size}   ${mainQuantity}-${products.cloths.quantity}`
-      );
       const token = getCookie("sscape");
       const data = {
         product_id: products.cloths.product_id,
@@ -119,7 +116,6 @@ const CartProduct = ({ products, index }) => {
         },
         body: JSON.stringify(data),
       };
-      console.log("Update Item Call");
 
       const updateCartItem = async () => {
         try {
