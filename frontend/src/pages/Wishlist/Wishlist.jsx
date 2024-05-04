@@ -10,7 +10,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import {
   AddProduct,
-  DeleteProductFromLocalStorage,
   DeleteProductOfWishlistFromLocalStorage,
 } from "../../services/storageOperations";
 import { SearchContext } from "../../contexts/contexts";
@@ -38,7 +37,6 @@ const Wishlist = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("Data from the Wishlist : ", data.products);
         SetWishlistProducts(data.products);
       })
       .catch((error) => {

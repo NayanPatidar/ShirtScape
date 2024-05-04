@@ -108,9 +108,11 @@ const CheckoutPage = () => {
     if (isUserLoggedIn) {
       fetchAddress();
       const userData = jwtDecode(getCookie("sscape"));
-      setCouponDiscount(
-        getItemAndCouponPrice(userData.userData.user_id).couponPrice
-      );
+      const CouponPrice = getItemAndCouponPrice(userData.userData.user_id);
+      if (CouponPrice != null) {
+        setCouponDiscount(CouponPrice.couponPrice);
+      }
+
       CartItemsPriceDetailsFetch();
     } else {
       navigate("/signin");
