@@ -86,7 +86,6 @@ const Address = () => {
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    console.log("Submit", JSON.stringify(addressInForm));
                     submitHandler();
                   }}
                   className="AddresFormMain flex flex-col gap-2 mb-10"

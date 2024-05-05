@@ -140,7 +140,6 @@ const Cart = () => {
 
   useEffect(() => {
     if (isUserLoggedIn) {
-      console.log("Cart Coupon");
       const userData = jwtDecode(getCookie("sscape"));
       const coupPrice = getItemAndCouponPrice(userData.userData.user_id);
 

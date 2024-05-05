@@ -135,14 +135,12 @@ const ProductsPage = () => {
     }
 
     const queryString = queryParams.toString();
-    // console.log(queryString);
     const url = queryString
       ? `http://localhost:8080/products/men?${queryString}`
       : "http://localhost:8080/products/men";
 
     const response = await fetch(url);
     const ProductsData = await response.json();
-    // console.log(url);
 
     if (queryString == "" || !queryString.includes("sort")) {
       const shuffledData = shuffleArray(ProductsData.clothsData.slice(), seed);
@@ -157,10 +155,6 @@ const ProductsPage = () => {
   useEffect(() => {
     fetchProductsData();
   }, [CategoryFilter, SortOption, DiscountFilter, SizeFilter, searchTerm]);
-
-  // useEffect(() => {
-  //   console.log(SizeFilter);
-  // }, [SizeFilter]);
 
   return (
     <div>

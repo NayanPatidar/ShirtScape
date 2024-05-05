@@ -51,7 +51,6 @@ const Wishlist = () => {
     }
     try {
       const productIds = LocalCartData.map((item) => parseInt(item.id));
-      console.log(JSON.stringify({ productIds }));
       let FetchedLocalCartData = await fetch(
         "http://localhost:8080/wishlist/tempUser",
         {

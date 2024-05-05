@@ -54,7 +54,6 @@ const CartProduct = ({ products, index }) => {
   };
 
   const ProductIdCheck = () => {
-    console.log("Navigate Clicked");
     setCartVisibility(true);
     navigate(`/products/${products.cloths.product_id}`);
   };

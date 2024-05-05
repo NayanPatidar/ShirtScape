@@ -64,7 +64,6 @@ const Product = () => {
     if (selectedSize != "") {
       if (isUserLoggedIn) {
         const token = getCookie("sscape");
-        console.log(token);
         const data = {
           product_id: productId,
           quantity: 1,

@@ -24,7 +24,6 @@ const CartProductSize = () => {
     setSize(selectedSize);
     setReference(itemIndex);
     setSizeMenuDone(!SizeMenuDone);
-    console.log("Reference has been set");
     handleCloseSizeMenu();
   };
 
