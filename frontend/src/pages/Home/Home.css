@@ -26,8 +26,9 @@
 }
 
 .EachCategoryProp {
+  position: absolute;
   margin-top: 1%;
-  height: 385px;
+  height: 450px;
   overflow: hidden;
 }
 
@@ -47,6 +48,7 @@
 
 .CategoriesMainCard {
   width: 32%;
+  height: auto;
 }
 
 .CategoryNameEachCard {

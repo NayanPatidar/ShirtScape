@@ -110,7 +110,7 @@ function Home() {
         </div>
 
         <span className="TopSellingTitle mt-20">TOP SELLING</span>
-        <div className="TopSellingProds flex flex-row gap-5 justify-around items-center mt-3 mb-3">
+        <div className="TopSellingProds flex flex-row gap-5 justify-around items-center mt-3 p-5">
           {TShirts &&
             TShirts.map((tShirt, index) => (
               <div key={index} className="" style={{ width: "23.5%" }}>
@@ -127,7 +127,7 @@ function Home() {
             ))}
         </div>
 
-        <span className="Categories mt-24">NEW ARRIVALS</span>
+        <span className="Categories mt-20">NEW ARRIVALS</span>
         <div className="NewArrivalsTypes mb-10 mt-6">
           {NewArrivals &&
             NewArrivals.map((category, index) => (
