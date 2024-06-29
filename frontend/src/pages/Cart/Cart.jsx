@@ -337,7 +337,7 @@ const Cart = () => {
             </div>
           </div>
         ) : itemsNum == -1 ? (
-          " "
+          <h1 className=" w-screen flex flex-row justify-center items-center mt-5 text-4xl font-bold">Loading ...</h1>
         ) : (
           <span className="NoItemDiv text-4xl font-semibold flex justify-center items-center align-middle h-3/5">
             No Item in the cart

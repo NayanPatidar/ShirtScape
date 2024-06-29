@@ -8,7 +8,7 @@ import Navbar from "../../components/Navbar/Nav";
 import { SearchContext } from "../../contexts/contexts";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState(null);
   const [SortFeatures, setSortFeatures] = useState(false);
   const [SortOption, setSortOption] = useState("Recommended");
   const SortObj = {

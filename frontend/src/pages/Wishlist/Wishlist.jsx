@@ -15,7 +15,7 @@ import {
 import { SearchContext } from "../../contexts/contexts";
 
 const Wishlist = () => {
-  const [WishlistProducts, SetWishlistProducts] = useState("");
+  const [WishlistProducts, SetWishlistProducts] = useState(null);
   const { isUserLoggedIn } = useContext(AuthContext);
   const [WishlistChanged, setWishlistChange] = useState(false);
   const { setCartVisibility } = useContext(SearchContext);
@@ -114,62 +114,78 @@ const Wishlist = () => {
     <div>
       <div className="MainWishlistBox">
         {WishlistProducts ? (
-          <div>
-            <span className=" WishlistAreaTitle">My Wishlist</span>
-            <div className=" grid grid-cols-4 gap-10 mt-5">
-              {WishlistProducts != "" &&
-                WishlistProducts &&
-                WishlistProducts.map((product, index) => (
-                  <div key={index} className=" WishlistProductCard ">
-                    <div className=" flex flex-col justify-end items-end relative">
-                      <IoClose
-                        className="text-white z-100 absolute top-2 right-2 size-5 cursor-pointer"
-                        onClick={() => {
-                          HandleRemoveProductFromWishlist(
-                            product.cloths.product_id
-                          );
-                        }}
-                      />
-                      <img
-                        src={product.cloths.photo1}
-                        className=" WishlsitProductPhoto cursor-pointer"
+          WishlistProducts.length > 0 ? (
+            <div>
+              <span className=" WishlistAreaTitle">My Wishlist</span>
+              <div className=" grid grid-cols-4 gap-10 mt-5">
+                {WishlistProducts != "" &&
+                  WishlistProducts &&
+                  WishlistProducts.map((product, index) => (
+                    <div key={index} className=" WishlistProductCard ">
+                      <div className=" flex flex-col justify-end items-end relative">
+                        <IoClose
+                          className="text-white z-100 absolute top-2 right-2 size-5 cursor-pointer"
+                          onClick={() => {
+                            HandleRemoveProductFromWishlist(
+                              product.cloths.product_id
+                            );
+                          }}
+                        />
+                        <img
+                          src={product.cloths.photo1}
+                          className=" WishlsitProductPhoto cursor-pointer"
+                          onClick={() =>
+                            ProductClickeOnWishlist(product.cloths.product_id)
+                          }
+                        />
+                      </div>
+                      <div className=" flex flex-col justify-center pl-3 pr-3">
+                        <span className="WishlistProductName mt-2">
+                          {product.cloths.product_name}
+                        </span>
+                        <span className="WishlistProductDesc">
+                          {product.cloths.genericdesc}
+                        </span>
+                        <span className="WishlistProductPrice flex flex-row gap-2">
+                          <span className=" CurrentPrice">
+                            ₹{product.cloths.price}
+                          </span>
+                          <span className=" CurrentMRP">
+                            ₹{product.cloths.mrp}
+                          </span>
+                        </span>
+                      </div>
+                      <div
+                        className="MoveToCartButton flex flex-row cursor-pointer"
                         onClick={() =>
-                          ProductClickeOnWishlist(product.cloths.product_id)
+                          MoveProductToCartFunction(product.cloths.product_id)
                         }
-                      />
-                    </div>
-                    <div className=" flex flex-col justify-center pl-3 pr-3">
-                      <span className="WishlistProductName mt-2">
-                        {product.cloths.product_name}
-                      </span>
-                      <span className="WishlistProductDesc">
-                        {product.cloths.genericdesc}
-                      </span>
-                      <span className="WishlistProductPrice flex flex-row gap-2">
-                        <span className=" CurrentPrice">
-                          ₹{product.cloths.price}
+                      >
+                        <span className=" ButtonTextMoveToCart">
+                          MOVE TO CART
                         </span>
-                        <span className=" CurrentMRP">
-                          ₹{product.cloths.mrp}
-                        </span>
-                      </span>
+                      </div>
                     </div>
-                    <div
-                      className="MoveToCartButton flex flex-row cursor-pointer"
-                      onClick={() =>
-                        MoveProductToCartFunction(product.cloths.product_id)
-                      }
-                    >
-                      <span className=" ButtonTextMoveToCart">
-                        MOVE TO CART
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className=" flex flex-col gap-5 justify-center items-center align-middle mt-52">
+              <span className="text-3xl font-semibold  ">
+                Nothing in the Wishlist ! Shop to add it
+              </span>
+              <button
+                className=" bg-black w-36 text-white text-xl "
+                onClick={() => navigate("/men")}
+              >
+                SHOP NOW
+              </button>
+            </div>
+          )
         ) : (
-          "Nothing in the Wishlist ! Shop to add it"
+          <div className=" flex flex-col gap-5 justify-center items-center align-middle mt-52">
+            <span className="text-3xl font-semibold  ">Loading ...</span>
+          </div>
         )}
       </div>
     </div>

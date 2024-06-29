@@ -49,7 +49,7 @@ const Order = () => {
         </div>
         <div className="MyProfile h-96 w-4/6 pl-10">
           <span className=" MyProfileTitle">ORDERS</span>
-          <div className=" flex flex-col gap-5">
+          <div className=" flex flex-col gap-5 pb-5">
             {OrderDetails != "" && OrderDetails ? (
               OrderDetails.map((item, index) => (
                 <div key={index} className=" flex flex-row border">
