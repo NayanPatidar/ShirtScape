@@ -10,26 +10,6 @@ import Navbar from "../../components/Navbar/Nav";
 import { SearchContext } from "../../contexts/contexts";
 import { useNavigate } from "react-router-dom";
 
-const slideImages = [
-  {
-    url: banner1,
-  },
-  {
-    url: banner2,
-  },
-  {
-    url: banner3,
-  },
-];
-
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "400px",
-  backgroundSize: "cover",
-};
-
 function Home() {
   const [TShirts, setTShirts] = useState();
   const [Categories, setCategory] = useState();
@@ -78,16 +58,19 @@ function Home() {
 
   return (
     <div className=" cursor-default">
-      <div className="slide-container pt-16">
-        <Fade>
-          {slideImages.map((image, index) => (
-            <div key={index}>
-              <div
-                style={{ ...divStyle, backgroundImage: `url(${image.url})` }}
-              ></div>
-            </div>
-          ))}
-        </Fade>
+      <div className=" containerSlider">
+        <div className="slider-wrapper ">
+          <div className=" slider">
+            <img id="slide-1" src={banner1} />
+            <img id="slide-2" src={banner2} />
+            <img id="slide-3" src={banner3} />
+          </div>
+          <div className=" slider-nav">
+            <a href="#slide-1"></a>
+            <a href="#slide-2"></a>
+            <a href="#slide-3"></a>
+          </div>
+        </div>
       </div>
 
       <div className=" flex flex-col justify-center items-center align-middle mt-16">
