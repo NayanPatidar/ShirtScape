@@ -3,10 +3,10 @@ import ProductsPageCard from "../ProductsCard/ProductsPageCards";
 
 const ProductGrid = ({ productsData }) => {
   return (
-    <div className="ProductsListMain p-5 pb-24 ">
+    <div className="ProductsListMain ">
       {productsData &&
         (productsData.length > 0 ? (
-          <div className=" ProductsArea grid grid-cols-4 gap-y-24 justify-items-center">
+          <div className=" ProductsArea p-2 pb-40 grid grid-cols-4 gap-y-40 justify-items-center overflow-hidden">
             {productsData.map((product, index) => (
               <div key={index} className=" ProductBoxMain z-0 ">
                 <ProductsPageCard
