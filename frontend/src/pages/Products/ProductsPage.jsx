@@ -157,7 +157,7 @@ const ProductsPage = () => {
   }, [CategoryFilter, SortOption, DiscountFilter, SizeFilter, searchTerm]);
 
   return (
-    <div>
+    <div className=" flex justify-center ">
       <div
         className="ProductsPageMain flex flex-col pt-16"
         onClick={sortToggleOff}

@@ -1,0 +1,18 @@
+
+/* .ProductBoxMain {
+    height: 12rem;
+} */
+
+@media (min-width: 768px ) {
+    .ProductBoxMain {
+        height: 18rem;
+    }
+}
+
+@media (min-width: 1024px ) {
+    .ProductBoxMain {
+        height: 24rem;
+    }
+}
+
+

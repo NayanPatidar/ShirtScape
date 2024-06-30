@@ -1,5 +1,6 @@
 .ProductsPageMain {
-  width: 100%;
+  width: 90rem;
+  display:  flex;
 }
 
 .FilterTableMain {
