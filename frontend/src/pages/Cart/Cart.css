@@ -18,6 +18,14 @@
   border-left: solid 1px rgb(238, 238, 238);
 }
 
+.ProductsPriceDataBox {
+  height: 85vh;
+}
+
+.CartItemsList {
+  height: 89vh;
+}
+
 .NoItemDiv {
   height: 300px;
 }

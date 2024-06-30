@@ -249,13 +249,16 @@ const Cart = () => {
                 handleCloseQuantityMenu();
               }}
             >
-              <div className=" w-6/12 flex flex-col gap-4 pb-3">
+              <div
+                className=" w-6/12 flex flex-col gap-4 pb-3 "
+                style={itemsNum < 4 ? { height: "89.3vh" } : { height: "100%" }}
+              >
                 {CartItems.map((products, index) => (
                   <CartProduct products={products} key={index} index={index} />
                 ))}
               </div>
               <div className="ProductsPricesBlock text-black cursor-default">
-                <div className=" p-2 flex flex-col">
+                <div className="ProductsPriceDataBox p-2 flex flex-col">
                   <div className=" flex flex-col gap-4">
                     <span className="CouponsTitle">COUPONS</span>
                     <div className="CouponsApplication flex flex-row justify-between">
