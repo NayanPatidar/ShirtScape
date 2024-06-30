@@ -56,19 +56,43 @@ function Home() {
     navigate(`/products/${ProductId}`);
   };
 
+  useEffect(() => {
+    var counter = 2;
+    const interval = setInterval(() => {
+      document.getElementById("radio" + counter).checked = true;
+
+      counter++;
+      if (counter > 3) {
+        counter = 1;
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className=" cursor-default">
       <div className=" containerSlider">
         <div className="slider-wrapper ">
-          <div className=" slider">
-            <img id="slide-1" src={banner1} />
+          <div className="slider">
+            <input type="radio" name="radio-btn" id="radio1" />
+            <input type="radio" name="radio-btn" id="radio2" />
+            <input type="radio" name="radio-btn" id="radio3" />
+
+            <img id="slide-1" src={banner1} className="first" />
             <img id="slide-2" src={banner2} />
             <img id="slide-3" src={banner3} />
+
+            <div className="navigation-auto">
+              <div className="auto-btn1"></div>
+              <div className="auto-btn2"></div>
+              <div className="auto-btn3"></div>
+            </div>
           </div>
-          <div className=" slider-nav">
-            <a href="#slide-1"></a>
-            <a href="#slide-2"></a>
-            <a href="#slide-3"></a>
+          <div className="slider-nav">
+            <label for="radio1" className="manual-btn"></label>
+            <label for="radio2" className="manual-btn"></label>
+            <label for="radio3" className="manual-btn"></label>
           </div>
         </div>
       </div>
