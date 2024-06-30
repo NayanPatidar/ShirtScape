@@ -144,44 +144,50 @@ const CheckoutPage = () => {
         <div className="DetailsSectionCheckout flex flex-row gap-10 justify-center">
           <div className=" w-3/5 flex flex-col gap-5 ">
             <span>ADDRESS</span>
-            {Address != "" ? (
-              Address.map((item, index) => (
-                <div key={index} className="CheckoutAddressCard">
-                  <label>
-                    <span className="AddressUserName flex flex-row justify-between items-center">
-                      <span>{item.name}</span>
-                      <input
-                        type="radio"
-                        name="selectedAddress"
-                        value={index}
-                        onChange={() => handleAddressSelection(index)}
-                      />
-                    </span>
-                    <p>
-                      <small>{item.street}</small>
-                    </p>
-                    <p>
-                      <small>{item.city}, </small>
-                      <small>{item.state}, </small>
-                      <small>{item.zipCode}</small>
-                    </p>
-                    <p>
-                      <small>{item.country}</small>
-                    </p>
-                    <p>
-                      <small className=" flex flex-row gap-1">
-                        Mobile :
-                        <span className=" text-red-500 font-medium">
-                          {item.mobile}
-                        </span>
-                      </small>
-                    </p>
-                  </label>
-                </div>
-              ))
+            {Address ? (
+              Address != "" ? (
+                Address.map((item, index) => (
+                  <div key={index} className="CheckoutAddressCard">
+                    <label>
+                      <span className="AddressUserName flex flex-row justify-between items-center">
+                        <span>{item.name}</span>
+                        <input
+                          type="radio"
+                          name="selectedAddress"
+                          value={index}
+                          onChange={() => handleAddressSelection(index)}
+                        />
+                      </span>
+                      <p>
+                        <small>{item.street}</small>
+                      </p>
+                      <p>
+                        <small>{item.city}, </small>
+                        <small>{item.state}, </small>
+                        <small>{item.zipCode}</small>
+                      </p>
+                      <p>
+                        <small>{item.country}</small>
+                      </p>
+                      <p>
+                        <small className=" flex flex-row gap-1">
+                          Mobile :
+                          <span className=" text-red-500 font-medium">
+                            {item.mobile}
+                          </span>
+                        </small>
+                      </p>
+                    </label>
+                  </div>
+                ))
+              ) : (
+                <span className="NoAddressFoundText text-xl ">
+                  No Address Found !
+                </span>
+              )
             ) : (
               <span className="NoAddressFoundText text-xl ">
-                No Address Found !
+                Loading ...
               </span>
             )}
           </div>
