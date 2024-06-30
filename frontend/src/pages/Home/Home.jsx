@@ -93,7 +93,7 @@ function Home() {
         </div>
 
         <span className="TopSellingTitle mt-20">TOP SELLING</span>
-        <div className="TopSellingProds flex flex-row gap-5 justify-around items-center mt-3 p-5">
+        <div className="TopSellingProds flex flex-row gap-5 justify-around items-center mt-3">
           {TShirts &&
             TShirts.map((tShirt, index) => (
               <div key={index} className="" style={{ width: "23.5%" }}>
