@@ -1,3 +1,12 @@
+.MainCartPage {
+  /* height: 100%; */
+}
+
+.CartPage {
+  height: 100%;
+  width: 100%;
+}
+
 .MainBackgroundCart {
   height: auto;
 }

@@ -174,12 +174,12 @@ const Wishlist = () => {
               <span className="text-3xl font-semibold  ">
                 Nothing in the Wishlist ! Shop to add it
               </span>
-              <button
-                className=" bg-black w-36 text-white text-xl "
+              <div
+                className=" bg-black w-52 h-12 justify-center items-center flex cursor-pointer text-white text-xl"
                 onClick={() => navigate("/men")}
               >
                 SHOP NOW
-              </button>
+              </div>
             </div>
           )
         ) : (
