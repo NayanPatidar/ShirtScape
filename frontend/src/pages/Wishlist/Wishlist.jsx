@@ -63,7 +63,13 @@ const Wishlist = () => {
       );
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
-        SetWishlistProducts(data.CartData);
+        if (data.CartData != undefined) {
+          SetWishlistProducts(data.CartData);
+        } else {
+          SetWishlistProducts({
+            products: [],
+          });
+        }
       }
     } catch (error) {
       console.log("Error fetching the data: ", error.message);
