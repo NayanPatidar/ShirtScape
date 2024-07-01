@@ -8,6 +8,7 @@ import Navbar from "../../components/Navbar/Nav";
 import { SearchContext } from "../../contexts/contexts";
 
 const ProductsPage = () => {
+  const [key, setKey] = useState(0);
   const [products, setProducts] = useState(null);
   const [SortFeatures, setSortFeatures] = useState(false);
   const [SortOption, setSortOption] = useState("Recommended");
@@ -35,13 +36,15 @@ const ProductsPage = () => {
 
   const { searchTerm } = useContext(SearchContext);
 
-  
   const { setCartVisibility } = useContext(SearchContext);
+
+  const forceUpdate = () => {
+    setKey((prevkey) => prevkey + 1);
+  };
 
   useEffect(() => {
     setCartVisibility(true);
   }, []);
-
 
   const sortToggle = () => {
     setSortFeatures(!SortFeatures);
@@ -55,6 +58,26 @@ const ProductsPage = () => {
 
   const setSortType = (SortType) => {
     setSortOption(SortType);
+  };
+
+  const clearAll = () => {
+    for (const key in DiscountFilter) {
+      if (DiscountFilter[key]) {
+        DiscountFilter[key] = false;
+      }
+    }
+
+    for (const key in CategoryFilter) {
+      if (CategoryFilter[key]) {
+        CategoryFilter[key] = false;
+      }
+    }
+
+    for (const key in SizeFilter) {
+      if (SizeFilter[key]) {
+        SizeFilter[key] = false;
+      }
+    }
   };
 
   const handleCheckboxChange = (event) => {
@@ -206,11 +229,22 @@ const ProductsPage = () => {
         </div>
 
         <div className=" flex flex-row">
-          <div className="FilterTableMain flex flex-col p-3 ">
+          <div className="FilterTableMain flex flex-col p-3 " key={key}>
             <div className=" flex flex-col  border-b border-gray-300 pb-3">
-              <span className=" font-semibold text-gray-700 text-sm pb-1">
-                PRODUCTS
-              </span>
+              <div className=" flex justify-between">
+                <span className=" font-semibold text-gray-700 text-sm pb-1">
+                  PRODUCTS
+                </span>
+                <span
+                  className=" font-semibold text-xs w-20 text-center text-gray-800 pb-1 pt-1 bg-gray-200 rounded-md cursor-pointer"
+                  onClick={() => {
+                    clearAll();
+                    forceUpdate();
+                  }}
+                >
+                  CLEAR ALL
+                </span>
+              </div>
               <div className="checkbox-example">
                 <input
                   type="checkbox"

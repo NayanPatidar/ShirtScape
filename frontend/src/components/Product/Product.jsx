@@ -16,6 +16,7 @@ import { SearchContext } from "../../contexts/contexts";
 const Product = () => {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
+  const [sizeNotSelectedError, SetSizeError] = useState("");
   const { login, isUserLoggedIn } = useContext(AuthContext);
   const { setCartVisibility } = useContext(SearchContext);
 
@@ -56,7 +57,7 @@ const Product = () => {
         });
       }
     } else {
-      console.log("Select the Size to Add to Cart");
+      SetSizeError("Select the Size to Add to Cart");
     }
   };
 
@@ -193,6 +194,9 @@ const Product = () => {
                   <span className=" w-5/12">WISHLIST</span>
                 </div>
               </div>
+              <span className=" text-red-400 pt-5 text-lg">
+                {selectedSize == "" ? sizeNotSelectedError : ""}
+              </span>
             </div>
           )}
         </div>
