@@ -6,6 +6,8 @@ import { SearchContext } from "../../contexts/contexts";
 import { getCookie } from "../../services/cookieOperations";
 import { AuthContext } from "../../contexts/AuthContexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Order = () => {
   const { setCartVisibility } = useContext(SearchContext);
   const { isUserLoggedIn } = useContext(AuthContext);
@@ -22,7 +24,7 @@ const Order = () => {
     };
 
     try {
-      let response = await fetch(`http://localhost:8080/FetchOrders`, options);
+      let response = await fetch(`${backendUrl}FetchOrders`, options);
       if (!response.ok) {
         throw new Error("Failed to fetch orders");
       } else {

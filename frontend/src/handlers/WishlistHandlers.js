@@ -1,5 +1,7 @@
 import { getCookie } from "../services/cookieOperations";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export const AddProductToWishlist = (ProductID) => {
   console.log(JSON.stringify({ Product_Id: ProductID }));
   try {
@@ -13,7 +15,7 @@ export const AddProductToWishlist = (ProductID) => {
       body: JSON.stringify({ Product_Id: ProductID }),
     };
 
-    fetch("http://localhost:8080/wishlist/add", options)
+    fetch(`${backendUrl}wishlist/add`, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -43,7 +45,7 @@ export const RemoveProductFromWishlist = (ProductID) => {
       body: JSON.stringify({ Product_Id: ProductID }),
     };
 
-    fetch("http://localhost:8080/wishlist/delete", options)
+    fetch(`${backendUrl}wishlist/delete`, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -83,7 +85,7 @@ export const MoveProductToCart = (ProductID) => {
       body: JSON.stringify(data),
     };
 
-    fetch(`http://localhost:8080/AddUserCart`, options)
+    fetch(`${backendUrl}AddUserCart`, options)
       .then((response) => response.json())
       .then((data) => {
         console.log("Successfully Added Product to cart");

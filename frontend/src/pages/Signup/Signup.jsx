@@ -5,6 +5,8 @@ import "./Signup.css";
 import { SearchContext } from "../../contexts/contexts";
 import { AuthContext } from "../../contexts/AuthContexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Signup = () => {
   const { login, isUserLoggedIn } = useContext(AuthContext);
   const [ShowSignup, SetShowSignup] = useState(true);
@@ -57,7 +59,7 @@ const Signup = () => {
 
   const sendData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/signup", {
+      const response = await fetch(`${backendUrl}signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -7,6 +7,8 @@ import { getCookie } from "../../services/cookieOperations";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { CartContext } from "../../contexts/contexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const ItemRemovalBox = () => {
   const {
     IsItemRemovalMenuOpen,
@@ -56,10 +58,7 @@ const ItemRemovalBox = () => {
     };
     console.log("Delete Item from Cart");
     try {
-      let response = await fetch(
-        `http://localhost:8080/DeleteUserCartItem`,
-        options
-      );
+      let response = await fetch(`${backendUrl}DeleteUserCartItem`, options);
       if (!response.ok) {
         throw new Error("Failed to update cart item");
       }

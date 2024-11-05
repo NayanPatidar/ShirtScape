@@ -1,5 +1,7 @@
 import { getCookie } from "../services/cookieOperations";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export const AddAddress = async (address) => {
   try {
     const token = getCookie("sscape");
@@ -45,7 +47,7 @@ export const UpdateAddress = async (addressID, UpdatedAddress) => {
       body: JSON.stringify({ AddressId: addressID, Address: UpdatedAddress }),
     };
 
-    fetch("http://localhost:8080/address/update", options)
+    fetch(`${backendUrl}address/update`, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -75,7 +77,7 @@ export const DeleteAddress = async (addressID) => {
       body: JSON.stringify({ AddressId: addressID }),
     };
 
-    fetch("http://localhost:8080/address/delete", options)
+    fetch(`${backendUrl}address/delete`, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

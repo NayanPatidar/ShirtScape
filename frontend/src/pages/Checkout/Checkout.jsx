@@ -12,6 +12,8 @@ import {
 } from "../../services/CouponDetails";
 import { ConfirmOrder } from "../../handlers/OrderConfirmation";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const CheckoutPage = () => {
   const { setCartVisibility } = useContext(SearchContext);
   const { isUserLoggedIn, logout } = useContext(AuthContext);
@@ -50,7 +52,7 @@ const CheckoutPage = () => {
       };
 
       let UserAddress = await fetch(
-        `http://localhost:8080/FetchAddress`,
+        `${backendUrl}FetchAddress`,
         options
       );
       const data = await UserAddress.json();
@@ -79,7 +81,7 @@ const CheckoutPage = () => {
       };
 
       let FetchedLPermCartData = await fetch(
-        `http://localhost:8080/checkout/PermUserData/Details`,
+        `${backendUrl}checkout/PermUserData/Details`,
         options
       );
 
