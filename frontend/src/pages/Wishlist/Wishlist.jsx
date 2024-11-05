@@ -14,6 +14,8 @@ import {
 } from "../../services/storageOperations";
 import { SearchContext } from "../../contexts/contexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Wishlist = () => {
   const [WishlistProducts, SetWishlistProducts] = useState(null);
   const { isUserLoggedIn } = useContext(AuthContext);
@@ -29,7 +31,7 @@ const Wishlist = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    fetch("http://localhost:8080/wishlist/allProducts", options)
+    fetch(`${backendUrl}wishlist/allProducts`, options)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -51,16 +53,16 @@ const Wishlist = () => {
     }
     try {
       const productIds = LocalCartData.map((item) => parseInt(item.id));
-      let FetchedLocalCartData = await fetch(
-        "http://localhost:8080/wishlist/tempUser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ productIds }),
-        }
-      );
+      console.log("backendurl");
+      console.log(backendUrl);
+
+      let FetchedLocalCartData = await fetch(`${backendUrl}wishlist/tempUser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productIds }),
+      });
       if (FetchedLocalCartData.ok) {
         const data = await FetchedLocalCartData.json();
         if (data.CartData != undefined) {

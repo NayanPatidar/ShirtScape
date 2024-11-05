@@ -14,6 +14,8 @@ import { BiUnderline } from "react-icons/bi";
 import { AuthContext } from "../../contexts/AuthContexts";
 import { CartContext, SearchContext } from "../../contexts/contexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const CartProduct = ({ products, index }) => {
   const { isUserLoggedIn } = useContext(AuthContext);
   const {
@@ -119,7 +121,7 @@ const CartProduct = ({ products, index }) => {
       const updateCartItem = async () => {
         try {
           let response = await fetch(
-            `http://localhost:8080/UpdateUserCart`,
+            `${backendUrl}UpdateUserCart`,
             options
           );
           if (!response.ok) {

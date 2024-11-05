@@ -14,6 +14,8 @@ import { AuthContext } from "../../contexts/AuthContexts";
 import { getItemAndCouponPrice } from "../../services/CouponDetails";
 import { jwtDecode } from "jwt-decode";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Cart = () => {
   // This is the Cart Complete Data
   const [CartItems, SetCartItems] = useState(null);
@@ -89,7 +91,7 @@ const Cart = () => {
       };
 
       let FetchedLPermCartData = await fetch(
-        `http://localhost:8080/cart/PermUserData`,
+        `${backendUrl}cart/PermUserData`,
         options
       );
 

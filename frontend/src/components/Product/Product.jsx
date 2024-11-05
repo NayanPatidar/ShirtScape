@@ -13,6 +13,8 @@ import { AuthContext } from "../../contexts/AuthContexts";
 import { AddProductToWishlist } from "../../handlers/WishlistHandlers";
 import { SearchContext } from "../../contexts/contexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Product = () => {
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
@@ -22,6 +24,7 @@ const Product = () => {
 
   let { productId } = useParams();
 
+
   useEffect(() => {
     fetchProductData();
     setCartVisibility(true);
@@ -29,9 +32,7 @@ const Product = () => {
 
   async function fetchProductData() {
     try {
-      const productData = await fetch(
-        `http://localhost:8080/product/${productId}`
-      );
+      const productData = await fetch(`${backendUrl}product/${productId}`);
       if (!productData.ok) {
         console.error("Product Data Not Valid");
       }
@@ -80,7 +81,7 @@ const Product = () => {
           body: JSON.stringify(data),
         };
 
-        fetch(`http://localhost:8080/AddUserCart`, options)
+        fetch(`${backendUrl}AddUserCart`, options)
           .then((response) => response.json())
           .then((data) => console.log(data))
           .catch((error) => console.error("Error:", error));

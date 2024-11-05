@@ -6,6 +6,7 @@ import { SearchContext } from "../../contexts/contexts";
 import { AuthContext } from "../../contexts/AuthContexts";
 
 const JWT_SECRET_KEY = "aqwerdftgh";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const Signin = () => {
   const { login, isUserLoggedIn } = useContext(AuthContext);
@@ -63,7 +64,7 @@ const Signin = () => {
 
   const sendLoginDetails = async () => {
     try {
-      const response = await fetch("http://localhost:8080/signin", {
+      const response = await fetch(`${backendUrl}signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

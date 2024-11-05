@@ -15,6 +15,8 @@ function Home() {
   const [Categories, setCategory] = useState();
   const [NewArrivals, setNewArrivals] = useState();
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const { setCartVisibility } = useContext(SearchContext);
 
   useEffect(() => {
@@ -27,11 +29,12 @@ function Home() {
 
   const fetchData = async () => {
     try {
-      const TshirtData = await fetch("http://localhost:8080/mainpage/TShirts");
-      const NewArrivalsData = await fetch(
-        "http://localhost:8080/mainpage/NewArrivals"
-      );
-      const categories = await fetch("http://localhost:8080/mainpage/images");
+      console.log(backendUrl);
+
+      const TshirtData = await fetch(`${backendUrl}mainpage/TShirts`);
+      const NewArrivalsData = await fetch(`${backendUrl}mainpage/NewArrivals`);
+      const categories = await fetch(`${backendUrl}mainpage/images`);
+      console.log(TshirtData);
 
       if (!TshirtData.ok || !categories.ok) {
         throw new Error("Network response was not ok");

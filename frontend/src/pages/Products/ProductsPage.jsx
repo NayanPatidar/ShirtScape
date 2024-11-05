@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Nav";
 import { SearchContext } from "../../contexts/contexts";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const ProductsPage = () => {
   const [key, setKey] = useState(0);
   const [products, setProducts] = useState(null);
@@ -159,8 +161,8 @@ const ProductsPage = () => {
 
     const queryString = queryParams.toString();
     const url = queryString
-      ? `http://localhost:8080/products/men?${queryString}`
-      : "http://localhost:8080/products/men";
+      ? `${backendUrl}products/men?${queryString}`
+      : `${backendUrl}products/men`;
 
     const response = await fetch(url);
     const ProductsData = await response.json();
