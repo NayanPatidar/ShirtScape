@@ -120,7 +120,7 @@ const Cart = () => {
     try {
       const productIds = LocalCartData.map((item) => parseInt(item.id));
       let FetchedLocalCartData = await fetch(
-        "http://localhost:8080/cart/tempUser",
+        `${backendUrl}cart/tempUser`,
         {
           method: "POST",
           headers: {

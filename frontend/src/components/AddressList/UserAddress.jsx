@@ -9,6 +9,8 @@ import { FaPencilAlt } from "react-icons/fa";
 import { DeleteAddress } from "../../handlers/AddressHandlers";
 import { AddressContext } from "../../contexts/AddressContext";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export const AddressList = () => {
   const [Address, setAddress] = useState("");
   const { logout } = useContext(AuthContext);
@@ -48,7 +50,7 @@ export const AddressList = () => {
         };
 
         let UserAddress = await fetch(
-          `http://localhost:8080/FetchAddress`,
+          `${backendUrl}FetchAddress`,
           options
         );
         const data = await UserAddress.json();
